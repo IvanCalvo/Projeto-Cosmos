@@ -9,20 +9,35 @@ public class ProjectileLauncher : MonoBehaviour
     private float launchForce = 500f;
     private float timeToFire = 0f;
     private float fireRate = 5f;
+    private int magazine = 12;
+    [SerializeField]private int bulletCount;
+    [SerializeField]private int extraAmmo;
+    private float reloadTime = 2f;
+
+    private bool isReloading = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        bulletCount = magazine;
+        extraAmmo = 2 * magazine;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButton("Fire1") && Time.time >= timeToFire)
+        if (isReloading)
+            return;
+        if (bulletCount <= 0 && extraAmmo > 0 || Input.GetKeyDown(KeyCode.R))
+        { 
+            StartCoroutine(Reload());
+            return;
+        }
+        if (Input.GetButton("Fire1") && Time.time >= timeToFire && bulletCount !=0)
         {
             timeToFire = Time.time + 1 / fireRate;
             LaunchProjectile();
+            bulletCount--;
         }
     }
 
@@ -33,4 +48,30 @@ public class ProjectileLauncher : MonoBehaviour
         projectileInstance.AddForce(firePoint.forward * launchForce);
     }
 
+    IEnumerator Reload()
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(reloadTime);
+
+        if (bulletCount != 0)
+        {
+            if (magazine - bulletCount > extraAmmo)
+            {
+                bulletCount += extraAmmo;
+                extraAmmo = 0;
+            }
+            else
+            {
+                extraAmmo -= (magazine - bulletCount);
+                bulletCount += (magazine - bulletCount);
+            }
+        }
+        else
+        {
+            extraAmmo -= magazine;
+            bulletCount += magazine;
+        }  
+
+        isReloading = false;
+    }
 }
