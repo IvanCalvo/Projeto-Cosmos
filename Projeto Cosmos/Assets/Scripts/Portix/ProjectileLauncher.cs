@@ -5,8 +5,10 @@ using UnityEngine;
 public class ProjectileLauncher : MonoBehaviour
 {
     [SerializeField]private Transform firePoint;
-    [SerializeField]private Rigidbody projectilePrefab;
+    [SerializeField]private Rigidbody projectileRb;
     private float launchForce = 500f;
+    private float timeToFire = 0f;
+    private float fireRate = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -17,15 +19,16 @@ public class ProjectileLauncher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButton("Fire1") && Time.time >= timeToFire)
         {
+            timeToFire = Time.time + 1 / fireRate;
             LaunchProjectile();
         }
     }
 
     void LaunchProjectile()
     {
-        var projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        var projectileInstance = Instantiate(projectileRb, firePoint.position, firePoint.rotation);
 
         projectileInstance.AddForce(firePoint.forward * launchForce);
     }

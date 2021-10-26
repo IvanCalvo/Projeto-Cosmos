@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 491571963}
   - component: {fileID: 491571962}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: MovimentacaoCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 700904707}
-  projectilePrefab: {fileID: 7268111421503407226, guid: 0ab5fd01d723cbe479eb7a7259334e1c, type: 3}
+  projectileRb: {fileID: 7268111421503407226, guid: 0ab5fd01d723cbe479eb7a7259334e1c, type: 3}
 --- !u!1 &701796137
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +932,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 1
-  m_AngularDrag: 2.5
+  m_AngularDrag: 5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1049,7 +1049,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &1201071535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,4 +1937,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1723266041}
-  projectilePrefab: {fileID: 7268111421503407226, guid: 0ab5fd01d723cbe479eb7a7259334e1c, type: 3}
+  projectileRb: {fileID: 7268111421503407226, guid: 0ab5fd01d723cbe479eb7a7259334e1c, type: 3}
