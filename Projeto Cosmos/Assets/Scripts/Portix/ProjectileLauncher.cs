@@ -28,7 +28,7 @@ public class ProjectileLauncher : MonoBehaviour
     {
         if (isReloading)
             return;
-        if (bulletCount <= 0 && extraAmmo > 0 || Input.GetKeyDown(KeyCode.R))
+        if (bulletCount <= 0 && extraAmmo > 0|| Input.GetKeyDown(KeyCode.R) && extraAmmo > 0 && bulletCount < magazine)
         { 
             StartCoroutine(Reload());
             return;
@@ -55,7 +55,7 @@ public class ProjectileLauncher : MonoBehaviour
 
         if (bulletCount != 0)
         {
-            if (magazine - bulletCount > extraAmmo)
+            if (magazine - bulletCount > extraAmmo) // Arrumar, ainda está dando número negativo ??
             {
                 bulletCount += extraAmmo;
                 extraAmmo = 0;

@@ -801,6 +801,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 700904707}
   projectileRb: {fileID: 7268111421503407226, guid: 0ab5fd01d723cbe479eb7a7259334e1c, type: 3}
+  bulletCount: 0
+  extraAmmo: 0
 --- !u!1 &701796137
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,8 +917,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e48a3f5f9f02d34ca64ef0bd792706e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitchTorque: 3000
-  rollTorque: 1500
+  pitchTorque: 4500
+  rollTorque: 3000
   thrust: 100
   thrustGlideReduction: 100
   velocidade: 50
@@ -1938,3 +1940,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1723266041}
   projectileRb: {fileID: 7268111421503407226, guid: 0ab5fd01d723cbe479eb7a7259334e1c, type: 3}
+  bulletCount: 0
+  extraAmmo: 0
