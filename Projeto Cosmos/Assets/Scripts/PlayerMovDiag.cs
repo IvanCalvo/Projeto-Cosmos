@@ -34,22 +34,21 @@ public class PlayerMovDiag : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         boost_string = (boost_value/10).ToString();
         boostText.text = boost_string;
-        //Debug.Log(boost_value);
+        Debug.Log(speed);
         if(boost_value < 0) {
             boost_value = 0;
         }
-        if(Input.GetKey(KeyCode.LeftShift) && boost_value > 0) {
+        if(Input.GetKey(KeyCode.LeftShift) && boost_value > 20) {
             speed = 50f;
             boost_value -= 10;
         } else {
             if(boost_value < 1000) {
                 boost_value++;
             }
-            //StartCoroutine("Boost_Duration");
             speed = 12f;
         }
         float x = Input.GetAxis("Horizontal");
@@ -73,14 +72,5 @@ public class PlayerMovDiag : MonoBehaviour
         controller.Move(move* speed * Time.deltaTime);
 
     }
-
-    /*IEnumerator Boost_Duration() {
-        boost = true;
-        if(boost_value <= 1000 && boost == false){
-            boost_value++;
-        }
-        yield return new WaitForSeconds(.1f);
-        boost = false;
-    }*/
 }
 
