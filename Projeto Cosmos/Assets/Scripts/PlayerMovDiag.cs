@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMovDiag : MonoBehaviour
 {
+    bool boost;
+    string boost_string;
+    [SerializeField] TMPro.TextMeshProUGUI boostText;
+    int boost_value;
     public CharacterController controller;
     public Transform playerTransform;
     [SerializeField] public float speed = 12f;
 
     float xRotation = 0f;
     float yRotation = 0f;
-
     float zRotation = 0f;
 
     private float rollInput;
@@ -21,6 +25,9 @@ public class PlayerMovDiag : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        boost_value = 1000;
+        boost_string = (boost_value/10).ToString();
+        boostText.text = boost_string;
         screenCenter.x = Screen.width * .5f;
         screenCenter.y = Screen.height * .5f;
         Cursor.lockState = CursorLockMode.Confined;
@@ -29,9 +36,20 @@ public class PlayerMovDiag : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.LeftShift)) {
+        boost_string = (boost_value/10).ToString();
+        boostText.text = boost_string;
+        //Debug.Log(boost_value);
+        if(boost_value < 0) {
+            boost_value = 0;
+        }
+        if(Input.GetKey(KeyCode.LeftShift) && boost_value > 0) {
             speed = 50f;
+            boost_value -= 10;
         } else {
+            if(boost_value < 1000) {
+                boost_value++;
+            }
+            //StartCoroutine("Boost_Duration");
             speed = 12f;
         }
         float x = Input.GetAxis("Horizontal");
@@ -55,4 +73,14 @@ public class PlayerMovDiag : MonoBehaviour
         controller.Move(move* speed * Time.deltaTime);
 
     }
+
+    /*IEnumerator Boost_Duration() {
+        boost = true;
+        if(boost_value <= 1000 && boost == false){
+            boost_value++;
+        }
+        yield return new WaitForSeconds(.1f);
+        boost = false;
+    }*/
 }
+
