@@ -14,6 +14,9 @@ public class TesteMovimento : MonoBehaviour
     float glide = 0f;
     private Vector3 currentVelocity;
     [SerializeField] public float velocidade = 5f;
+    [SerializeField] private TMPro.TextMeshProUGUI ammoText;
+    [SerializeField] public ProjectileLauncher projectileScript;
+    private string ammoString;
 
 
 
@@ -33,6 +36,9 @@ public class TesteMovimento : MonoBehaviour
         inputRoll = Input.GetAxis("Mouse X");
         inputPitch = Input.GetAxis("Mouse Y");
         thrustInput = Input.GetAxis("Vertical");
+        
+        ammoText.text= projectileScript.bulletCount.ToString() + " / " + projectileScript.extraAmmo.ToString();
+
     }
 
     void FixedUpdate()

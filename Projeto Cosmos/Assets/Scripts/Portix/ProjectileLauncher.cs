@@ -10,8 +10,8 @@ public class ProjectileLauncher : MonoBehaviour
     private float timeToFire = 0f;
     private float fireRate = 5f;
     private int magazine = 12;
-    [SerializeField]private int bulletCount;
-    [SerializeField]private int extraAmmo;
+    [SerializeField]public int bulletCount;
+    [SerializeField]public int extraAmmo;
     private float reloadTime = 2f;
 
     private bool isReloading = false;
@@ -24,7 +24,7 @@ public class ProjectileLauncher : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (isReloading)
             return;
