@@ -14,7 +14,7 @@ public class ProjectileLauncher : MonoBehaviour
     [SerializeField]public int extraAmmo;
     private float reloadTime = 2f;
 
-    private bool isReloading = false;
+    [SerializeField]private bool isReloading = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class ProjectileLauncher : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (isReloading)
             return;
@@ -39,6 +39,8 @@ public class ProjectileLauncher : MonoBehaviour
             LaunchProjectile();
             bulletCount--;
         }
+        if (Input.GetKeyDown(KeyCode.M))
+            extraAmmo += 5;
     }
 
     void LaunchProjectile()
