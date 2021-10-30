@@ -1137,7 +1137,6 @@ MonoBehaviour:
   projectileRb: {fileID: 7268111421503407226, guid: 0ab5fd01d723cbe479eb7a7259334e1c, type: 3}
   bulletCount: 0
   extraAmmo: 0
-  isReloading: 0
 --- !u!1 &701796137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e48a3f5f9f02d34ca64ef0bd792706e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inverterControle: 1
   pitchTorque: 4500
   rollTorque: 3000
   thrust: 100
@@ -1832,7 +1830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e48a3f5f9f02d34ca64ef0bd792706e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inverterControle: 1
   pitchTorque: 350
   rollTorque: 350
   thrust: 1000
@@ -2385,7 +2382,6 @@ MonoBehaviour:
   projectileRb: {fileID: 7268111421503407226, guid: 0ab5fd01d723cbe479eb7a7259334e1c, type: 3}
   bulletCount: 0
   extraAmmo: 0
-  isReloading: 0
 --- !u!1 &2101968612
 GameObject:
   m_ObjectHideFlags: 0
