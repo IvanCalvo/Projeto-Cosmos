@@ -5,6 +5,10 @@ using UnityEngine;
 public class TesteMovimento : MonoBehaviour
 {
     // private float yawTorque = 500f;
+    [Header("--Controles da Nave--")]
+    [SerializeField] private bool inverterControle = true;
+    [Header("---------------------")]
+
     [SerializeField]private float pitchTorque = 1000f;
     [SerializeField] private float rollTorque = 1000f;
     [SerializeField] private float thrust = 100f;
@@ -19,7 +23,6 @@ public class TesteMovimento : MonoBehaviour
     private string ammoString;
 
 
-
     Rigidbody rb;
     [SerializeField]private float inputRoll = 0f;
     [SerializeField]private float inputPitch = 0f;
@@ -29,6 +32,8 @@ public class TesteMovimento : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        if (!inverterControle)
+            pitchTorque = -pitchTorque;
     }
 
     private void Update()
