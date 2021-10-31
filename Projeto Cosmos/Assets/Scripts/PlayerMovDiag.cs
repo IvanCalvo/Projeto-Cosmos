@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerMovDiag : MonoBehaviour
 {
-    bool boost;
+    bool boostRecharging;
     string boost_string;
     [SerializeField] TMPro.TextMeshProUGUI boostText;
     int boost_value;
@@ -46,8 +46,8 @@ public class PlayerMovDiag : MonoBehaviour
             speed = 50f;
             boost_value -= 10;
         } else {
-            if(boost_value < 1000) {
-                boost_value++;
+            if(boost_value < 1000 && boostRecharging == false) {
+                StartCoroutine("boostRecharge");
             }
             speed = 12f;
         }
@@ -71,6 +71,13 @@ public class PlayerMovDiag : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move* speed * Time.deltaTime);
 
+    }
+
+    IEnumerator boostRecharge() {
+        boostRecharging = true;
+        yield return new WaitForSeconds(.1f);
+        boost_value += 10;
+        boostRecharging = false;
     }
 }
 
