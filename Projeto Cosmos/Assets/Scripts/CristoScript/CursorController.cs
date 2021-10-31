@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
+
 public class CursorController : MonoBehaviour
 {
     //declaracao das texturas do cursor caso tenha mais de uma etc
     public Texture2D cursor;
+    public Texture2D cursorAtirando;
 
     private void Awake()
     {
         ChangeCursor(cursor);
-        cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Confined;
     }
     private void ChangeCursor(Texture2D cursorType)
     {
@@ -24,4 +25,3 @@ public class CursorController : MonoBehaviour
     }
 
 }
-*/
