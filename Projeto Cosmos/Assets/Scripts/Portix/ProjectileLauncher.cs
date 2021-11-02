@@ -26,6 +26,8 @@ public class ProjectileLauncher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.M))
+            extraAmmo += 5;
         if (isReloading)
             return;
         if (bulletCount <= 0 && extraAmmo > 0|| Input.GetKeyDown(KeyCode.R) && extraAmmo > 0 && bulletCount < magazine)
@@ -39,8 +41,7 @@ public class ProjectileLauncher : MonoBehaviour
             LaunchProjectile();
             bulletCount--;
         }
-        if (Input.GetKeyDown(KeyCode.M))
-            extraAmmo += 5;
+
     }
 
     void LaunchProjectile()
@@ -55,24 +56,21 @@ public class ProjectileLauncher : MonoBehaviour
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
 
-        if (bulletCount != 0)
+        if ((magazine - bulletCount) > extraAmmo) // Arrumar, ainda está dando número negativo ??
         {
-            if (magazine - bulletCount > extraAmmo) // Arrumar, ainda está dando número negativo ??
-            {
-                bulletCount += extraAmmo;
-                extraAmmo = 0;
-            }
-            else
-            {
-                extraAmmo -= (magazine - bulletCount);
-                bulletCount += (magazine - bulletCount);
-            }
+            bulletCount += extraAmmo;
+            extraAmmo = 0;
         }
-        else
-        {
-            extraAmmo -= magazine;
-            bulletCount += magazine;
-        }  
+        else if (bulletCount != 0)
+             {
+                 extraAmmo -= (magazine - bulletCount);
+                 bulletCount += (magazine - bulletCount);
+             }
+             else
+             {
+                 extraAmmo -= magazine;
+                 bulletCount += magazine;
+             }  
 
         isReloading = false;
     }

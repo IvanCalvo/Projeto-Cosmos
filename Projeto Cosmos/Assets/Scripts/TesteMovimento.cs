@@ -56,7 +56,7 @@ public class TesteMovimento : MonoBehaviour
         // Colocar Drag = 1 e Angular Drag = 2.5 no RigidBody
          
         // Roll
-        rb.AddRelativeTorque(Vector3.back * rollTorque * Mathf.Clamp(inputRoll, -1f, 1f) * Time.deltaTime);
+        rb.AddRelativeTorque(Vector3.up * rollTorque * Mathf.Clamp(inputRoll, -1f, 1f) * Time.deltaTime);
 
 
         // Pitch
