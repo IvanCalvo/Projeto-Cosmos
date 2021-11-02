@@ -89,11 +89,10 @@ public class Arma1 : MonoBehaviour
         //ja atirou
         readyToShoot = false;
 
-        //ENCONTRAR A POSICAO ACERTADA DO CURSOR USANDO RAYCAST AJUDAR AGUI PFFFFF
+        //ENCONTRAR A POSICAO ACERTADA DO CURSOR USANDO RAYCAST
         //origem do ray eh o meio do player
         //aponta para a posicao do cursor
-        //distancia do tiro
-        float rayLength = 10000f;
+        float rayLength = 10000f;//distancia infinita onde o z aponta
         Ray ray =  Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         //CHECAR SE O RAY MIRA EM ALGO
