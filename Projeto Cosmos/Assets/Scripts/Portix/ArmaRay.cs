@@ -7,10 +7,15 @@ public class ArmaRay : MonoBehaviour
 {
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
     //PROJETIL, BALA, BULLET
+    [Header("Prefabs de Munições")]
     [SerializeField] public GameObject Bullet;
+    [SerializeField] public GameObject Projectile;
+    [SerializeField] private GameObject CurrentProjectile;
+
 
     //FORCA DA BALA, BULLET FORCE
-    public float shootForce;
+    [Header("Configurações Arma")]
+    public float shootForce = 200f;
 
     //CONSTITUICAO DA ARMA, GUN STATS
     public float shootingRate; //tempo entre as disparadas
@@ -26,8 +31,11 @@ public class ArmaRay : MonoBehaviour
     bool shooting, readyToShoot, reloading;
 
     //REFERENCES
+    [Header("Referências")]
     public Camera fpsCam;
-    public Transform attackPoint;
+    public Transform primaryWeaponPoint;
+    public Transform secondaryWeaponPoint;
+    public Transform firePoint;
 
     //GRAFICO
     public GameObject muzzleFlash;
@@ -44,6 +52,8 @@ public class ArmaRay : MonoBehaviour
         //TER CERTEZA SE O PENTE TA FULL
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        CurrentProjectile = Bullet;
+        firePoint = primaryWeaponPoint;
 
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -74,14 +84,23 @@ public class ArmaRay : MonoBehaviour
             Reload();
 
         //ATIRANDO, SHOOTING
-        if (readyToShoot && shooting && !reloading && bulletsLeft>0)
+        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             //NAO ATIROU NENHUMA, ainda
             bulletsShot = 0;
             Shoot();
         }
-        //MOUSE POSITION
-        //Vector3  mousePos = Input.mousePosition;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ShootPrimaryWeapon();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ShootMissile();
+        }
+
+
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
 
@@ -104,7 +123,7 @@ public class ArmaRay : MonoBehaviour
             targetPoint = ray.GetPoint(100);//just away from the player
         
         //CALCULO DA DIRECAO DA NAVE ATE O ALVO
-        Vector3 directionNOSpread = targetPoint - attackPoint.position;
+        Vector3 directionNOSpread = targetPoint - firePoint.position;
 
         //CALCULO DO SPREAD
         float x = Random.Range(-spread, spread);
@@ -113,7 +132,7 @@ public class ArmaRay : MonoBehaviour
         Vector3 directionSpread = directionNOSpread + new Vector3(x,y,0);
 
         //INSTANCIAR A BALA, INSTANCIATE BULLET
-        GameObject currentBullet = Instantiate(Bullet, attackPoint.position, Quaternion.identity);
+        GameObject currentBullet = Instantiate(CurrentProjectile, firePoint.position, Quaternion.identity);
         //rodar a bala na direcao correta
         currentBullet.transform.forward = directionSpread.normalized;
 
@@ -122,7 +141,7 @@ public class ArmaRay : MonoBehaviour
 
         //INSTANCIAR muzzleFlash
         if (muzzleFlash != null)
-            Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+            Instantiate(muzzleFlash, firePoint.position, Quaternion.identity);
 
         //DESCONTAR DAS BALAS E MARCAR Q ATIROU
         bulletsLeft--;
@@ -161,5 +180,19 @@ public class ArmaRay : MonoBehaviour
         reloading = false;
     }
 
+    private void ShootPrimaryWeapon()
+    {
+        CurrentProjectile = Bullet;
+        firePoint = primaryWeaponPoint;
+        shootForce = 200f;
+        shootingRate = 0.1f;
+    }
 
+    private void ShootMissile()
+    {
+        CurrentProjectile = Projectile;
+        firePoint = secondaryWeaponPoint;
+        shootForce = 20f;
+        shootingRate = 0.5f;
+    }
 }
