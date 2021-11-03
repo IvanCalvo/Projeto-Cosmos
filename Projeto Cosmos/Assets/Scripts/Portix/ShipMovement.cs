@@ -6,7 +6,7 @@ public class ShipMovement : MonoBehaviour
 {
     string boost_string;
     [SerializeField] TMPro.TextMeshProUGUI boostText;
-    int boost_value;
+    public int boost_value;
     public CharacterController controller;
     public Transform playerTransform;
     [SerializeField] public float speed = 12f;
@@ -39,7 +39,7 @@ public class ShipMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftShift) && boost_value > 20)
         {
-            speed = 50f;
+            speed = 36f;
             boost_value -= 10;
         }
         else

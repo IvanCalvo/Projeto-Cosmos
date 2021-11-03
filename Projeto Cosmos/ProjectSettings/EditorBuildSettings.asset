@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Portix.unity
+    guid: ff4b0335017a4e84cbbc4410f60d6f19
   m_configObjects: {}

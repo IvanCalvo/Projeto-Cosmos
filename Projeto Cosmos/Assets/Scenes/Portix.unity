@@ -1367,7 +1367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1098786232
 Transform:
   m_ObjectHideFlags: 0
@@ -1538,6 +1538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostText: {fileID: 1683712521}
+  boost_value: 0
   controller: {fileID: 1383053157}
   playerTransform: {fileID: 1383053160}
   speed: 12
@@ -1679,8 +1680,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1383053160}
   rig: {fileID: 432875558}
-  distance: 2
-  rotationSpeed: 100
+  backDistance: 2
+  upDistance: 0.75
+  rotationSpeed: 60
+  cameraOffset: {x: 0, y: -0.5, z: 2}
+  cameraPosition: {x: 0, y: 0, z: 0}
+  smoothTime: 0.27
+  angle: 0
+  shipMovement: {fileID: 1383053158}
 --- !u!81 &1411008401
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1879,7 +1886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1598205293
 Transform:
   m_ObjectHideFlags: 0
