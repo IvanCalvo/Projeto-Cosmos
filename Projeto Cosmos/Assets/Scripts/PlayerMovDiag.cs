@@ -38,7 +38,6 @@ public class PlayerMovDiag : MonoBehaviour
     {
         boost_string = (boost_value/10).ToString();
         boostText.text = boost_string;
-        Debug.Log(speed);
         if(boost_value < 0) {
             boost_value = 0;
         }
