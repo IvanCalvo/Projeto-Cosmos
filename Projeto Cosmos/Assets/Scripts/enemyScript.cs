@@ -13,6 +13,10 @@ public class enemyScript : MonoBehaviour
 
     public Transform player;
 
+    GameObject enemyGun;
+
+    [SerializeField] GameObject CurrentProjectile;
+
     public LayerMask Objects, whatIsPlayer;
 
     public Vector3 walkPoint;
@@ -28,6 +32,7 @@ public class enemyScript : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("InicialShip").transform;
+        enemyGun = GameObject.Find("enemyGun");
         enemyRB = GetComponent<Rigidbody>();
     }
 
@@ -124,8 +129,13 @@ public class enemyScript : MonoBehaviour
 
         if(!alreadyAttacked)
         {
+            Vector3 shootDirection = player.position - enemyGun.transform.position;
             //attack code
             Debug.Log("ATTACK");
+            
+            GameObject currentBullet = Instantiate(CurrentProjectile, enemyGun.transform.position, Quaternion.identity);
+
+            currentBullet.GetComponent<Rigidbody>().AddForce(shootDirection.normalized * 200f, ForceMode.Impulse);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
