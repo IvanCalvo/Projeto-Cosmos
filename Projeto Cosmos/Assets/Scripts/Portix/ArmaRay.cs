@@ -11,7 +11,8 @@ public class ArmaRay : MonoBehaviour
     [SerializeField] public GameObject Bullet;
     [SerializeField] public GameObject Projectile;
     [SerializeField] private GameObject CurrentProjectile;
-
+    [SerializeField] public GameObject CanvasOverHeat;
+    [SerializeField] public GameObject CanvasMunicaoMissil;
 
     //FORCA DA BALA, BULLET FORCE
     [Header("Configurações Arma")]
@@ -25,11 +26,17 @@ public class ArmaRay : MonoBehaviour
     public int magazineSize; //tamanho do pente
     public int bulletPerTap; //quantas balas saem por clique
     public bool allowHold; //auto / semiauto
+    public bool hasOverHeat = true;
+    public bool hasAmmo = false;
     int bulletsLeft, bulletsShot; //quantas balas tem
+    public int extraAmmo;
+    private float overHeatReload = 0.25f;
+    public float overHeat= 0f;
+    private int maxHeat = 25;
 
     //BOOLS CHECKS
-    bool shooting, readyToShoot, reloading;
-
+    bool shooting, reloading, readyToShoot;
+    public bool isOverHeating;
     //REFERENCES
     [Header("Referências")]
     public Camera fpsCam;
@@ -47,24 +54,33 @@ public class ArmaRay : MonoBehaviour
     public Vector3 mousePos;
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
 
+    //Referencias/Scripts
+    [Header("Scripts")]
+    public OverHeatBar overHeatBar;
+
     private void Awake()
     {
         //TER CERTEZA SE O PENTE TA FULL
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        isOverHeating = false;
         CurrentProjectile = Bullet;
         firePoint = primaryWeaponPoint;
-
+        extraAmmo = 2 * magazineSize;
+        StartCoroutine(OverHeat());
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
 
     private void Update()
     {
         MyInput();
-
+        if(hasOverHeat)
+        {
+            overHeatBar.SetOverheat(overHeat);
+        }
         //set ammo display
         if (ammoDisplay != null)
-            ammoDisplay.SetText(bulletsLeft/bulletPerTap + "/" + magazineSize/bulletPerTap);
+            ammoDisplay.SetText(bulletsLeft + "/" + extraAmmo);
         
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -75,29 +91,52 @@ public class ArmaRay : MonoBehaviour
             shooting = Input.GetKey(KeyCode.Mouse0);
         else
             shooting = Input.GetKeyDown(KeyCode.Mouse0);
-
+        //*
         //RECARREGAR MANUAL
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading && !hasOverHeat)
             Reload();
         //RECARGA AUTOMATICA
-        if (readyToShoot && shooting && !reloading && bulletsLeft <= 0)
+        if (readyToShoot && !reloading && bulletsLeft <= 0 && !hasOverHeat)
             Reload();
-
+        //*/
         //ATIRANDO, SHOOTING
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if (!isOverHeating && readyToShoot && shooting && !reloading && overHeat < maxHeat && hasOverHeat)
         {
             //NAO ATIROU NENHUMA, ainda
             bulletsShot = 0;
             Shoot();
         }
-
+        //*
+        else if (readyToShoot && shooting && !reloading && hasAmmo)
+        {
+            //NAO ATIROU NENHUMA, ainda
+            bulletsShot = 0;
+            Shoot();
+        }
+        //*/
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ShootPrimaryWeapon();
+            hasOverHeat = true;
+            hasAmmo = false;
+            //*
+            if (overHeatReload == 0.125f)
+            {
+                isOverHeating = true;
+            }
+            //*/
+            CanvasOverHeat.SetActive(true);
+            CanvasMunicaoMissil.SetActive(false);
+            
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ShootMissile();
+            hasOverHeat = false;
+            hasAmmo = true;
+            isOverHeating = false;
+            CanvasOverHeat.SetActive(false);
+            CanvasMunicaoMissil.SetActive(true);
         }
 
 
@@ -144,8 +183,16 @@ public class ArmaRay : MonoBehaviour
             Instantiate(muzzleFlash, firePoint.position, Quaternion.identity);
 
         //DESCONTAR DAS BALAS E MARCAR Q ATIROU
-        bulletsLeft--;
         bulletsShot++;
+        if (hasOverHeat)
+            overHeat++;
+        //*
+        else if (hasAmmo)
+        {
+            bulletsLeft--;
+            bulletsShot++;
+        }
+        //*/
 
         //RESET DO SHOOT
         if (allowInvoke)
@@ -167,18 +214,39 @@ public class ArmaRay : MonoBehaviour
         allowInvoke = true;
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
-
+    //*
     private void Reload()
     {
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
     }
+    //*/
+    //OverHeat na arma, em vez de munição
+    // Laser
+    // Missil Teleguiado
 
+    //*
     private void ReloadFinished()
     {
-        bulletsLeft = magazineSize;
+        if ((magazineSize - bulletsLeft) > extraAmmo) // Arrumar, ainda está dando número negativo ??
+        {
+            bulletsLeft += extraAmmo;
+            extraAmmo = 0;
+        }
+        else if (bulletsLeft != 0)
+             {
+                 extraAmmo -= (magazineSize - bulletsLeft);
+                 bulletsLeft += (magazineSize - bulletsLeft);
+             }
+             else
+             {
+                 extraAmmo -= magazineSize;
+                 bulletsLeft += magazineSize;
+             }  
+
         reloading = false;
     }
+    //*/
 
     private void ShootPrimaryWeapon()
     {
@@ -194,5 +262,35 @@ public class ArmaRay : MonoBehaviour
         firePoint = secondaryWeaponPoint;
         shootForce = 20f;
         shootingRate = 0.5f;
+    }
+
+    IEnumerator OverHeat()
+    {
+        yield return new WaitForSeconds(overHeatReload);
+        if(!shooting || reloading || isOverHeating)
+        {
+            if (overHeat > 0)
+            {
+                overHeat -= 0.5f;
+                readyToShoot = true;
+            }
+        }
+        if (overHeat >= maxHeat)
+        {
+            overHeatReload = 0.125f;
+            readyToShoot = false;
+            isOverHeating = true;
+            StartCoroutine(OverHeated());
+        }
+        
+        StartCoroutine(OverHeat());
+    }
+
+    IEnumerator OverHeated()
+    {
+        yield return new WaitForSeconds(5f);
+        isOverHeating = false;
+        readyToShoot = true;
+        overHeatReload = 0.5f;
     }
 }
