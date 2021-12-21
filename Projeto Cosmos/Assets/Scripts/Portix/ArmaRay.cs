@@ -260,7 +260,7 @@ public class ArmaRay : MonoBehaviour
     {
         CurrentProjectile = Projectile;
         firePoint = secondaryWeaponPoint;
-        shootForce = 20f;
+        shootForce = 0;
         shootingRate = 0.5f;
     }
 

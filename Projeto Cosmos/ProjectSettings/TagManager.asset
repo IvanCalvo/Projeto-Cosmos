@@ -7,6 +7,7 @@ TagManager:
   - Bullet
   - Enemy
   - Gun
+  - Planet
   layers:
   - Default
   - TransparentFX

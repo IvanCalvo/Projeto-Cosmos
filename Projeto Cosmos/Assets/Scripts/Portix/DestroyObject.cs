@@ -81,7 +81,7 @@ public class DestroyObject : MonoBehaviour
         collisions++;
 
         //EXPLODE IF HIT ENEMY
-        if (collision.collider.CompareTag("Enemy") && explodeOnToutch)
+        if ((collision.collider.CompareTag("Enemy") && explodeOnToutch) || (collision.collider.CompareTag("Planet") && explodeOnToutch))
         {
             Explode();
             Destroy(collision.collider.gameObject);
