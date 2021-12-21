@@ -62,6 +62,15 @@ public class enemyScript : MonoBehaviour
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
+        Vector3 desvio = new Vector3(direction.x + 1f, direction.y + 1f, direction.z + 1f);
+
+        if(Physics.Raycast(player.position, -transform.up, 5f, Objects)) {
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, 
+                                                    Quaternion.LookRotation(direction), 1 * Time.deltaTime);
+            
+            transform.position += transform.forward * walkSpeed * Time.deltaTime;
+        }
+
         if(distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
@@ -98,15 +107,19 @@ public class enemyScript : MonoBehaviour
         transform.position += transform.forward * walkSpeed * Time.deltaTime;
         //enemyRB.AddForce(player.position, ForceMode.Force);
 
-        Vector3 desvio = new Vector3(player.position.x + 1f, player.position.y + 1f, player.position.z + 1f);
+        Vector3 desvio = new Vector3(direction.x + 1f, direction.y + 1f, direction.z + 1f);
 
         if(Physics.Raycast(player.position, -transform.up, 5f, Objects)) {
-            enemyRB.AddForce(desvio, ForceMode.Force);
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, 
+                                                    Quaternion.LookRotation(direction), 1 * Time.deltaTime);
+            
+            transform.position += transform.forward * walkSpeed * Time.deltaTime;
         }
     }
 
     private void AttackPlayer()
     {
+        bool objectAhead = false;
 
         Vector3 direction = player.position - this.transform.position;
 
@@ -119,10 +132,14 @@ public class enemyScript : MonoBehaviour
         transform.position += transform.forward * walkSpeed/5 * Time.deltaTime;
         //enemyRB.AddForce(player.position, ForceMode.Force);
 
-        Vector3 desvio = new Vector3(player.position.x + 1f, player.position.y + 1f, player.position.z + 1f);
+        Vector3 desvio = new Vector3(direction.x + 1f, direction.y + 1f, direction.z + 1f);
 
         if(Physics.Raycast(player.position, -transform.up, 5f, Objects)) {
-            enemyRB.AddForce(desvio, ForceMode.Force);
+            objectAhead = true;
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, 
+                                                    Quaternion.LookRotation(direction), 1 * Time.deltaTime);
+            
+            transform.position += transform.forward * walkSpeed * Time.deltaTime;
         }
 
         transform.LookAt(player);
@@ -131,12 +148,10 @@ public class enemyScript : MonoBehaviour
         {
             Vector3 shootDirection = player.position - enemyGun.transform.position;
             //attack code
+         
             Debug.Log("ATTACK");
-            
             GameObject currentBullet = Instantiate(CurrentProjectile, enemyGun.transform.position, Quaternion.identity);
-
             currentBullet.GetComponent<Rigidbody>().AddForce(shootDirection.normalized * 200f, ForceMode.Impulse);
-
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }

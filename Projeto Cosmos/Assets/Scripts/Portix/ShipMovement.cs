@@ -44,7 +44,7 @@ public class ShipMovement : MonoBehaviour
         }
         else
         {
-            if (boost_value < 1000)
+            if (boost_value < 1000000)
             {
                 boost_value++;
                 boost_value++;
