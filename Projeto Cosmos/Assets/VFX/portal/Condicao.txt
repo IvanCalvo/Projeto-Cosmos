@@ -1,0 +1,1 @@
+Sempre que precisar fazer um hitdistortion ir no URPseeting and set opaque texture to true!!!
