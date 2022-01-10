@@ -9,21 +9,23 @@ public class MissilTeleguiado : MonoBehaviour
     
     [SerializeField] private float missileAcceleration = 20f;
     [SerializeField] private float accelerateTime = 7f;
-    [SerializeField] private float turnRate = 50f;
-    [SerializeField] private float trackingDelay = 1.5f;
+    [SerializeField] private float turnRate = 30000f; // estranho
+    [SerializeField] private float trackingDelay = 1f;
 
     private bool missileActive = false;
     private bool isAccelarating = false;
     private bool targetTracking = false;
 
-    private Transform target; // Posição do alvo
+    //private Transform target; // Posição do alvo
     private Rigidbody rb;
     private Quaternion guideRotation;
+
+    private TargetController targetControllerScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Planet").transform;
+        //target = GameObject.FindGameObjectWithTag("Planet").transform;
         rb = GetComponent<Rigidbody>();
         ActivateMissile();
     }
@@ -31,8 +33,11 @@ public class MissilTeleguiado : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameObject image = GameObject.FindGameObjectWithTag("LockOnImage");
+        targetControllerScript = image.GetComponent<TargetController>();
         Run();
         GuidedMissile();
+        //Debug.Log(targetControllerScript.target.transform.position);
     }
 
     private void ActivateMissile()
@@ -44,15 +49,15 @@ public class MissilTeleguiado : MonoBehaviour
 
     private void GuidedMissile()
     {
-        if (target == null) return;
+        //if (target == null) return;
 
         if(targetTracking)
         {
-            Vector3 relativePosition = target.position - transform.position;
+            Vector3 relativePosition = targetControllerScript.alvo.transform.position - transform.position;
             guideRotation = Quaternion.LookRotation(relativePosition, transform.up);
         }
 
-        Debug.Log("Tracking");
+        //Debug.Log("Tracking");
     }
 
     private void Run()

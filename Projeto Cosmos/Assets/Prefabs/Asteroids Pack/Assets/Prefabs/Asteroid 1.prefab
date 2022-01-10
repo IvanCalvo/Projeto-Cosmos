@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 5444550}
   - component: {fileID: 11425652}
   - component: {fileID: 5400348805982120741}
+  - component: {fileID: -5598853599663739761}
   m_Layer: 6
   m_Name: Asteroid 1
   m_TagString: Enemy
@@ -299,6 +300,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.86
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5598853599663739761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ed982eb19b23d49bb941801b9eb034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  onScreen: 0
+  enemyPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &176588
 GameObject:
   m_ObjectHideFlags: 0

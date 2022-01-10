@@ -12,6 +12,7 @@ public class EnemyInView : MonoBehaviour
     void Start()
     {
         addOnlyOnce = true;
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -19,9 +20,9 @@ public class EnemyInView : MonoBehaviour
     {
         enemyPosition = cam.WorldToViewportPoint(gameObject.transform.position);
         // Debug.Log(enemyPosition);
-        onScreen = enemyPosition.z > 0 && enemyPosition.x > 0 && enemyPosition.x < 1 && enemyPosition.y > 0 && enemyPosition.y < 1;
-
-        if(onScreen && addOnlyOnce)
+        onScreen = enemyPosition.z > 0 && enemyPosition.x > 0 && enemyPosition.x < 1 && enemyPosition.y > 0 && enemyPosition.y < 1; // teste para adcionar todos
+                                                                                                               // os inimigos do mapa 
+        if(addOnlyOnce)
         {
             addOnlyOnce = false;
             TargetController.nearByEnemies.Add(this);

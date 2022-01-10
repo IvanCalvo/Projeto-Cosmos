@@ -10,6 +10,7 @@ public class DestroyObject : MonoBehaviour
     public GameObject explosion;
     public LayerMask whatIsEnemies;
     private ArmaRay armaRayScript;
+    private TargetController targetControllerScript;
 
     //STATS
     [Range(0f, 1f)]
@@ -33,6 +34,8 @@ public class DestroyObject : MonoBehaviour
     {
         GameObject gun = GameObject.FindWithTag("Gun");
         armaRayScript = gun.GetComponent<ArmaRay>();
+        GameObject targetController = GameObject.FindGameObjectWithTag("LockOnImage");
+        targetControllerScript = targetController.GetComponent<TargetController>();
         Setup();
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -72,6 +75,7 @@ public class DestroyObject : MonoBehaviour
     private void Delay()
     {
         Destroy(gameObject);
+        
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
 
@@ -85,6 +89,7 @@ public class DestroyObject : MonoBehaviour
         {
             Explode();
             Destroy(collision.collider.gameObject);
+            
             if (armaRayScript.hasOverHeat)
             {
                 if (armaRayScript.overHeat <= 10)
@@ -96,6 +101,10 @@ public class DestroyObject : MonoBehaviour
             }
             else
                 armaRayScript.extraAmmo += 2;
+
+            targetControllerScript.firstLock = true;
+            targetControllerScript.image.enabled = false;
+            targetControllerScript.lockedOn = false;
         }
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//

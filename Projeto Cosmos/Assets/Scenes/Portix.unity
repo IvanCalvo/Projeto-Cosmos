@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 33019759}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: LockOnImage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,9 +174,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1428210926}
+  target: {fileID: 0}
   image: {fileID: 33019760}
   player: {fileID: 1383053154}
-  enemyScript: {fileID: 925789448}
+  alvo: {fileID: 0}
+  enemyScript: {fileID: 0}
+  weaponScript: {fileID: 2010424892}
+  lockedEnemy: 0
 --- !u!114 &33019760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 1, b: 0.018627405, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -731,7 +735,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0be092eed109eed448ac411475f656e7, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0be092eed109eed448ac411475f656e7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1441,7 +1445,7 @@ Transform:
   - {fileID: 372020201}
   - {fileID: 1598491352}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &701796139
 BoxCollider:
@@ -1608,7 +1612,7 @@ Transform:
   - {fileID: 432875558}
   - {fileID: 1411008403}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1223743077
 GameObject:
@@ -1710,7 +1714,7 @@ RectTransform:
   - {fileID: 265007746}
   - {fileID: 33019758}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2129,7 +2133,7 @@ Transform:
   - {fileID: 1428210927}
   - {fileID: 1834133332}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1598491351
 GameObject:
@@ -2784,6 +2788,7 @@ MonoBehaviour:
   CurrentProjectile: {fileID: 0}
   CanvasOverHeat: {fileID: 265007745}
   CanvasMunicaoMissil: {fileID: 2101968612}
+  inimigo: {fileID: 0}
   shootForce: 200
   shootingRate: 0.1
   fireRate: 1
@@ -2809,6 +2814,7 @@ MonoBehaviour:
   allowInvoke: 1
   mousePos: {x: 0, y: 0, z: 0}
   overHeatBar: {fileID: 265007747}
+  targetControllerScript: {fileID: 33019759}
 --- !u!1 &2101968612
 GameObject:
   m_ObjectHideFlags: 0

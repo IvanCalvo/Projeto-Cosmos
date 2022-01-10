@@ -13,6 +13,7 @@ public class ArmaRay : MonoBehaviour
     [SerializeField] private GameObject CurrentProjectile;
     [SerializeField] public GameObject CanvasOverHeat;
     [SerializeField] public GameObject CanvasMunicaoMissil;
+    public GameObject inimigo;
 
     //FORCA DA BALA, BULLET FORCE
     [Header("Configurações Arma")]
@@ -37,6 +38,8 @@ public class ArmaRay : MonoBehaviour
     //BOOLS CHECKS
     bool shooting, reloading, readyToShoot;
     public bool isOverHeating;
+    public bool readyToLock; 
+
     //REFERENCES
     [Header("Referências")]
     public Camera fpsCam;
@@ -57,10 +60,13 @@ public class ArmaRay : MonoBehaviour
     //Referencias/Scripts
     [Header("Scripts")]
     public OverHeatBar overHeatBar;
+    public TargetController targetControllerScript;
+
 
     private void Awake()
     {
         //TER CERTEZA SE O PENTE TA FULL
+        readyToLock = true;
         bulletsLeft = magazineSize;
         readyToShoot = true;
         isOverHeating = false;
@@ -81,6 +87,9 @@ public class ArmaRay : MonoBehaviour
         //set ammo display
         if (ammoDisplay != null)
             ammoDisplay.SetText(bulletsLeft + "/" + extraAmmo);
+
+        if (!targetControllerScript.lockedOn)
+            CheckHit();
         
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -262,6 +271,25 @@ public class ArmaRay : MonoBehaviour
         firePoint = secondaryWeaponPoint;
         shootForce = 0;
         shootingRate = 0.5f;
+    }
+
+    private void CheckHit()
+    {
+        float rayLength = 400f;//distancia infinita onde o z aponta
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        //CHECAR SE O RAY MIRA EM ALGO
+        Vector3 targetPoint;
+        if (Physics.Raycast(ray, out hit, rayLength, PlayerLayerMask))
+        {
+            targetPoint = hit.point;
+            //Debug.Log("Acertou");
+            Debug.Log(hit.collider.gameObject.name);
+            inimigo = hit.collider.gameObject;
+
+        }
+        else
+            targetPoint = ray.GetPoint(100);//just away from the player
     }
 
     IEnumerator OverHeat()
