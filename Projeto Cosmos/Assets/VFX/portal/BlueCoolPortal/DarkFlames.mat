@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DarkFlames
+  m_Shader: {fileID: -6465566751694194690, guid: 88b8388f0ed1e4f898903d8f60157dd3, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_11d87c9a1451498d9555a0234a8e40f7:
+        m_Texture: {fileID: 2800000, guid: b23746bc950d94a179181b50608758a7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_32767ed3920b4df1afa85e816b163ab1: 2.29
+    - Vector1_361629b826e943a294f87f419fe28a9d: 4
+    - Vector1_6b1b11e3d0af405dbc6a1ecf983f40d1: 5
+    m_Colors:
+    - Color_a42abc1444d1441aae8dcb320776abe6: {r: 0.41224304, g: 0.13691592, b: 1.2452831, a: 1}
+    - Vector2_0640594c09084439864b2c8e72142fa8: {r: 0, g: -8, b: 0, a: 0}
+    - Vector2_234d58b81c9b49d48b20e2ec1eab7b07: {r: 11, g: 1.5, b: 0, a: 0}
+    - Vector2_90722493c2cf48e9a7cc478f1818d521: {r: 0, g: 1.5, b: 0, a: 0}
+  m_BuildTextureStacks: []
