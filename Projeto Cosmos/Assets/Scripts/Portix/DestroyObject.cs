@@ -89,7 +89,7 @@ public class DestroyObject : MonoBehaviour
         {
             Explode();
             Destroy(collision.collider.gameObject);
-            
+
             if (armaRayScript.hasOverHeat)
             {
                 if (armaRayScript.overHeat <= 10)
@@ -98,13 +98,19 @@ public class DestroyObject : MonoBehaviour
                     armaRayScript.overHeat -= 10;
 
                 armaRayScript.isOverHeating = false;
+
+                
             }
             else
                 armaRayScript.extraAmmo += 2;
+               
+            if (collision.collider.gameObject == armaRayScript.inimigo)
+            {
+                targetControllerScript.firstLock = true;
+                targetControllerScript.image.enabled = false;
+                targetControllerScript.lockedOn = false;
+            }
 
-            targetControllerScript.firstLock = true;
-            targetControllerScript.image.enabled = false;
-            targetControllerScript.lockedOn = false;
         }
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -117,7 +123,10 @@ public class DestroyObject : MonoBehaviour
         physics_mat.frictionCombine = PhysicMaterialCombine.Minimum;
         physics_mat.bounceCombine = PhysicMaterialCombine.Maximum;
         //ASSIGN MATERIAL TO COLLIDER
-        GetComponent<BoxCollider>().material = physics_mat;
+        if (gameObject.tag == "Bullet")
+            GetComponent<CapsuleCollider>().material = physics_mat;
+        else
+            GetComponent<BoxCollider>().material = physics_mat;
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
 

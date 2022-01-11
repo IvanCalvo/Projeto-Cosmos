@@ -180,6 +180,8 @@ MonoBehaviour:
   alvo: {fileID: 0}
   enemyScript: {fileID: 0}
   weaponScript: {fileID: 2010424892}
+  lockedOn: 0
+  firstLock: 1
   lockedEnemy: 0
 --- !u!114 &33019760
 MonoBehaviour:
@@ -2783,7 +2785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ca05d4475f62a4e9b2e4877056398f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1407763926312896630, guid: 0d43f86cc9afa35418717f7c8740c33c, type: 3}
+  Bullet: {fileID: 3181085372917062262, guid: 30ea44b62f2984fc187eb49634de88b8, type: 3}
   Projectile: {fileID: 6891984120119095047, guid: e6619783ea360b440abe76225bf71afa, type: 3}
   CurrentProjectile: {fileID: 0}
   CanvasOverHeat: {fileID: 265007745}
@@ -2802,6 +2804,7 @@ MonoBehaviour:
   extraAmmo: 0
   overHeat: 0
   isOverHeating: 0
+  readyToLock: 0
   fpsCam: {fileID: 1428210926}
   primaryWeaponPoint: {fileID: 2010424891}
   secondaryWeaponPoint: {fileID: 361636736}

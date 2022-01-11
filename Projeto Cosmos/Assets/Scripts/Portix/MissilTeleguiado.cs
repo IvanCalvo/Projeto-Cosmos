@@ -19,6 +19,7 @@ public class MissilTeleguiado : MonoBehaviour
     //private Transform target; // Posição do alvo
     private Rigidbody rb;
     private Quaternion guideRotation;
+    private BoxCollider boxCollider;
 
     private TargetController targetControllerScript;
 
@@ -27,6 +28,7 @@ public class MissilTeleguiado : MonoBehaviour
     {
         //target = GameObject.FindGameObjectWithTag("Planet").transform;
         rb = GetComponent<Rigidbody>();
+        boxCollider = GetComponent<BoxCollider>();
         ActivateMissile();
     }
 
@@ -85,7 +87,10 @@ public class MissilTeleguiado : MonoBehaviour
 
     IEnumerator TargetTrackingDelay()
     {
+        boxCollider.enabled = false;
         yield return new WaitForSeconds(Random.Range(trackingDelay, trackingDelay));
         targetTracking = true;
+        boxCollider.enabled = true;
+
     }
 }

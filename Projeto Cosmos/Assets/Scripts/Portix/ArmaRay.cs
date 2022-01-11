@@ -230,7 +230,7 @@ public class ArmaRay : MonoBehaviour
         Invoke("ReloadFinished", reloadTime);
     }
     //*/
-    //OverHeat na arma, em vez de munição
+    //OverHeat na arma, em vez de munição  -> arma de overheat acertando a nave principal
     // Laser
     // Missil Teleguiado
 

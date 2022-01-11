@@ -9,9 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3181085372917062263}
-  m_Layer: 0
+  - component: {fileID: 6499557170259437615}
+  - component: {fileID: 4653845120696070533}
+  - component: {fileID: 8634427564922924005}
+  m_Layer: 3
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3181085372917062262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.19079, y: 1.346343, z: -14.42}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 3181085373054173490}
   - {fileID: 3181085373216314871}
@@ -33,6 +36,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &6499557170259437615
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181085372917062262}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!136 &4653845120696070533
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181085372917062262}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.21004009
+  m_Height: 1.0121174
+  m_Direction: 2
+  m_Center: {x: 0.010897636, y: 0, z: 0.006058693}
+--- !u!114 &8634427564922924005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181085372917062262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba0881b51e4b5b4a83a0d57d877001c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 6499557170259437615}
+  explosion: {fileID: 0}
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 0
+  bounciness: 0
+  explosionDamage: 40
+  explosionRange: 3
+  maxCollisions: 5
+  maxlifeTime: 4
+  explodeOnToutch: 1
 --- !u!1 &3181085373054173489
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +101,7 @@ GameObject:
   - component: {fileID: 3181085373054173453}
   - component: {fileID: 3181085373054173452}
   - component: {fileID: 3181085373054173491}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BulletVfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3181085373216314871}
   - component: {fileID: 3181085373216314864}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3181085373314330586}
   - component: {fileID: 3181085373314330587}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +433,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3181085373316814636}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
