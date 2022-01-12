@@ -1322,7 +1322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ade8fca681f724cd89b5a568642f15ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2586,6 +2586,7 @@ MonoBehaviour:
   CurrentProjectile: {fileID: 0}
   CanvasOverHeat: {fileID: 0}
   CanvasMunicaoMissil: {fileID: 0}
+  inimigo: {fileID: 0}
   shootForce: 200
   shootingRate: 0.1
   fireRate: 1
@@ -2599,6 +2600,7 @@ MonoBehaviour:
   extraAmmo: 0
   overHeat: 0
   isOverHeating: 0
+  readyToLock: 0
   fpsCam: {fileID: 1428210926}
   primaryWeaponPoint: {fileID: 2010424891}
   secondaryWeaponPoint: {fileID: 361636736}
@@ -2611,6 +2613,7 @@ MonoBehaviour:
   allowInvoke: 1
   mousePos: {x: 0, y: 0, z: 0}
   overHeatBar: {fileID: 0}
+  targetControllerScript: {fileID: 0}
 --- !u!1 &2074193665
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,7 +2627,6 @@ GameObject:
   - component: {fileID: 2074193669}
   - component: {fileID: 2074193668}
   - component: {fileID: 2074193667}
-  - component: {fileID: 2074193666}
   - component: {fileID: 2074193672}
   m_Layer: 0
   m_Name: Enemy
@@ -2633,28 +2635,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!195 &2074193666
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2074193665}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &2074193667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2667,7 +2647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceab0dd83aba911e3839bab3df0daae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 20
+  walkSpeed: 10
   player: {fileID: 1383053160}
   CurrentProjectile: {fileID: 4351212865535585641, guid: 80fe1471888a7e9418a98af9070e0b13, type: 3}
   Objects:
@@ -2680,6 +2660,7 @@ MonoBehaviour:
   walkPointSet: 0
   walkPointRange: 20
   timeBetweenAttacks: 1
+  turnSpeed: 30000
   sightRange: 50
   attackRange: 30
   playerInSightRange: 0
