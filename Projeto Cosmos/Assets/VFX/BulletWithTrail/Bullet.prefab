@@ -89,6 +89,7 @@ MonoBehaviour:
   maxCollisions: 5
   maxlifeTime: 4
   explodeOnToutch: 1
+  hitImpactVFX: {fileID: 4085096625336766974, guid: 4b93d97ae99cd4486886654a13e75955, type: 3}
 --- !u!1 &3181085373054173489
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +296,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.56331336, g: 0.990566, b: 0.0046724924, a: 1}
+      key0: {r: 0.7924528, g: 0.6632564, b: 0.14578143, a: 1}
       key1: {r: 0.39864588, g: 0.46226418, b: 0.32053223, a: 0.07058824}
       key2: {r: 351.8145, g: 6.4422274, b: 53.29756, a: 0}
       key3: {r: 0.130162, g: 0.4502627, b: 0.6132076, a: 0}
@@ -373,7 +374,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.4129479, g: 0.754717, b: 0.10323961, a: 1}
+  m_Color: {r: 0.8018868, g: 0.7935788, b: 0.49550554, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30

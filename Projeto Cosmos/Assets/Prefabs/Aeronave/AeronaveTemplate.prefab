@@ -30,6 +30,83 @@ Transform:
   m_Father: {fileID: 8379550459538640057}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2128881787709391430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6699610412044321056}
+  - component: {fileID: 3517346044149796473}
+  m_Layer: 0
+  m_Name: Gun1
+  m_TagString: Gun
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6699610412044321056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128881787709391430}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -12.923}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5994044483241675363}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3517346044149796473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128881787709391430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ca05d4475f62a4e9b2e4877056398f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 3181085372917062262, guid: 30ea44b62f2984fc187eb49634de88b8, type: 3}
+  Projectile: {fileID: 6891984120119095047, guid: e6619783ea360b440abe76225bf71afa, type: 3}
+  CurrentProjectile: {fileID: 0}
+  CanvasOverHeat: {fileID: 0}
+  CanvasMunicaoMissil: {fileID: 0}
+  muzzleVFX: {fileID: 0}
+  inimigo: {fileID: 0}
+  shootForce: 200
+  shootingRate: 0.1
+  fireRate: 1
+  spread: 0
+  reloadTime: 2
+  magazineSize: 25
+  bulletPerTap: 1
+  allowHold: 1
+  hasOverHeat: 1
+  hasAmmo: 0
+  extraAmmo: 0
+  overHeat: 0
+  isOverHeating: 0
+  readyToLock: 0
+  fpsCam: {fileID: 0}
+  primaryWeaponPoint: {fileID: 6699610412044321056}
+  secondaryWeaponPoint: {fileID: 0}
+  firePoint: {fileID: 0}
+  muzzleFlash: {fileID: 3165102196127907355, guid: 5d1db2842289e4b16a9fe9bb5bd83ec3, type: 3}
+  ammoDisplay: {fileID: 0}
+  PlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 247
+  allowInvoke: 1
+  mousePos: {x: 0, y: 0, z: 0}
+  overHeatBar: {fileID: 0}
+  targetControllerScript: {fileID: 0}
 --- !u!1 &2902489118775415941
 GameObject:
   m_ObjectHideFlags: 0
@@ -53,13 +130,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2902489118775415941}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8379550459538640057}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &5683829413702238929
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +163,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6699610412044321056}
   m_Father: {fileID: 8379550459538640057}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -159,6 +237,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8379550459538640057}
+  - component: {fileID: 3809322971413818725}
+  - component: {fileID: 3459433231756432017}
+  - component: {fileID: 5066488042332179051}
+  - component: {fileID: 8816954566662063544}
   m_Layer: 0
   m_Name: AeronaveTemplate
   m_TagString: Untagged
@@ -174,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8614448685498109653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 61.80152, y: 5.761505, z: 11.298912}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 43520616089352085}
@@ -185,3 +267,71 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3809322971413818725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614448685498109653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8ca3c7405154367b087d42582fbb9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGO: {fileID: 0}
+  boostText: {fileID: 0}
+  CanvasOverHeat: {fileID: 0}
+--- !u!114 &3459433231756432017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614448685498109653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058f95249304f9b438300a03b9a02311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostText: {fileID: 0}
+  boost_value: 0
+  controller: {fileID: 5066488042332179051}
+  playerTransform: {fileID: 43520616089352085}
+  speed: 12
+  lookSpeed: 60
+  rollSpeed: 130
+  lookInput: {x: 0, y: 0}
+  screenCenter: {x: 0, y: 0}
+  mouseDistance: {x: 0, y: 0}
+--- !u!143 &5066488042332179051
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614448685498109653}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0.62723565
+  m_Radius: 1.0697129
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &8816954566662063544
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614448685498109653}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.75, y: 0.50223565, z: 1.4447129}
+  m_Center: {x: 0, y: 0.062499993, z: 0.34735644}

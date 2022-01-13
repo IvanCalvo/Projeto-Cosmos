@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour
 {
     string boost_string;
-    [SerializeField] TMPro.TextMeshProUGUI boostText;
+    public TMPro.TextMeshProUGUI boostText;
     public int boost_value;
     public CharacterController controller;
     public Transform playerTransform;

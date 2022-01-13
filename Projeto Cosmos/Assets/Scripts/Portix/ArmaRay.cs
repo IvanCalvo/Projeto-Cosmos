@@ -7,16 +7,16 @@ public class ArmaRay : MonoBehaviour
 {
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
     //PROJETIL, BALA, BULLET
-    [Header("Prefabs de Munições")]
+    [Header("Prefabs de Muniï¿½ï¿½es")]
     [SerializeField] public GameObject Bullet;
     [SerializeField] public GameObject Projectile;
     [SerializeField] private GameObject CurrentProjectile;
     [SerializeField] public GameObject CanvasOverHeat;
-    [SerializeField] public GameObject CanvasMunicaoMissil;
+    [SerializeField] public GameObject CanvasMunicaoMissil;    
     public GameObject inimigo;
 
     //FORCA DA BALA, BULLET FORCE
-    [Header("Configurações Arma")]
+    [Header("Configuraï¿½ï¿½es Arma")]
     public float shootForce = 200f;
 
     //CONSTITUICAO DA ARMA, GUN STATS
@@ -41,7 +41,7 @@ public class ArmaRay : MonoBehaviour
     public bool readyToLock; 
 
     //REFERENCES
-    [Header("Referências")]
+    [Header("Referï¿½ncias")]
     public Camera fpsCam;
     public Transform primaryWeaponPoint;
     public Transform secondaryWeaponPoint;
@@ -189,7 +189,7 @@ public class ArmaRay : MonoBehaviour
 
         //INSTANCIAR muzzleFlash
         if (muzzleFlash != null)
-            Instantiate(muzzleFlash, firePoint.position, Quaternion.identity);
+            Instantiate(muzzleFlash, transform);// firePoint.position), Quaternion.identity);
 
         //DESCONTAR DAS BALAS E MARCAR Q ATIROU
         bulletsShot++;
@@ -230,14 +230,14 @@ public class ArmaRay : MonoBehaviour
         Invoke("ReloadFinished", reloadTime);
     }
     //*/
-    //OverHeat na arma, em vez de munição  -> arma de overheat acertando a nave principal
+    //OverHeat na arma, em vez de muniï¿½ï¿½o  -> arma de overheat acertando a nave principal
     // Laser
     // Missil Teleguiado
 
     //*
     private void ReloadFinished()
     {
-        if ((magazineSize - bulletsLeft) > extraAmmo) // Arrumar, ainda está dando número negativo ??
+        if ((magazineSize - bulletsLeft) > extraAmmo) // Arrumar, ainda estï¿½ dando nï¿½mero negativo ??
         {
             bulletsLeft += extraAmmo;
             extraAmmo = 0;

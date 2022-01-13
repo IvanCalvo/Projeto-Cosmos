@@ -26,6 +26,10 @@ public class DestroyObject : MonoBehaviour
     public float maxlifeTime;
     public bool explodeOnToutch = true;
 
+    //VFX
+    [SerializeField]
+    GameObject hitImpactVFX = null;
+
     int collisions;
     PhysicMaterial physics_mat;
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -89,6 +93,10 @@ public class DestroyObject : MonoBehaviour
         {
             Explode();
             Destroy(collision.collider.gameObject);
+            if (hitImpactVFX != null)
+            {
+                Instantiate(hitImpactVFX, transform);
+            }
 
             if (armaRayScript.hasOverHeat)
             {
