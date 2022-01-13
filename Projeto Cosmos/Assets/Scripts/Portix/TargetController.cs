@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,25 +37,50 @@ public class TargetController : MonoBehaviour
     {
         //if (alvo == null) return;
         //*
-        enemyScript = weaponScript.inimigo.GetComponent<EnemyInView>();
-        if (!enemyScript.onScreen) // target == null || 
-        {
-            image.enabled = false; // Console ainda reclama que está tentando acessar o script... Resolve quando mudar o sistema de troca de lockOn
+
+        try {
+            enemyScript = weaponScript.inimigo.GetComponent<EnemyInView>();
+            if (!enemyScript.onScreen) // target == null || 
+            {
+                image.enabled = false; // Console ainda reclama que estï¿½ tentando acessar o script... Resolve quando mudar o sistema de troca de lockOn
+            }
+            
+            else if (enemyScript.onScreen)
+            {
+                image.enabled = true;
+            }
+            //*/
+            float distancia = Vector3.Distance(player.transform.position, enemyScript.transform.position);
+
+            if(Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                lockedOn = !lockedOn;
+            }
+
+
+            if (weaponScript.readyToLock)
+            {
+                if (firstLock)
+                {
+                    image.enabled = true;
+                    firstLock = false;
+                }
+                alvo = weaponScript.inimigo;
+
+                gameObject.transform.position = cam.WorldToScreenPoint(alvo.transform.position);
+
+            }
+        } catch (Exception e) {
+            Debug.Log("Objeto ainda nao encontrado ou destruido");
         }
         
-        else if (enemyScript.onScreen)
-        {
-            image.enabled = true;
-        }
-        //*/
-        float distancia = Vector3.Distance(player.transform.position, enemyScript.transform.position);
         //Debug.Log(distancia);
 
         //Debug.Log("x: " + player.transform.position.x);
         //Debug.Log(target.enemyTransform.position.x);
         
         /*
-        if (Input.GetKeyDown(KeyCode.Space) && !lockedOn && enemyScript.onScreen) // LockOn esta atrelado ao botão espaço, mudar para botao direito do mouse
+        if (Input.GetKeyDown(KeyCode.Space) && !lockedOn && enemyScript.onScreen) // LockOn esta atrelado ao botï¿½o espaï¿½o, mudar para botao direito do mouse
         {
             if(nearByEnemies.Count >= 1)
             {
@@ -76,24 +102,6 @@ public class TargetController : MonoBehaviour
 
         //*/
 
-        if(Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            lockedOn = !lockedOn;
-        }
-
-
-        if (weaponScript.readyToLock)
-        {
-            if (firstLock)
-            {
-                image.enabled = true;
-                firstLock = false;
-            }
-            alvo = weaponScript.inimigo;
-
-            gameObject.transform.position = cam.WorldToScreenPoint(alvo.transform.position);
-
-        }
         
         // Desatualizado
         /*
