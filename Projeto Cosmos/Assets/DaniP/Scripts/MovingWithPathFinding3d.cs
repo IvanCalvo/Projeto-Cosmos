@@ -32,18 +32,12 @@ public class MovingWithPathFinding3d : MonoBehaviour
 
     [SerializeField]
     List<Vector3> outterPointsPosition = new List<Vector3>();
+    float angleAmount = 0;
 
 
     private void Start()
     {
-        //SettingUp the amount of ray, and the ray positions
-        //radianos
-        DeffiningPointsInCircle(innerPointsPosition, innerCircleRadius ,transform.position);
-        DeffiningPointsInCircle(outterPointsPosition, outterCircleRaius, transform.position + (transform.forward * viewDistance));
-        for (int i = 0; i < innerPointsPosition.Count; i++)
-        {
-            Debug.DrawLine(innerPointsPosition[i], outterPointsPosition[i], Color.white, 100f);
-        }
+        angleAmount = 2 * Mathf.PI / amountOfRays;        
 
     }
 
@@ -74,8 +68,9 @@ public class MovingWithPathFinding3d : MonoBehaviour
 
     private void Update()
     {
-        //Turn();
-        //Move();
+        Move();
+        Pathfinding();
+        
     }
 
     private void Turn()
@@ -96,6 +91,33 @@ public class MovingWithPathFinding3d : MonoBehaviour
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 
-     
+    private void Pathfinding()
+    {
+        DeffiningPointsInCircle(innerPointsPosition, innerCircleRadius, transform.position);
+        DeffiningPointsInCircle(outterPointsPosition, outterCircleRaius, transform.position + (transform.forward * viewDistance));     
+
+        Vector3 rayCastOffSet = Vector3.zero;
+        Vector3 circleCenter = transform.position + (transform.forward * viewDistance);
+        for (int i = 0; i < amountOfRays; i++)
+        {
+            RaycastHit hit;
+            Vector3 dir = outterPointsPosition[i] - innerPointsPosition[i];
+            if (Physics.Raycast(innerPointsPosition[i], dir,out hit ,viewDistance))
+            {
+                Vector3 amountToAdd = circleCenter - hit.point;
+                amountToAdd.Normalize();
+                Debug.Log(amountToAdd);
+                rayCastOffSet += amountToAdd;
+            }
+        }
+        if (rayCastOffSet!=Vector3.zero)
+        {
+            transform.Rotate(rayCastOffSet * Time.deltaTime);
+        }
+        else
+        {
+            Turn();
+        }
+    } 
     
 }
