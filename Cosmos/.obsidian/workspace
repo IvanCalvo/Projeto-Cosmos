@@ -1,0 +1,98 @@
+{
+  "main": {
+    "id": "72979691f6e814cf",
+    "type": "split",
+    "children": [
+      {
+        "id": "96fcf6d1e65ea2bc",
+        "type": "leaf",
+        "state": {
+          "type": "graph",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "baf5c9d441eeb091",
+    "type": "split",
+    "children": [
+      {
+        "id": "2f5788e2acbd97fc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a51f337ceb01a07c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "a8a15bea918805cd",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "053dd82ab310cfc5",
+    "type": "split",
+    "children": [
+      {
+        "id": "dc74624b9e615182",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "020444fd7f0a5e18",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "96fcf6d1e65ea2bc",
+  "lastOpenFiles": [
+    "Lore/Seres/Espécies.md",
+    "Lore/Seres/Personagem.md",
+    "Lore/Seres/Inimigos.md",
+    "Desenvolvimento/Controles.md",
+    "Desenvolvimento/GDD Log.md",
+    "Desenvolvimento/Gêneros de Jogo.md",
+    "Desenvolvimento/Projeto Cosmos.md",
+    "Desenvolvimento/Objetivos.md",
+    "Desenvolvimento/Mecânicas.md",
+    "Desenvolvimento/HUD.md"
+  ]
+}

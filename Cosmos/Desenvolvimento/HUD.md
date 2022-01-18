@@ -1,0 +1,2 @@
+
+HUD mostra danos locais na nave. Condição da nave, combustível da nave, boost disponível, munição disponível, armas disponíveis, tempo restante, sistema de lock, sistema direcional (mostra de onde vem os tiros), texto rápido de objetivos, nome de regiões (planetas, sistemas, estações).
