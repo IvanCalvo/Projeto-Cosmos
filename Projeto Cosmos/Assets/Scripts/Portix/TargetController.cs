@@ -71,7 +71,7 @@ public class TargetController : MonoBehaviour
 
             }
         } catch (Exception e) {
-            Debug.Log("Objeto ainda nao encontrado ou destruido");
+            //Debug.Log("Objeto ainda nao encontrado ou destruido");
         }
         
         //Debug.Log(distancia);

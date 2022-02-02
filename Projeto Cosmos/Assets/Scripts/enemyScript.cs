@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class enemyScript : MonoBehaviour
 {
-    //public NavMeshAgent agent;
-
     Rigidbody enemyRB;
 
     public float walkSpeed;
@@ -29,6 +27,9 @@ public class enemyScript : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    public BoxCollider coll;
+    public ShotEnemy ShEn;
+
     private void Awake()
     {
         player = GameObject.Find("InicialShip").transform;
@@ -46,6 +47,11 @@ public class enemyScript : MonoBehaviour
         if(playerInSightRange && playerInAttackRange) AttackPlayer();
     }
 
+    void OnCollisionEnter(Collision collision) {
+        ShEn.Shots++;
+    }
+    
+
     private void Patroling()
     {
         if(!walkPointSet) SearchWalkPoint();
@@ -54,9 +60,9 @@ public class enemyScript : MonoBehaviour
         this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, 
                                                     Quaternion.LookRotation(direction, Vector3.up), turnSpeed * Time.deltaTime);
 
-        Debug.Log("IDLE - Atual: " + this.transform.position);
+        /*Debug.Log("IDLE - Atual: " + this.transform.position);
         Debug.Log("walkpoint " + walkPoint);
-        Debug.Log("direction " + direction);
+        Debug.Log("direction " + direction);*/
 
         transform.position += transform.forward * walkSpeed * Time.deltaTime;
 
@@ -99,8 +105,8 @@ public class enemyScript : MonoBehaviour
         walkPointSet = false;
         Vector3 direction = player.position - this.transform.position;
 
-        Debug.Log("CHASING - Direction: " + direction);
-        Debug.Log("PlayerPosition: " + player.position);
+        /*Debug.Log("CHASING - Direction: " + direction);
+        Debug.Log("PlayerPosition: " + player.position);*/
 
         this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, 
                                                     Quaternion.LookRotation(direction, Vector3.up), turnSpeed * Time.deltaTime);
@@ -128,8 +134,8 @@ public class enemyScript : MonoBehaviour
         this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, 
                                                     Quaternion.LookRotation(direction, Vector3.up), turnSpeed * Time.deltaTime);
 
-        Debug.Log("ATTACKING - Direction: " + direction);
-        Debug.Log("PlayerPosition: " + player.position);
+        /*Debug.Log("ATTACKING - Direction: " + direction);
+        Debug.Log("PlayerPosition: " + player.position);*/
         
         transform.position += transform.forward * walkSpeed/10 * Time.deltaTime;
 
@@ -150,7 +156,7 @@ public class enemyScript : MonoBehaviour
             Vector3 shootDirection = player.position - enemyGun.transform.position;
             //attack code
          
-            Debug.Log("ATTACK");
+            //Debug.Log("ATTACK");
             GameObject currentBullet = Instantiate(CurrentProjectile, enemyGun.transform.position, Quaternion.identity);
             currentBullet.GetComponent<Rigidbody>().AddForce(shootDirection.normalized * 200f, ForceMode.Impulse);
             alreadyAttacked = true;

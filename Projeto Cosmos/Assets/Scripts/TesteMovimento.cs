@@ -22,7 +22,6 @@ public class TesteMovimento : MonoBehaviour
     [SerializeField] public ProjectileLauncher projectileScript;
     private string ammoString;
 
-
     Rigidbody rb;
     [SerializeField]private float inputRoll = 0f;
     [SerializeField]private float inputPitch = 0f;
