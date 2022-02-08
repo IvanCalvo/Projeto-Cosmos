@@ -17,7 +17,11 @@ public class ShotEnemy : Goal {
     }
  
     public override void DrawHUD() {
-        GUILayout.Label(string.Format("Acertou {0}/{1} tiros", Shots, ShotsGoal));
+        if(this.IsAchieved()) {
+            GUILayout.Label(string.Format("Acertou {0}/{1} tiros (Completo!)", Shots, ShotsGoal));
+        } else {
+            GUILayout.Label(string.Format("Acertou {0}/{1} tiros", Shots, ShotsGoal));
+        }
     }
 
 }

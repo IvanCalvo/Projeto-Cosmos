@@ -29,12 +29,43 @@ public class enemyScript : MonoBehaviour
 
     public BoxCollider coll;
     public ShotEnemy ShEn;
+    [SerializeField] float rotationSpeed = 1f;
+
+    [SerializeField] float innerCircleRadius = 1f;
+
+    [SerializeField] float outterCircleRaius = 3f;
+
+    [SerializeField] float viewDistance = 5f;
+
+    [SerializeField] int amountOfRays = 4;
+
+    [SerializeField] List<Vector3> innerPointsPosition = new List<Vector3>();
+
+    [SerializeField] List<Vector3> outterPointsPosition = new List<Vector3>();
+    float angleAmount = 0;
 
     private void Awake()
     {
+        angleAmount = 2 * Mathf.PI / amountOfRays;
         player = GameObject.Find("InicialShip").transform;
         enemyGun = GameObject.Find("enemyGun");
         enemyRB = GetComponent<Rigidbody>();
+    }
+
+    void DeffiningPointsInCircle(List<Vector3> circlePoints, float circleRadius, Vector3 circleCenter)
+    {
+        float angleAmount = 2*Mathf.PI / amountOfRays;
+
+        for (int i = 0; i < amountOfRays; i++)
+        {
+            float x = Mathf.Cos(i * angleAmount)* circleRadius;
+            float y = Mathf.Sin(i * angleAmount) * circleRadius;
+            Vector3 pointPosition = new Vector3(x, y, 0);
+            pointPosition += circleCenter;
+            circlePoints.Add(pointPosition);
+
+        }
+
     }
 
     private void Update()
@@ -51,9 +82,57 @@ public class enemyScript : MonoBehaviour
         ShEn.Shots++;
     }
     
+    private void Turn()
+    {
+        if (player == null)
+        {
+            return;
+        }   
+        Vector3 direction = player.position - transform.position;
+        Quaternion aimedRotation = Quaternion.LookRotation(direction);
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, aimedRotation, rotationSpeed * Time.deltaTime);
+
+    }
+
+    private void Move()
+    {
+        transform.position += transform.forward * walkSpeed * Time.deltaTime;
+    }
+
+    private void Pathfinding()
+    {
+        DeffiningPointsInCircle(innerPointsPosition, innerCircleRadius, transform.position);
+        DeffiningPointsInCircle(outterPointsPosition, outterCircleRaius, transform.position + (transform.forward * viewDistance));     
+
+        Vector3 rayCastOffSet = Vector3.zero;
+        Vector3 circleCenter = transform.position + (transform.forward * viewDistance);
+        for (int i = 0; i < amountOfRays; i++)
+        {
+            RaycastHit hit;
+            Vector3 dir = outterPointsPosition[i] - innerPointsPosition[i];
+            if (Physics.Raycast(innerPointsPosition[i], dir,out hit ,viewDistance))
+            {
+                Vector3 amountToAdd = circleCenter - hit.point;
+                amountToAdd.Normalize();
+                Debug.Log(amountToAdd);
+                rayCastOffSet += amountToAdd;
+            }
+        }
+        if (rayCastOffSet!=Vector3.zero)
+        {
+            transform.Rotate(rayCastOffSet * Time.deltaTime);
+        }
+        else
+        {
+            Turn();
+        }
+    } 
 
     private void Patroling()
     {
+        walkSpeed = 10f;
+        Debug.Log("Patroling");
         if(!walkPointSet) SearchWalkPoint();
         Vector3 direction = walkPoint - this.transform.position;
 
@@ -100,15 +179,18 @@ public class enemyScript : MonoBehaviour
             walkPointSet = true;
         }
     }
+
     private void ChasePlayer()
     {
-        walkPointSet = false;
+        Debug.Log("Chasing");
+
+        /*walkPointSet = false;
         Vector3 direction = player.position - this.transform.position;
 
         /*Debug.Log("CHASING - Direction: " + direction);
         Debug.Log("PlayerPosition: " + player.position);*/
 
-        this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, 
+        /*this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, 
                                                     Quaternion.LookRotation(direction, Vector3.up), turnSpeed * Time.deltaTime);
         
         transform.position += transform.forward * walkSpeed * Time.deltaTime;
@@ -121,11 +203,17 @@ public class enemyScript : MonoBehaviour
             
             transform.position += transform.forward * walkSpeed * 2 * Time.deltaTime;
         }
+        */
+        walkSpeed = 10f;
+        Pathfinding();
+        Move();
     }
 
     private void AttackPlayer()
     {
-        walkPointSet = false;
+        Debug.Log("Attacking");
+
+        /*walkPointSet = false;
 
         bool objectAhead = false;
 
@@ -137,7 +225,7 @@ public class enemyScript : MonoBehaviour
         /*Debug.Log("ATTACKING - Direction: " + direction);
         Debug.Log("PlayerPosition: " + player.position);*/
         
-        transform.position += transform.forward * walkSpeed/10 * Time.deltaTime;
+        /*transform.position += transform.forward * walkSpeed/10 * Time.deltaTime;
 
         Vector3 desvio = new Vector3(direction.x + 1f, direction.y + 1f, direction.z + 1f);
 
@@ -149,7 +237,10 @@ public class enemyScript : MonoBehaviour
             transform.position += transform.forward * walkSpeed * Time.deltaTime;
         }
 
-        transform.LookAt(player);
+        transform.LookAt(player);*/
+        walkSpeed = 1f;
+        Pathfinding();
+        Move();
 
         if(!alreadyAttacked)
         {
@@ -177,3 +268,5 @@ public class enemyScript : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 }
+
+
