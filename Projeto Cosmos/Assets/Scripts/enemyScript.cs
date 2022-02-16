@@ -28,7 +28,8 @@ public class enemyScript : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
 
     public BoxCollider coll;
-    public ShotEnemy ShEn;
+    public DestroyEnemy DestroyEnemyScript;
+
     [SerializeField] float rotationSpeed = 1f;
 
     [SerializeField] float innerCircleRadius = 1f;
@@ -79,7 +80,7 @@ public class enemyScript : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        ShEn.Shots++;
+        DestroyEnemyScript.Shots++;
     }
     
     private void Turn()
@@ -132,7 +133,7 @@ public class enemyScript : MonoBehaviour
     private void Patroling()
     {
         walkSpeed = 10f;
-        Debug.Log("Patroling");
+        //Debug.Log("Patroling");
         if(!walkPointSet) SearchWalkPoint();
         Vector3 direction = walkPoint - this.transform.position;
 
@@ -182,7 +183,7 @@ public class enemyScript : MonoBehaviour
 
     private void ChasePlayer()
     {
-        Debug.Log("Chasing");
+        //Debug.Log("Chasing");
 
         /*walkPointSet = false;
         Vector3 direction = player.position - this.transform.position;
@@ -211,7 +212,7 @@ public class enemyScript : MonoBehaviour
 
     private void AttackPlayer()
     {
-        Debug.Log("Attacking");
+        //Debug.Log("Attacking");
 
         /*walkPointSet = false;
 
