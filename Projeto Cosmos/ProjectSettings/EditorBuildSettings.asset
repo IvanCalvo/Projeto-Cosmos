@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cenas Objetivos/DestroyEnemy Scene.unity
     guid: 50b5a85cf53e531b7bdba893cb49926a
+  - enabled: 1
+    path: Assets/Scenes/MenuPrincipal.unity
+    guid: b6d687ad7310e72629043ddc49c27250
   m_configObjects: {}
