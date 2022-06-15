@@ -1,0 +1,318 @@
+fileFormatVersion: 2
+guid: 40dc5ad6acca3ef4daf2a72bc1226b9f
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: -5095488205242793194
+    second: Star Fighter|Fire.001
+  - first:
+      74: -7541981824333300634
+    second: Star Fighter|Icosphere.001Action
+  - first:
+      74: 2722586389283829361
+    second: Star Fighter|SF.003Action
+  - first:
+      74: 9195887146830795784
+    second: Star Fighter|SF.005Action
+  - first:
+      74: 2399328551562100933
+    second: Star Fighter|SFAction
+  - first:
+      74: 2951735886054864956
+    second: Star Fighter|SFAction.001
+  - first:
+      74: 6717950279249053149
+    second: Star Fighter|SphereAction.002
+  - first:
+      74: -347973706474165408
+    second: Star Fighter|SphereAction.003
+  - first:
+      74: -4403179349725614205
+    second: Icosphere.001|Fire.001
+  - first:
+      74: 4075965102321130359
+    second: Icosphere.001|Icosphere.001Action
+  - first:
+      74: -2682493085867910871
+    second: Icosphere.001|SF.003Action
+  - first:
+      74: 863190197480459547
+    second: Icosphere.001|SF.005Action
+  - first:
+      74: 2433063325996028462
+    second: Icosphere.001|SFAction
+  - first:
+      74: 3938027745760936032
+    second: Icosphere.001|SFAction.001
+  - first:
+      74: 3808552058522412860
+    second: Icosphere.001|SphereAction.002
+  - first:
+      74: -9112514221236313483
+    second: Icosphere.001|SphereAction.003
+  - first:
+      74: 6894463204570410198
+    second: Icosphere|Fire.001
+  - first:
+      74: 2751515557927025504
+    second: Icosphere|Icosphere.001Action
+  - first:
+      74: -2086844138045031256
+    second: Icosphere|SF.003Action
+  - first:
+      74: -1862500319422827160
+    second: Icosphere|SF.005Action
+  - first:
+      74: -3430788375948251250
+    second: Icosphere|SFAction
+  - first:
+      74: -5840563514865663598
+    second: Icosphere|SFAction.001
+  - first:
+      74: 5745791654162890550
+    second: Icosphere|SphereAction.002
+  - first:
+      74: -5449697538408268690
+    second: Icosphere|SphereAction.003
+  - first:
+      74: 5435169431557415778
+    second: Sphere.001|Fire.001
+  - first:
+      74: 1129929323608390154
+    second: Sphere.001|Icosphere.001Action
+  - first:
+      74: 3543299859101295648
+    second: Sphere.001|SF.003Action
+  - first:
+      74: 1117723582860466916
+    second: Sphere.001|SF.005Action
+  - first:
+      74: -5581419914768665549
+    second: Sphere.001|SFAction
+  - first:
+      74: -993957071372078604
+    second: Sphere.001|SFAction.001
+  - first:
+      74: 1310266037165004511
+    second: Sphere.001|SphereAction.002
+  - first:
+      74: 3629464246511344378
+    second: Sphere.001|SphereAction.003
+  - first:
+      74: -4420947680383455991
+    second: Star Fighter.002|Fire.001
+  - first:
+      74: -1081695698104869825
+    second: Star Fighter.002|Icosphere.001Action
+  - first:
+      74: -512471523914932340
+    second: Star Fighter.002|SF.003Action
+  - first:
+      74: 6410414809068216119
+    second: Star Fighter.002|SF.005Action
+  - first:
+      74: 3168669433471160568
+    second: Star Fighter.002|SFAction
+  - first:
+      74: 3476628871087906046
+    second: Star Fighter.002|SFAction.001
+  - first:
+      74: 5636899680656049690
+    second: Star Fighter.002|SphereAction.002
+  - first:
+      74: 7284504008756103174
+    second: Star Fighter.002|SphereAction.003
+  - first:
+      74: -5730975698800257091
+    second: Star Fighter.003|Fire.001
+  - first:
+      74: 3075161852243434372
+    second: Star Fighter.003|Icosphere.001Action
+  - first:
+      74: 5147452957708298322
+    second: Star Fighter.003|SF.003Action
+  - first:
+      74: -2582985338151402870
+    second: Star Fighter.003|SF.005Action
+  - first:
+      74: -2895043420024397049
+    second: Star Fighter.003|SFAction
+  - first:
+      74: 4392363916088564481
+    second: Star Fighter.003|SFAction.001
+  - first:
+      74: 4410887757193696814
+    second: Star Fighter.003|SphereAction.002
+  - first:
+      74: 1848999818776094692
+    second: Star Fighter.003|SphereAction.003
+  - first:
+      74: -3007879591158156820
+    second: Star Fighter.004|Fire.001
+  - first:
+      74: -1748528528998595646
+    second: Star Fighter.004|Icosphere.001Action
+  - first:
+      74: 9115118824339684968
+    second: Star Fighter.004|SF.003Action
+  - first:
+      74: 8416349067900675903
+    second: Star Fighter.004|SF.005Action
+  - first:
+      74: -4507646837193905152
+    second: Star Fighter.004|SFAction
+  - first:
+      74: -8671147952254579933
+    second: Star Fighter.004|SFAction.001
+  - first:
+      74: 15652322898127000
+    second: Star Fighter.004|SphereAction.002
+  - first:
+      74: 8229554711990925980
+    second: Star Fighter.004|SphereAction.003
+  - first:
+      74: 7714409974542122475
+    second: Star Fighter.001|Fire.001
+  - first:
+      74: 1676034470866962384
+    second: Star Fighter.001|Icosphere.001Action
+  - first:
+      74: -9004050148013113410
+    second: Star Fighter.001|SF.003Action
+  - first:
+      74: -8737227585137178566
+    second: Star Fighter.001|SF.005Action
+  - first:
+      74: 5501170968793791146
+    second: Star Fighter.001|SFAction
+  - first:
+      74: 6252884047366915782
+    second: Star Fighter.001|SFAction.001
+  - first:
+      74: 1026923669690740783
+    second: Star Fighter.001|SphereAction.002
+  - first:
+      74: 4177955528174647600
+    second: Star Fighter.001|SphereAction.003
+  - first:
+      74: -1321394854535067794
+    second: Star Fighter.005|Fire.001
+  - first:
+      74: -2320915430459490296
+    second: Star Fighter.005|Icosphere.001Action
+  - first:
+      74: 427151744177419782
+    second: Star Fighter.005|SF.003Action
+  - first:
+      74: -4726452535367604758
+    second: Star Fighter.005|SF.005Action
+  - first:
+      74: 4908990767596520221
+    second: Star Fighter.005|SFAction
+  - first:
+      74: -3416560482100663634
+    second: Star Fighter.005|SFAction.001
+  - first:
+      74: 1899888845563078967
+    second: Star Fighter.005|SphereAction.002
+  - first:
+      74: -918037071372723103
+    second: Star Fighter.005|SphereAction.003
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
