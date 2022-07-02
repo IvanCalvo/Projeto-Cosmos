@@ -23,6 +23,8 @@ public class MissilTeleguiado : MonoBehaviour
 
     private TargetController targetControllerScript;
 
+    //public GameObject enemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +66,8 @@ public class MissilTeleguiado : MonoBehaviour
 
     private void Run()
     {
+        targetControllerScript.lockedOn = true;
+        targetControllerScript.targetTracked = true;
         if (Since(accelerateActiveTime) > accelerateTime)
             isAccelarating = false;
         else

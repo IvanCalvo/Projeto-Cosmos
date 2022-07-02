@@ -18,8 +18,10 @@ public class TargetController : MonoBehaviour
     
     public bool lockedOn;
     public bool firstLock = true;
+    public bool targetTracked;
 
     public int lockedEnemy;
+
 
     public static List<EnemyInView> nearByEnemies = new List<EnemyInView>();
 
@@ -29,6 +31,7 @@ public class TargetController : MonoBehaviour
         image = gameObject.GetComponent<Image>();
 
         lockedOn = false;
+        targetTracked = false;
         //lockedEnemy = 0;
     }
 
@@ -40,9 +43,15 @@ public class TargetController : MonoBehaviour
 
         try {
             enemyScript = weaponScript.inimigo.GetComponent<EnemyInView>();
-            if (!enemyScript.onScreen) // target == null || 
+            if (!enemyScript.onScreen) // Caso o inimigo não esteja na tela, desaparece imagem de lock 
             {
-                image.enabled = false; // Console ainda reclama que est� tentando acessar o script... Resolve quando mudar o sistema de troca de lockOn
+                image.enabled = false; 
+                if (lockedOn && !targetTracked) // Se estiver lockado, deixa de estar
+                {
+                    lockedOn = false;
+                    image.color = Color.green;
+                }
+                weaponScript.inimigo = null; // Retira referência do inimigo
             }
             
             else if (enemyScript.onScreen)
@@ -50,17 +59,20 @@ public class TargetController : MonoBehaviour
                 image.enabled = true;
             }
             //*/
-            float distancia = Vector3.Distance(player.transform.position, enemyScript.transform.position);
 
-            if(Input.GetKeyDown(KeyCode.Mouse1))
+            if(Input.GetKeyDown(KeyCode.Mouse1)) // Sistema de Lock on
             {
                 lockedOn = !lockedOn;
+                if (lockedOn) // Muda a cor da mira
+                    image.color = Color.red;
+                else
+                    image.color = Color.green;
             }
 
 
             if (weaponScript.readyToLock)
             {
-                if (firstLock)
+                if (firstLock && enemyScript.onScreen)
                 {
                     image.enabled = true;
                     firstLock = false;
@@ -69,12 +81,16 @@ public class TargetController : MonoBehaviour
 
                 gameObject.transform.position = cam.WorldToScreenPoint(alvo.transform.position);
 
+                //float distancia = Vector3.Distance(player.transform.position, enemyScript.transform.position);
+                //Debug.Log(distancia); // distancia até o inimigo
+
             }
-        } catch (Exception e) {
-            //Debug.Log("Objeto ainda nao encontrado ou destruido");
+        } catch (Exception e) { // Ao não achar mais o imigo que morreu, reseta cores padrões de mira, status de locked e seguido pelo missil
+            image.color = Color.green;
+            lockedOn = false;
+            targetTracked = false;
         }
         
-        //Debug.Log(distancia);
 
         //Debug.Log("x: " + player.transform.position.x);
         //Debug.Log(target.enemyTransform.position.x);

@@ -6,6 +6,7 @@ public class EnemyInView : MonoBehaviour
 {
     public Camera cam;
     bool addOnlyOnce;
+    bool lockedOn;
 
     public bool onScreen;
     public Vector3 enemyPosition;
@@ -13,6 +14,7 @@ public class EnemyInView : MonoBehaviour
     {
         addOnlyOnce = true;
         cam = Camera.main;
+        lockedOn = false;
     }
 
     // Update is called once per frame
@@ -27,6 +29,8 @@ public class EnemyInView : MonoBehaviour
             addOnlyOnce = false;
             TargetController.nearByEnemies.Add(this);
         }
-        
+
+        if (!onScreen) // Se não estiver na tela não pode dar lock -- talvez fique pesado
+            lockedOn = false;
     }
 }

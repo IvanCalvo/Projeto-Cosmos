@@ -275,7 +275,7 @@ public class ArmaRay : MonoBehaviour
 
     private void CheckHit()
     {
-        float rayLength = 400f;//distancia infinita onde o z aponta
+        float rayLength = 400f;//distancia finita onde o z aponta
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         //CHECAR SE O RAY MIRA EM ALGO
