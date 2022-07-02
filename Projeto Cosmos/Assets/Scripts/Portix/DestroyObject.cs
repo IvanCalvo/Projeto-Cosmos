@@ -8,6 +8,8 @@ public class DestroyObject : MonoBehaviour
     //ASSIGNABLES
     public Rigidbody rb;
     public GameObject explosion;
+    public hpScript enemyHP;
+    public ShotEnemy shotGoal;
     public LayerMask whatIsEnemies;
     private ArmaRay armaRayScript;
     private TargetController targetControllerScript;
@@ -92,7 +94,11 @@ public class DestroyObject : MonoBehaviour
         if ((collision.collider.CompareTag("Enemy") && explodeOnToutch) || (collision.collider.CompareTag("Planet") && explodeOnToutch))
         {
             Explode();
-            Destroy(collision.collider.gameObject);
+            //Destroy(collision.collider.gameObject);
+
+            enemyHP.health -= 10;
+            shotGoal.Shots++;
+
             if (hitImpactVFX != null)
             {
                 Instantiate(hitImpactVFX, transform);

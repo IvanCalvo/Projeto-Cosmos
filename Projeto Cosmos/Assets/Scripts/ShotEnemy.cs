@@ -7,6 +7,7 @@ public class ShotEnemy : Goal {
  
     public int Shots = 0;
     public int ShotsGoal = 10;
+    public bool Dead;
     
     public override void Complete() {
         Debug.Log("Completo!");
