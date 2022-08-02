@@ -5,7 +5,6 @@ using UnityEngine;
 public class hpScript : MonoBehaviour
 {
     public int health = 100;
-    public GameObject enemyObject;
 
     private void Start()
     {
@@ -17,7 +16,7 @@ public class hpScript : MonoBehaviour
         if(health <= 0)
         {
             
-            Destroy(enemyObject);
+            Destroy(gameObject);
         }
     }
 }

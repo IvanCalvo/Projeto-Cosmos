@@ -89,6 +89,7 @@ public class TargetController : MonoBehaviour
             image.color = Color.green;
             lockedOn = false;
             targetTracked = false;
+            image.enabled = false;
         }
         
 

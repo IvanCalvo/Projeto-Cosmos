@@ -8,7 +8,7 @@ public class DestroyObject : MonoBehaviour
     //ASSIGNABLES
     public Rigidbody rb;
     public GameObject explosion;
-    public hpScript enemyHP;
+    public hpScript hpEnemyScript;
     public ShotEnemy shotGoal;
     public LayerMask whatIsEnemies;
     private ArmaRay armaRayScript;
@@ -96,8 +96,8 @@ public class DestroyObject : MonoBehaviour
             Explode();
             //Destroy(collision.collider.gameObject);
 
-            enemyHP.health -= 10;
-            shotGoal.Shots++;
+            hpEnemyScript = collision.collider.GetComponent<hpScript>();
+           
 
             if (hitImpactVFX != null)
             {
@@ -112,8 +112,6 @@ public class DestroyObject : MonoBehaviour
                     armaRayScript.overHeat -= 10;
 
                 armaRayScript.isOverHeating = false;
-
-                
             }
             else
                 armaRayScript.extraAmmo += 2;
@@ -124,6 +122,8 @@ public class DestroyObject : MonoBehaviour
                 targetControllerScript.image.enabled = false;
                 targetControllerScript.lockedOn = false;
             }
+            hpEnemyScript.health -= 10;
+            shotGoal.Shots++;
 
         }
     }

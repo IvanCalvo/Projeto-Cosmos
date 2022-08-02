@@ -1830,6 +1830,19 @@ MonoBehaviour:
   cam: {fileID: 1428210926}
   onScreen: 0
   enemyPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &925789449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925789447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a7d24819554ae48983c72dfd00a324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!114 &925789453
 MonoBehaviour:
   m_ObjectHideFlags: 0
