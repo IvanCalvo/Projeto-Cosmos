@@ -9,6 +9,7 @@ TagManager:
   - Gun
   - Planet
   - LockOnImage
+  - GoalManager
   layers:
   - Default
   - TransparentFX

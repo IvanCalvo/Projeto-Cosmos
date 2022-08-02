@@ -1172,7 +1172,6 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInAttackRange: 0
   coll: {fileID: 302956313}
-  DestroyEnemyScript: {fileID: 765223580}
   rotationSpeed: 1
   innerCircleRadius: 1
   outterCircleRaius: 3
@@ -1272,7 +1271,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  enemyObject: {fileID: 302956312}
 --- !u!1 &351570260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,7 +2348,7 @@ GameObject:
   - component: {fileID: 765223580}
   m_Layer: 0
   m_Name: GoalManager
-  m_TagString: Untagged
+  m_TagString: GoalManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

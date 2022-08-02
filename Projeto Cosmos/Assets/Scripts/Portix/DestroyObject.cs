@@ -9,7 +9,7 @@ public class DestroyObject : MonoBehaviour
     public Rigidbody rb;
     public GameObject explosion;
     public hpScript hpEnemyScript;
-    public ShotEnemy shotGoal;
+    public DestroyEnemy shotGoalScript;
     public LayerMask whatIsEnemies;
     private ArmaRay armaRayScript;
     private TargetController targetControllerScript;
@@ -27,6 +27,7 @@ public class DestroyObject : MonoBehaviour
     public int maxCollisions;
     public float maxlifeTime;
     public bool explodeOnToutch = true;
+    public bool tookDamage = false;
 
     //VFX
     [SerializeField]
@@ -42,6 +43,8 @@ public class DestroyObject : MonoBehaviour
         armaRayScript = gun.GetComponent<ArmaRay>();
         GameObject targetController = GameObject.FindGameObjectWithTag("LockOnImage");
         targetControllerScript = targetController.GetComponent<TargetController>();
+        GameObject goalManager = GameObject.FindGameObjectWithTag("GoalManager");
+        shotGoalScript = goalManager.GetComponent<DestroyEnemy>();
         Setup();
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -76,7 +79,7 @@ public class DestroyObject : MonoBehaviour
         }
 
         //ADD DELAY SO POR DEBUG
-        Invoke("Delay", 0.05f);
+        Invoke("Delay", 0f);
     }
     private void Delay()
     {
@@ -95,36 +98,38 @@ public class DestroyObject : MonoBehaviour
         {
             Explode();
             //Destroy(collision.collider.gameObject);
-
             hpEnemyScript = collision.collider.GetComponent<hpScript>();
-           
+            //Destroy(gameObject);
 
-            if (hitImpactVFX != null)
+            if (!tookDamage)
             {
-                Instantiate(hitImpactVFX, transform);
-            }
+                if (hitImpactVFX != null)
+                {
+                    Instantiate(hitImpactVFX, transform);
+                }
 
-            if (armaRayScript.hasOverHeat)
-            {
-                if (armaRayScript.overHeat <= 10)
-                    armaRayScript.overHeat = 0;
+                if (armaRayScript.hasOverHeat)
+                {
+                    if (armaRayScript.overHeat <= 10)
+                        armaRayScript.overHeat = 0;
+                    else
+                        armaRayScript.overHeat -= 10;
+
+                    armaRayScript.isOverHeating = false;
+                }
                 else
-                    armaRayScript.overHeat -= 10;
+                    armaRayScript.extraAmmo += 2;
 
-                armaRayScript.isOverHeating = false;
+                if (collision.collider.gameObject == armaRayScript.inimigo)
+                {
+                    targetControllerScript.firstLock = true;
+                    targetControllerScript.image.enabled = false;
+                    targetControllerScript.lockedOn = false;
+                }
+                hpEnemyScript.health -= explosionDamage;
+                tookDamage = true;
+                shotGoalScript.Shots++;
             }
-            else
-                armaRayScript.extraAmmo += 2;
-               
-            if (collision.collider.gameObject == armaRayScript.inimigo)
-            {
-                targetControllerScript.firstLock = true;
-                targetControllerScript.image.enabled = false;
-                targetControllerScript.lockedOn = false;
-            }
-            hpEnemyScript.health -= 10;
-            shotGoal.Shots++;
-
         }
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//

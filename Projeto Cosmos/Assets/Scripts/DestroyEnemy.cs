@@ -11,7 +11,6 @@ public class DestroyEnemy : Goal {
     public GameObject enemyGO;
 
     public override void Complete() {
-        Destroy(enemyGO);
         Debug.Log("Completo!");
     }
 

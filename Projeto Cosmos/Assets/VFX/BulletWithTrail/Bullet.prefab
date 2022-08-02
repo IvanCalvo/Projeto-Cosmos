@@ -80,13 +80,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 6499557170259437615}
   explosion: {fileID: 0}
+  hpEnemyScript: {fileID: 0}
+  shotGoal: {fileID: 0}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 0
   bounciness: 0
-  explosionDamage: 40
+  explosionDamage: 10
   explosionRange: 3
-  maxCollisions: 5
+  maxCollisions: 2
   maxlifeTime: 4
   explodeOnToutch: 1
   hitImpactVFX: {fileID: 4085096625336766974, guid: 4b93d97ae99cd4486886654a13e75955, type: 3}

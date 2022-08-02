@@ -28,7 +28,7 @@ public class enemyScript : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
 
     public BoxCollider coll;
-    public DestroyEnemy DestroyEnemyScript;
+    //public DestroyEnemy DestroyEnemyScript;
 
     [SerializeField] float rotationSpeed = 1f;
 
@@ -79,9 +79,11 @@ public class enemyScript : MonoBehaviour
         if(playerInSightRange && playerInAttackRange) AttackPlayer();
     }
 
+    /*
     void OnCollisionEnter(Collision collision) {
         DestroyEnemyScript.Shots++;
     }
+    //*/
     
     private void Turn()
     {
