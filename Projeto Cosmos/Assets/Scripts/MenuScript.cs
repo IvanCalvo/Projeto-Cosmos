@@ -8,6 +8,7 @@ public class MenuScript : MonoBehaviour
 {
     public GameObject MenuCanvas;
     public GameObject InstructionCanvas;
+    public GameObject CreditsCanvas;
 
     public void Start()
     {
@@ -16,6 +17,7 @@ public class MenuScript : MonoBehaviour
        
         MenuCanvas.SetActive(true);
         InstructionCanvas.SetActive(false);
+        CreditsCanvas.SetActive(false);
     }
     public void StartGame()
     {
@@ -26,12 +28,21 @@ public class MenuScript : MonoBehaviour
     {
         MenuCanvas.SetActive(false);
         InstructionCanvas.SetActive(true);
+        CreditsCanvas.SetActive(false);
+    }
+
+    public void Credits()
+    {
+        MenuCanvas.SetActive(false);
+        InstructionCanvas.SetActive(false);
+        CreditsCanvas.SetActive(true);
     }
 
     public void BackToMenu()
     {
         MenuCanvas.SetActive(true);
         InstructionCanvas.SetActive(false);
+        CreditsCanvas.SetActive(true);
     }
 
     public void QuitGame()
