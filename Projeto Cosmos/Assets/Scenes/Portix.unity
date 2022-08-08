@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17316318, g: 0.16457182, b: 0.29665613, a: 1}
+  m_IndirectSpecularColor: {r: 0.1732206, g: 0.1645535, b: 0.29666728, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1546,6 +1546,7 @@ GameObject:
   - component: {fileID: 610593824}
   - component: {fileID: 610593823}
   - component: {fileID: 610593822}
+  - component: {fileID: 610593825}
   m_Layer: 0
   m_Name: GoalManager
   m_TagString: GoalManager
@@ -1596,6 +1597,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &610593825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610593821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951369ac9aedec1c9aa3400a63481bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meteorsDestroyed: 0
+  MeteorsGoal: 10
 --- !u!1 &629784760
 GameObject:
   m_ObjectHideFlags: 0

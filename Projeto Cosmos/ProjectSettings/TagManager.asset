@@ -11,6 +11,7 @@ TagManager:
   - LockOnImage
   - GoalManager
   - Station
+  - Asteroid
   layers:
   - Default
   - TransparentFX
