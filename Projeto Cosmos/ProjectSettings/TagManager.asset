@@ -10,6 +10,7 @@ TagManager:
   - Planet
   - LockOnImage
   - GoalManager
+  - Station
   layers:
   - Default
   - TransparentFX

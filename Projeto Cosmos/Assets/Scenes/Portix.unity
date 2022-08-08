@@ -805,6 +805,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fb543b3bcb421104ea80b0cd8040d85d, type: 3}
+      propertyPath: m_TagString
+      value: Station
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb543b3bcb421104ea80b0cd8040d85d, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -880,6 +884,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0be092eed109eed448ac411475f656e7, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0be092eed109eed448ac411475f656e7, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0be092eed109eed448ac411475f656e7, type: 3}
@@ -3294,7 +3302,7 @@ MonoBehaviour:
   ammoDisplay: {fileID: 2101968614}
   PlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 503
   allowInvoke: 1
   mousePos: {x: 0, y: 0, z: 0}
   overHeatBar: {fileID: 265007747}

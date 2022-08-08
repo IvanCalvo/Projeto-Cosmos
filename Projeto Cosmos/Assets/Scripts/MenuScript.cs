@@ -21,7 +21,8 @@ public class MenuScript : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("DestroyEnemy Scene");
+        //SceneManager.LoadScene("DestroyEnemy Scene");
+        SceneManager.LoadScene("Portix");
     }
 
     public void Instructions()
