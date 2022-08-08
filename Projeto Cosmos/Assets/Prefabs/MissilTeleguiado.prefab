@@ -143,13 +143,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6891984120119095041}
-  explosion: {fileID: 0}
+  explosion: {fileID: 4085096625336766974, guid: 4b93d97ae99cd4486886654a13e75955, type: 3}
+  dropObject: {fileID: 130102, guid: 04d0bf4be9447154188d86f6e3b8dce9, type: 3}
+  hpEnemyScript: {fileID: 0}
+  shotGoalScript: {fileID: 0}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 64
   bounciness: 0
-  explosionDamage: 40
+  explosionDamage: 100
   explosionRange: 1
   maxCollisions: 5
   maxlifeTime: 20
   explodeOnToutch: 1
+  tookDamage: 0
+  hitImpactVFX: {fileID: 0}

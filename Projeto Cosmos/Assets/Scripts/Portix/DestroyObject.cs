@@ -8,6 +8,7 @@ public class DestroyObject : MonoBehaviour
     //ASSIGNABLES
     public Rigidbody rb;
     public GameObject explosion;
+    public GameObject dropObject;
     public hpScript hpEnemyScript;
     public DestroyEnemy shotGoalScript;
     public LayerMask whatIsEnemies;
@@ -66,7 +67,7 @@ public class DestroyObject : MonoBehaviour
     {
         //INSTANTIATE EXPLOSION
         if (explosion != null)
-            Instantiate(explosion, transform.position, Quaternion.identity);
+            Instantiate(explosion, transform.position, Quaternion.identity);   // Tem autoDestrutor?
 
         //CHECK FOR ENEMY
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
@@ -97,9 +98,7 @@ public class DestroyObject : MonoBehaviour
         if ((collision.collider.CompareTag("Enemy") && explodeOnToutch) || (collision.collider.CompareTag("Planet") && explodeOnToutch))
         {
             Explode();
-            //Destroy(collision.collider.gameObject);
             hpEnemyScript = collision.collider.GetComponent<hpScript>();
-            //Destroy(gameObject);
 
             if (!tookDamage)
             {
@@ -107,19 +106,6 @@ public class DestroyObject : MonoBehaviour
                 {
                     Instantiate(hitImpactVFX, transform);
                 }
-
-                if (armaRayScript.hasOverHeat)
-                {
-                    if (armaRayScript.overHeat <= 10)
-                        armaRayScript.overHeat = 0;
-                    else
-                        armaRayScript.overHeat -= 10;
-
-                    armaRayScript.isOverHeating = false;
-                }
-                else
-                    armaRayScript.extraAmmo += 2;
-
                 if (collision.collider.gameObject == armaRayScript.inimigo)
                 {
                     targetControllerScript.firstLock = true;
@@ -127,6 +113,8 @@ public class DestroyObject : MonoBehaviour
                     targetControllerScript.lockedOn = false;
                 }
                 hpEnemyScript.health -= explosionDamage;
+                if(hpEnemyScript.health <= 0)
+                    DropItem(collision);
                 tookDamage = true;
                 shotGoalScript.Shots++;
             }
@@ -156,6 +144,10 @@ public class DestroyObject : MonoBehaviour
 
     }
 
+    private void DropItem(Collision objectTransform)
+    {
+        Instantiate(dropObject, objectTransform.collider.transform.position, Quaternion.identity);
+    }
 
 
 }
