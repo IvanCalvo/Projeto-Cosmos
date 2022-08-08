@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 5144218782953596077}
   m_Layer: 6
   m_Name: Asteroid 1
-  m_TagString: Enemy
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -329,7 +329,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  enemyObject: {fileID: 0}
 --- !u!1 &176588
 GameObject:
   m_ObjectHideFlags: 0

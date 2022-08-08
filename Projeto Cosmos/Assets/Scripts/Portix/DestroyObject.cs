@@ -11,6 +11,7 @@ public class DestroyObject : MonoBehaviour
     public GameObject dropObject;
     public hpScript hpEnemyScript;
     public DestroyEnemy shotGoalScript;
+    public DestroyMeteors meteorGoalScript;
     public LayerMask whatIsEnemies;
     private ArmaRay armaRayScript;
     private TargetController targetControllerScript;
@@ -46,6 +47,7 @@ public class DestroyObject : MonoBehaviour
         targetControllerScript = targetController.GetComponent<TargetController>();
         GameObject goalManager = GameObject.FindGameObjectWithTag("GoalManager");
         shotGoalScript = goalManager.GetComponent<DestroyEnemy>();
+        meteorGoalScript = goalManager.GetComponent<DestroyMeteors>();
         Setup();
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -95,7 +97,7 @@ public class DestroyObject : MonoBehaviour
         collisions++;
 
         //EXPLODE IF HIT ENEMY
-        if ((collision.collider.CompareTag("Enemy") && explodeOnToutch) || (collision.collider.CompareTag("Planet") && explodeOnToutch))
+        if ((collision.collider.CompareTag("Enemy") && explodeOnToutch) || (collision.collider.CompareTag("Planet") && explodeOnToutch) || (collision.collider.CompareTag("Asteroid") && explodeOnToutch))
         {
             Explode();
             hpEnemyScript = collision.collider.GetComponent<hpScript>();
@@ -116,7 +118,10 @@ public class DestroyObject : MonoBehaviour
                 if(hpEnemyScript.health <= 0)
                     DropItem(collision);
                 tookDamage = true;
-                shotGoalScript.Shots++;
+                if(collision.collider.CompareTag("Enemy"))
+                    shotGoalScript.Shots++;
+                else if(collision.collider.CompareTag("Asteroid"))
+                    meteorGoalScript.meteorsDestroyed++;
             }
         }
     }

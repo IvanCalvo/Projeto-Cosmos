@@ -29,7 +29,6 @@ public class TargetController : MonoBehaviour
     {
         //lockedOn = true;
         image = gameObject.GetComponent<Image>();
-
         lockedOn = false;
         targetTracked = false;
         //lockedEnemy = 0;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MissilTeleguiado : MonoBehaviour
 {
     private float missileSpeed = 20f;
-    private float accelerateActiveTime = 0f; // Quanto tempo está acelerando
+    private float accelerateActiveTime = 0f; // Quanto tempo estï¿½ acelerando
     
     [SerializeField] private float missileAcceleration = 20f;
     [SerializeField] private float accelerateTime = 7f;
@@ -16,10 +16,11 @@ public class MissilTeleguiado : MonoBehaviour
     private bool isAccelarating = false;
     private bool targetTracking = false;
 
-    //private Transform target; // Posição do alvo
+    //private Transform target; // Posiï¿½ï¿½o do alvo
     private Rigidbody rb;
     private Quaternion guideRotation;
     private BoxCollider boxCollider;
+    public GameObject alvo;
 
     private TargetController targetControllerScript;
 
@@ -34,13 +35,16 @@ public class MissilTeleguiado : MonoBehaviour
         ActivateMissile();
     }
 
+
     // Update is called once per frame
     void Update()
     {
         GameObject image = GameObject.FindGameObjectWithTag("LockOnImage");
         targetControllerScript = image.GetComponent<TargetController>();
-        Run();
         GuidedMissile();
+        Run();
+        if(targetControllerScript.alvo != null)
+            alvo = targetControllerScript.alvo;    
         //Debug.Log(targetControllerScript.target.transform.position);
     }
 
@@ -57,7 +61,7 @@ public class MissilTeleguiado : MonoBehaviour
 
         if(targetTracking)
         {
-            Vector3 relativePosition = targetControllerScript.alvo.transform.position - transform.position;
+            Vector3 relativePosition = alvo.transform.position - transform.position;
             guideRotation = Quaternion.LookRotation(relativePosition, transform.up);
         }
 
@@ -92,9 +96,8 @@ public class MissilTeleguiado : MonoBehaviour
     IEnumerator TargetTrackingDelay()
     {
         boxCollider.enabled = false;
-        yield return new WaitForSeconds(Random.Range(trackingDelay, trackingDelay));
+        yield return new WaitForSeconds(Random.Range(trackingDelay/2, trackingDelay));
         targetTracking = true;
         boxCollider.enabled = true;
-
     }
 }

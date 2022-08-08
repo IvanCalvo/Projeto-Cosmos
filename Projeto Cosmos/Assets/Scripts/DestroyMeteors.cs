@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyMeteors : Goal {
  
-    public int MeteorsDestroyed = 0;
+    public int meteorsDestroyed = 0;
     public int MeteorsGoal = 10;
     
     public override void Complete() {
@@ -12,11 +12,14 @@ public class DestroyMeteors : Goal {
     }
 
     public override bool IsAchieved(){
-        return (MeteorsDestroyed >= MeteorsGoal);
+        return (meteorsDestroyed >= MeteorsGoal);
     }
  
     public override void DrawHUD() {
-        GUILayout.Label(string.Format("Acertou {0}/{1} tiros", MeteorsDestroyed, MeteorsGoal));
+        if(this.IsAchieved())
+            GUILayout.Label(string.Format("Destruir 10 meteoros: {0}/{1} (Completo!))", meteorsDestroyed, MeteorsGoal));
+        else
+            GUILayout.Label(string.Format("Destruir 10 meteoros: {0}/{1}", meteorsDestroyed, MeteorsGoal));
     }
 
 }

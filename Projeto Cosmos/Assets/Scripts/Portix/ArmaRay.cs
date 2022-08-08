@@ -280,13 +280,12 @@ public class ArmaRay : MonoBehaviour
         RaycastHit hit;
         //CHECAR SE O RAY MIRA EM ALGO
         Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit, rayLength, PlayerLayerMask))
+        if (Physics.Raycast(ray, out hit, rayLength, PlayerLayerMask) && !targetControllerScript.targetTracked)
         {
             targetPoint = hit.point;
             //Debug.Log("Acertou");
             Debug.Log(hit.collider.gameObject.name);
             inimigo = hit.collider.gameObject;
-
         }
         else
             targetPoint = ray.GetPoint(100);//just away from the player
