@@ -12,6 +12,7 @@ TagManager:
   - GoalManager
   - Station
   - Asteroid
+  - Drop
   layers:
   - Default
   - TransparentFX

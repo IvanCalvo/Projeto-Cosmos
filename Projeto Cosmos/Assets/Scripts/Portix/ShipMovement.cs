@@ -25,6 +25,7 @@ public class ShipMovement : MonoBehaviour
         screenCenter.x = Screen.width * .5f;
         screenCenter.y = Screen.height * .5f;
         Cursor.lockState = CursorLockMode.Confined;
+        controller.detectCollisions = false;
     }
 
     // Update is called once per frame
