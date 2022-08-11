@@ -293,12 +293,13 @@ public class ArmaRay : MonoBehaviour
 
     IEnumerator OverHeat()
     {
-        yield return new WaitForSeconds(overHeatReload);
+        yield return new WaitForSeconds(overHeatReload/2);
         if(!shooting || reloading || isOverHeating)
         {
             if (overHeat > 0)
             {
-                overHeat -= 0.5f;
+                //overHeat -= 0.5f;
+                overHeat = Mathf.MoveTowards(overHeat, overHeat - 0.25f, 400f * Time.deltaTime);
                 readyToShoot = true;
             }
         }

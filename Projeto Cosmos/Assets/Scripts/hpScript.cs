@@ -11,7 +11,7 @@ public class hpScript : MonoBehaviour
     private float recoverHpTime = 5f;
     private float recoverShieldTime = 5f;
     private float recoverHpDelay = 0.2f;
-    private float recoverShieldDelay = 0.3f;
+    private float recoverShieldDelay = 0.8f;
 
     public int isOnCombatTimer = 5;
 
@@ -45,7 +45,7 @@ public class hpScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Checks if player hit certain objects
-        if(gameObject.CompareTag("Player") && !other.CompareTag("Bullet") && !other.CompareTag("Missile") && !other.CompareTag("Untagged") && alive)
+        if(gameObject.CompareTag("Player") && !other.CompareTag("Bullet") && !other.CompareTag("Missile") && !other.CompareTag("Untagged") && !other.CompareTag("Drop") && alive)
         {
             isOnCombatTimer = 5;
             if(!isOnCombat)
@@ -54,10 +54,14 @@ public class hpScript : MonoBehaviour
             float velocity = cControl.velocity.magnitude; // Gets current velocity to lose HP proportionally to its speed
             if (velocity > 20)
             {
-                if(shield >= velocity)
+                if (shield >= velocity)
                     shield -= velocity;
-                else if(shield <= velocity && shield > 0)
+                else if (shield <= velocity && shield > 0)
+                {
+                    float aux = velocity - shield;
                     shield = 0;
+                    health -= aux;
+                }
                 else if (health >= velocity)
                     health -= velocity;
                 else
@@ -68,28 +72,25 @@ public class hpScript : MonoBehaviour
     
     private void RecoverHp()
     {
-        if (health <= maxHealth - 1 && health > 0 && !isOnCombat)
+        if (health <= maxHealth && health > 0 && !isOnCombat)
         {
-            health++;
+            health = Mathf.MoveTowards(health, maxHealth, 800f * Time.deltaTime);
             Invoke("RecoverHp", recoverHpDelay);
+            if(health == maxHealth)
+                Invoke("RecoverShield", recoverShieldTime);
         }
-        else if (health > maxHealth - 1 && health < maxHealth)
-        {
-            health = maxHealth;
-            Invoke("RecoverShield", recoverShieldTime);
-        }
-
     }
 
     private void RecoverShield()
     {
-        if (shield <= maxShield - 1 && !isOnCombat)
+        if (shield <= maxShield && !isOnCombat)
         {
-            shield++;
+            shield = Mathf.MoveTowards(shield, maxShield, 300f * Time.deltaTime); // Testing
+            //shield++;
             Invoke("RecoverShield", recoverShieldDelay);
         }
-        else if (shield > maxShield - 1 && shield < maxShield)
-            shield = maxShield;
+        //else if (shield > maxShield - 1 && shield < maxShield)
+            //shield = maxShield;
     }
 
     IEnumerator StopCombat()
@@ -103,7 +104,7 @@ public class hpScript : MonoBehaviour
             if (health < maxHealth)
                 Invoke("RecoverHp", 0f);
             else if (shield < maxShield)
-                Invoke("RecoverShield", 0f);
+                Invoke("RecoverShield", recoverShieldTime);
         }
         else if (isOnCombatTimer != 5 && isOnCombatTimer > 0)
             StartCoroutine(StopCombat());

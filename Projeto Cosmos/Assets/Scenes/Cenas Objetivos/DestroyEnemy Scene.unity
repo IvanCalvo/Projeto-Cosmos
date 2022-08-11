@@ -1154,7 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 10
-  player: {fileID: 701796138}
+  player: {fileID: 5248762093495519967, guid: 05011971ebba8334bb0f505e78a9fa85, type: 3}
   CurrentProjectile: {fileID: 4351212865535585641, guid: 80fe1471888a7e9418a98af9070e0b13, type: 3}
   Objects:
     serializedVersion: 2
@@ -1270,7 +1270,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a7d24819554ae48983c72dfd00a324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  maxShield: 50
   health: 100
+  shield: 50
+  isOnCombatTimer: 5
+  hasShield: 0
+  alive: 1
+  isOnCombat: 0
 --- !u!1 &351570260
 GameObject:
   m_ObjectHideFlags: 0
@@ -4049,6 +4056,7 @@ MonoBehaviour:
   controller: {fileID: 1383053157}
   playerTransform: {fileID: 1383053160}
   speed: 12
+  virtual_camera: {fileID: 0}
   lookSpeed: 60
   rollSpeed: 130
   lookInput: {x: 0, y: 0}

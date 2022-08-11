@@ -328,7 +328,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a7d24819554ae48983c72dfd00a324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 10
+  maxShield: 50
   health: 10
+  shield: 50
+  isOnCombatTimer: 5
+  hasShield: 0
+  alive: 1
+  isOnCombat: 0
 --- !u!1 &176588
 GameObject:
   m_ObjectHideFlags: 0
