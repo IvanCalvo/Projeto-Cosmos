@@ -13,7 +13,7 @@ public class StarSpawner : MonoBehaviour
 
     void Start()
     {
-        numberOfStars = 100;
+        numberOfStars = 1000;
         generateSky();
     }
 
@@ -29,8 +29,8 @@ public class StarSpawner : MonoBehaviour
         int i;
         for(i=0; i<numberOfStars; i++)
         {
-            posX = Random.Range(-100f, 100f);
-            posY = Random.Range(-50f, 50f);
+            posX = Random.Range(-103f, 103f);
+            posY = Random.Range(-58f, 59f);
             Vector3 pos = new Vector3(posX, posY, 90f);
             newStar = Instantiate(MainStar);
             newStar.transform.SetParent(StarHUB.transform);
