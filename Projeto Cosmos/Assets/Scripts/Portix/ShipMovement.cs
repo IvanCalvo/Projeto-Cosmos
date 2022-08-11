@@ -10,6 +10,8 @@ public class ShipMovement : MonoBehaviour
     public CharacterController controller;
     public Transform playerTransform;
     [SerializeField] public float speed = 12f;
+    public GameObject virtual_camera;
+    Cinemachine.CinemachineVirtualCamera fov;
 
     private float rollInput;
     public float lookSpeed = 60f;
@@ -26,6 +28,8 @@ public class ShipMovement : MonoBehaviour
         screenCenter.y = Screen.height * .5f;
         Cursor.lockState = CursorLockMode.Confined;
         controller.detectCollisions = false;
+
+        fov = virtual_camera.GetComponent<Cinemachine.CinemachineVirtualCamera>();
     }
 
     // Update is called once per frame
@@ -40,17 +44,19 @@ public class ShipMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftShift) && boost_value > 20)
         {
-            speed = 36f;
+            Accelerate(36f, 80.0f, 1.0f);
+
             boost_value -= 10;
         }
         else
         {
+            Accelerate(12f, 60.0f, 3.0f);
+
             if (boost_value < 1000000)
             {
                 boost_value++;
                 boost_value++;
             }
-            speed = 12f;
         }
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
@@ -73,4 +79,11 @@ public class ShipMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
 
     }
+
+    void Accelerate(float desired_speed, float desired_fov, float lerp_strength) 
+    {
+        speed = Mathf.Lerp(speed, desired_speed, lerp_strength * Time.deltaTime);
+        fov.m_Lens.FieldOfView = Mathf.Lerp(fov.m_Lens.FieldOfView, desired_fov, lerp_strength * Time.deltaTime);
+    }
+
 }
