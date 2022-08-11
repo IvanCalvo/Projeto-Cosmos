@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 852482395132883267}
   m_Layer: 0
   m_Name: MissilTeleguiado
-  m_TagString: Untagged
+  m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   accelerateTime: 7
   turnRate: 500
   trackingDelay: 3
+  alvo: {fileID: 0}
 --- !u!54 &6891984120119095041
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -147,6 +148,7 @@ MonoBehaviour:
   dropObject: {fileID: 130102, guid: 04d0bf4be9447154188d86f6e3b8dce9, type: 3}
   hpEnemyScript: {fileID: 0}
   shotGoalScript: {fileID: 0}
+  meteorGoalScript: {fileID: 0}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 64

@@ -43,7 +43,7 @@ public class MenuScript : MonoBehaviour
     {
         MenuCanvas.SetActive(true);
         InstructionCanvas.SetActive(false);
-        CreditsCanvas.SetActive(true);
+        CreditsCanvas.SetActive(false);
     }
 
     public void QuitGame()

@@ -83,6 +83,7 @@ MonoBehaviour:
   dropObject: {fileID: 130102, guid: 04d0bf4be9447154188d86f6e3b8dce9, type: 3}
   hpEnemyScript: {fileID: 0}
   shotGoalScript: {fileID: 0}
+  meteorGoalScript: {fileID: 0}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 0
@@ -108,7 +109,7 @@ GameObject:
   - component: {fileID: 3181085373054173491}
   m_Layer: 3
   m_Name: BulletVfx
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

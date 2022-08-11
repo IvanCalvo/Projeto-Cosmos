@@ -284,7 +284,7 @@ public class ArmaRay : MonoBehaviour
         {
             targetPoint = hit.point;
             //Debug.Log("Acertou");
-            Debug.Log(hit.collider.gameObject.name);
+            //Debug.Log(hit.collider.gameObject.name);
             inimigo = hit.collider.gameObject;
         }
         else
