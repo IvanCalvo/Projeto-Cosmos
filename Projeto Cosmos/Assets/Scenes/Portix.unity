@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1732206, g: 0.1645535, b: 0.29666728, a: 1}
+  m_IndirectSpecularColor: {r: 0.17316318, g: 0.16457182, b: 0.29665613, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1326,7 +1326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!111 &402769446
 Animation:
   m_ObjectHideFlags: 0
@@ -2044,8 +2044,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a7d24819554ae48983c72dfd00a324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  maxHealth: 100
+  maxShield: 100
+  health: 1000
+  shield: 50
   alive: 1
+  hasShield: 0
+  recoverHpTime: 1
+  recoverShieldTime: 1
+  recoverHpDelay: 0.1
+  recoverShieldDelay: 0.2
 --- !u!114 &925789453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2066,6 +2074,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6362756056567160958, guid: 24ad90018b0c4ab4b9184adf6f9e0a3e, type: 3}
   m_PrefabInstance: {fileID: 6362756056951082357}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &975407725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 975407726}
+  - component: {fileID: 975407728}
+  - component: {fileID: 975407727}
+  m_Layer: 8
+  m_Name: Interaction Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &975407726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975407725}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1955678047}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &975407727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975407725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aaa4d07063db59349e0c7f56042b4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &975407728
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975407725}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.46916854
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1098786231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,8 +2344,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a7d24819554ae48983c72dfd00a324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  maxShield: 50
   health: 150
+  shield: 50
   alive: 1
+  hasShield: 1
+  recoverHpTime: 1
+  recoverShieldTime: 1
+  recoverHpDelay: 0.1
+  recoverShieldDelay: 0.2
 --- !u!65 &1383053156
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3390,6 +3463,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6958289074743949012, guid: fb543b3bcb421104ea80b0cd8040d85d, type: 3}
+--- !u!4 &1955678047 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fb543b3bcb421104ea80b0cd8040d85d, type: 3}
+  m_PrefabInstance: {fileID: 186049896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2010424890
 GameObject:
   m_ObjectHideFlags: 0

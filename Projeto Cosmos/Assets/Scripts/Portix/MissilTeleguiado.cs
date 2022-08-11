@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,11 +59,17 @@ public class MissilTeleguiado : MonoBehaviour
     private void GuidedMissile()
     {
         //if (target == null) return;
-
-        if(targetTracking)
+        try
         {
-            Vector3 relativePosition = alvo.transform.position - transform.position;
-            guideRotation = Quaternion.LookRotation(relativePosition, transform.up);
+            if (targetTracking)
+            {
+                Vector3 relativePosition = alvo.transform.position - transform.position;
+                guideRotation = Quaternion.LookRotation(relativePosition, transform.up);
+            }
+        }
+        catch(Exception e)
+        {
+
         }
 
         //Debug.Log("Tracking");
@@ -70,22 +77,27 @@ public class MissilTeleguiado : MonoBehaviour
 
     private void Run()
     {
-        targetControllerScript.lockedOn = true;
-        targetControllerScript.targetTracked = true;
-        if (Since(accelerateActiveTime) > accelerateTime)
-            isAccelarating = false;
-        else
-            isAccelarating = true;
+        try
+        {
+            targetControllerScript.lockedOn = true;
+            targetControllerScript.targetTracked = true;
+            if (Since(accelerateActiveTime) > accelerateTime)
+                isAccelarating = false;
+            else
+                isAccelarating = true;
 
-        if (!missileActive) return;
+            if (!missileActive) return;
 
-        if (isAccelarating)
-            missileSpeed += missileAcceleration * Time.deltaTime;
+            if (isAccelarating)
+                missileSpeed += missileAcceleration * Time.deltaTime;
 
-        rb.velocity = transform.forward * missileSpeed;
+            rb.velocity = transform.forward * missileSpeed;
 
-        if (targetTracking)
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, guideRotation, turnRate * Time.deltaTime);
+            if (targetTracking)
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, guideRotation, turnRate * Time.deltaTime);
+        }
+        catch(Exception e)
+        { }
     }
 
     private float Since(float since)
@@ -96,7 +108,7 @@ public class MissilTeleguiado : MonoBehaviour
     IEnumerator TargetTrackingDelay()
     {
         boxCollider.enabled = false;
-        yield return new WaitForSeconds(Random.Range(trackingDelay/2, trackingDelay));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(trackingDelay/2, trackingDelay));
         targetTracking = true;
         boxCollider.enabled = true;
     }
