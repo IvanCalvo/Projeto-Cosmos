@@ -23,7 +23,7 @@ public class starBright : MonoBehaviour
     IEnumerator brightTimer()
     {
         started = true;
-        float time = Random.Range(-5f, 5f);
+        float time = Random.Range(3f, 13f);
         float bright = Random.Range(.1f, .6f);
         yield return new WaitForSeconds(time);
         SpriteRenderer sprite = star.GetComponent<SpriteRenderer>();

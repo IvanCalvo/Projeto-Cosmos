@@ -19,7 +19,9 @@ public class OverHeatBar : MonoBehaviour
 
     public void SetOverheat(float overHeat)
     {
-        slider.value = overHeat;
+        //slider.value = overHeat;
+        slider.value = Mathf.MoveTowards(slider.value, overHeat, 10f * Time.deltaTime);
+        //Mathf.MoveTowards(currentValue, value, changeSpeed * Time.deltaTime);
 
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }

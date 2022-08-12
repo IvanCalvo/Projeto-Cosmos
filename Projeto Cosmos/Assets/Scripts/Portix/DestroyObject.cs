@@ -95,9 +95,12 @@ public class DestroyObject : MonoBehaviour
     {
         //CONTAR COLISAO
         collisions++;
-
+        if(collision.collider.tag == "Player")
+        {
+            Physics.IgnoreCollision(collision.collider, gameObject.GetComponent<Collider>());
+        }
         //EXPLODE IF HIT ENEMY
-        if ((collision.collider.CompareTag("Enemy") && explodeOnToutch) || (collision.collider.CompareTag("Planet") && explodeOnToutch) || (collision.collider.CompareTag("Asteroid") && explodeOnToutch))
+        if ((collision.collider.CompareTag("Enemy") && explodeOnToutch) || (collision.collider.CompareTag("Asteroid") && explodeOnToutch))
         {
             Explode();
             hpEnemyScript = collision.collider.GetComponent<hpScript>();

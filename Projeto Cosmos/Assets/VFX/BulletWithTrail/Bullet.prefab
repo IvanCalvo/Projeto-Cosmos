@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6499557170259437615}
   - component: {fileID: 4653845120696070533}
   - component: {fileID: 8634427564922924005}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3181085373054173453}
   - component: {fileID: 3181085373054173452}
   - component: {fileID: 3181085373054173491}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: BulletVfx
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3181085373216314871}
   - component: {fileID: 3181085373216314864}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3181085373314330586}
   - component: {fileID: 3181085373314330587}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,7 +439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3181085373316814636}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

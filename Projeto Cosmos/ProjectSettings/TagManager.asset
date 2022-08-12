@@ -13,6 +13,7 @@ TagManager:
   - Station
   - Asteroid
   - Drop
+  - Missile
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - WhatIsEnemies
   - WhatIsBullets
   - Objects
-  - 
+  - WhatIsEnemyBullets
   - 
   - 
   - 
