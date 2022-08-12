@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class hpScript : MonoBehaviour
 {
+    /*
+        URGENTE: Transformar esse sript em 2, um para inimigos e um para o player?
+    //*/
+    public HealthBar healthBarScript;
+    public ShieldBar shieldBarScript;
+
     public float maxHealth = 100;
     public float maxShield = 50;
     public float health = 100;
     public float shield = 50;
     private float recoverHpTime = 5f;
     private float recoverShieldTime = 5f;
-    private float recoverHpDelay = 0.2f;
-    private float recoverShieldDelay = 0.8f;
+    private float recoverHpDelay = 0.1f;
+    private float recoverShieldDelay = 0.1f;
+    
 
     public int isOnCombatTimer = 5;
 
@@ -28,6 +35,11 @@ public class hpScript : MonoBehaviour
         }
         else
             health = maxHealth;
+        if (gameObject.tag == "Player")
+        {
+            healthBarScript.SetMaxHealth(maxHealth);
+            shieldBarScript.SetMaxShield(maxShield);
+        }
     }
     private void Update()
     {
@@ -39,6 +51,11 @@ public class hpScript : MonoBehaviour
                 Debug.Log("Morreu");
             alive = false;
             health = 0;
+        }
+        if (gameObject.tag == "Player")
+        {
+            healthBarScript.SetHealth(health);
+            shieldBarScript.SetShield(shield);
         }
     }
 
@@ -74,7 +91,7 @@ public class hpScript : MonoBehaviour
     {
         if (health <= maxHealth && health > 0 && !isOnCombat)
         {
-            health = Mathf.MoveTowards(health, maxHealth, 800f * Time.deltaTime);
+            health = Mathf.MoveTowards(health, maxHealth, 1000f * Time.deltaTime);
             Invoke("RecoverHp", recoverHpDelay);
             if(health == maxHealth)
                 Invoke("RecoverShield", recoverShieldTime);
@@ -85,7 +102,7 @@ public class hpScript : MonoBehaviour
     {
         if (shield <= maxShield && !isOnCombat)
         {
-            shield = Mathf.MoveTowards(shield, maxShield, 300f * Time.deltaTime); // Testing
+            shield = Mathf.MoveTowards(shield, maxShield, 1000f * Time.deltaTime); // Testing
             //shield++;
             Invoke("RecoverShield", recoverShieldDelay);
         }
