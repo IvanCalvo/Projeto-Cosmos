@@ -5,10 +5,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseScript : MonoBehaviour
-{
+{   
+    public StationInteraction stationScript;
+    public ArmaRay gunScript;
+
+
     public static bool GamePaused = false;
     public GameObject PauseMenu;
     public GameObject OptionsMenu;
+
 
     void Start()
     {
@@ -19,7 +24,7 @@ public class PauseScript : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !stationScript.isOnHUD)
         {
             if (GamePaused)
             {
@@ -40,6 +45,8 @@ public class PauseScript : MonoBehaviour
         GamePaused = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+        if(!gunScript.reloading && !gunScript.isOverHeating)    // To prevent player shooting while onPauseMenu/reloading/overheating
+            gunScript.readyToShoot = true;
     }
 
     void Pause()
@@ -50,6 +57,8 @@ public class PauseScript : MonoBehaviour
         GamePaused = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        if(!gunScript.reloading && !gunScript.isOverHeating)
+            gunScript.readyToShoot = false;
     }
 
     public void Menu()

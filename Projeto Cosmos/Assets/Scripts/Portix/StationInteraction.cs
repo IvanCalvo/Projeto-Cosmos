@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class StationInteraction : MonoBehaviour
 {
     public CursorController cursorScript;
+    public ArmaRay gunScript;
 
     public GameObject stationHUD;
-    private bool isOnHUD = false;
+    public bool isOnHUD = false;
 
     private void Update() 
     {
@@ -31,6 +32,8 @@ public class StationInteraction : MonoBehaviour
         isOnHUD = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+        if(!gunScript.reloading && !gunScript.isOverHeating)  // To prevent player shooting while onPauseMenu/reloading/overheating
+            gunScript.readyToShoot = true;
     }
 
     void Pause()    // Talvez trocar o cursor? 
@@ -41,6 +44,8 @@ public class StationInteraction : MonoBehaviour
         isOnHUD = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        if(!gunScript.reloading && !gunScript.isOverHeating)
+            gunScript.readyToShoot = false;
     }
 
 

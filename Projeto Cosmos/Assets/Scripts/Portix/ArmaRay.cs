@@ -36,7 +36,9 @@ public class ArmaRay : MonoBehaviour
     private int maxHeat = 25;
 
     //BOOLS CHECKS
-    bool shooting, reloading, readyToShoot;
+    bool shooting;
+    public bool readyToShoot;
+    public bool reloading;
     public bool isOverHeating;
     public bool readyToLock; 
 
