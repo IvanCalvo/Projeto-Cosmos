@@ -3079,6 +3079,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 925789455}
     m_Modifications:
+    - target: {fileID: 201003406766734432, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 201003406766734438, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3086,6 +3090,10 @@ PrefabInstance:
     - target: {fileID: 201003406766734438, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 201003406907880888, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 201003407602758806, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
       propertyPath: m_RootOrder
@@ -3146,6 +3154,22 @@ PrefabInstance:
     - target: {fileID: 201003407602758807, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
       propertyPath: m_Name
       value: Saturn
+      objectReference: {fileID: 0}
+    - target: {fileID: 201003407602758807, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 201003407835375677, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824592167915443152, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592183989239419639, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6be40b5f97ef4a4ca545d9ab5d332ac, type: 3}
@@ -7063,6 +7087,8 @@ MonoBehaviour:
   hasAmmo: 0
   extraAmmo: 0
   overHeat: 0
+  readyToShoot: 0
+  reloading: 0
   isOverHeating: 0
   readyToLock: 0
   fpsCam: {fileID: 1428210926}
@@ -7073,7 +7099,7 @@ MonoBehaviour:
   ammoDisplay: {fileID: 2101968614}
   PlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 503
+    m_Bits: 247
   allowInvoke: 1
   mousePos: {x: 0, y: 0, z: 0}
   overHeatBar: {fileID: 265007747}
@@ -7329,6 +7355,10 @@ PrefabInstance:
     - target: {fileID: 6362756056567160946, guid: 24ad90018b0c4ab4b9184adf6f9e0a3e, type: 3}
       propertyPath: m_Name
       value: Planeta Principal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362756056567160946, guid: 24ad90018b0c4ab4b9184adf6f9e0a3e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6362756056567160946, guid: 24ad90018b0c4ab4b9184adf6f9e0a3e, type: 3}
       propertyPath: m_TagString
