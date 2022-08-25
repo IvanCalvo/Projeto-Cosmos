@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class TargetController : MonoBehaviour
 {
     public Camera cam;
-    public EnemyInView target;
     public Image image;
     public GameObject player;
 
