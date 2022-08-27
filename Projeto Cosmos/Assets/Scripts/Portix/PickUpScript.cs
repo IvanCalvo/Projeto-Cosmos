@@ -6,7 +6,7 @@ public class PickUpScript : MonoBehaviour
 {
     private ArmaRay armaRayScript;
     private MoneyScript moneyScript;
-
+    private PlayerStats playerStatScript;
 
     [SerializeField] private GameObject pickUpVFX;
     private float destructionTimer = 10f;
@@ -15,9 +15,9 @@ public class PickUpScript : MonoBehaviour
     {
         StartCoroutine(AutoDestruction());
         GameObject gun = GameObject.FindWithTag("Gun");
-        GameObject moneyManager = GameObject.FindWithTag("MoneyManager");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerStatScript = player.GetComponent<PlayerStats>();
         armaRayScript = gun.GetComponent<ArmaRay>();
-        moneyScript = moneyManager.GetComponent<MoneyScript>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -34,7 +34,7 @@ public class PickUpScript : MonoBehaviour
             }
             else
                 armaRayScript.extraAmmo += 2;
-            moneyScript.money += 10;
+            playerStatScript.money += 10;
             Destroy(gameObject);
         }
     }

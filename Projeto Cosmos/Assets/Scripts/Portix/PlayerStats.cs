@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerStats : MonoBehaviour
 {
     public HealthBar healthBarScript;
     public ShieldBar shieldBarScript;
+    public TextMeshProUGUI moneyObject;
 
     public float maxHealth = 100;
     public float maxShield = 50;
@@ -18,6 +20,7 @@ public class PlayerStats : MonoBehaviour
 
 
     public int isOnCombatTimer = 5;
+    public int money = 0;
 
     public bool hasShield = false;
     public bool alive = true;
@@ -44,10 +47,11 @@ public class PlayerStats : MonoBehaviour
         }
         healthBarScript.SetHealth(health);
         shieldBarScript.SetShield(shield);
+        moneyObject.text = money.ToString();
     }
 
-    /*
-    private void OnCollisionEnter(Collision collision)
+    //*
+    private void OnCollisionEnter(Collision collision) // Should Work
     {
             Debug.Log("Emnt1");
         if(!collision.collider.CompareTag("Bullet") && !collision.collider.CompareTag("Missile") && !collision.collider.CompareTag("Untagged") && !collision.collider.CompareTag("Drop"))
@@ -77,11 +81,11 @@ public class PlayerStats : MonoBehaviour
     }
     //*/
 
-    //*
+    /*
     private void OnTriggerEnter(Collider other) // TRIGGER?????? 
     {
             Debug.Log("Emnt1");
-        // Checks if player hit certain objects
+        // Checks if player hit certain objects 
         if (!other.CompareTag("Bullet") && !other.CompareTag("Missile") && !other.CompareTag("Untagged") && !other.CompareTag("Drop") && alive)
         {
             isOnCombatTimer = 5;
