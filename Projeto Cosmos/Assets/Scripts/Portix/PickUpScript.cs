@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickUpScript : MonoBehaviour
 {
     private ArmaRay armaRayScript;
-
+    private MoneyScript moneyScript;
 
 
     [SerializeField] private GameObject pickUpVFX;
@@ -15,7 +15,9 @@ public class PickUpScript : MonoBehaviour
     {
         StartCoroutine(AutoDestruction());
         GameObject gun = GameObject.FindWithTag("Gun");
+        GameObject moneyManager = GameObject.FindWithTag("MoneyManager");
         armaRayScript = gun.GetComponent<ArmaRay>();
+        moneyScript = moneyManager.GetComponent<MoneyScript>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -28,11 +30,11 @@ public class PickUpScript : MonoBehaviour
                     armaRayScript.overHeat = 0;
                 else
                     armaRayScript.overHeat -= 10;
-
                 armaRayScript.isOverHeating = false;
             }
             else
                 armaRayScript.extraAmmo += 2;
+            moneyScript.money += 10;
             Destroy(gameObject);
         }
     }
