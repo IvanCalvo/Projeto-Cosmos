@@ -13,7 +13,6 @@ public class ArmaRay : MonoBehaviour
     [SerializeField] private GameObject CurrentProjectile;
     [SerializeField] public GameObject CanvasOverHeat;
     [SerializeField] public GameObject CanvasMunicaoMissil;    
-    public GameObject inimigo;
 
     //FORCA DA BALA, BULLET FORCE
     [Header("Configura��es Arma")]
@@ -36,7 +35,9 @@ public class ArmaRay : MonoBehaviour
     private int maxHeat = 25;
 
     //BOOLS CHECKS
-    bool shooting, reloading, readyToShoot;
+    bool shooting;
+    public bool readyToShoot;
+    public bool reloading;
     public bool isOverHeating;
     public bool readyToLock; 
 
@@ -46,11 +47,14 @@ public class ArmaRay : MonoBehaviour
     public Transform primaryWeaponPoint;
     public Transform secondaryWeaponPoint;
     public Transform firePoint;
+    public GameObject inimigo;
+    public GameObject planeta;
 
     //GRAFICO
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammoDisplay;
     public LayerMask PlayerLayerMask;
+    public LayerMask PlanetsLayerMask;
 
     //BUG FIXING
     public bool allowInvoke = true;
@@ -90,6 +94,8 @@ public class ArmaRay : MonoBehaviour
 
         if (!targetControllerScript.lockedOn)
             CheckHit();
+
+        CheckPlanets();
         
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -283,9 +289,24 @@ public class ArmaRay : MonoBehaviour
         if (Physics.Raycast(ray, out hit, rayLength, PlayerLayerMask) && !targetControllerScript.targetTracked)
         {
             targetPoint = hit.point;
-            //Debug.Log("Acertou");
             //Debug.Log(hit.collider.gameObject.name);
             inimigo = hit.collider.gameObject;
+        }
+        else
+            targetPoint = ray.GetPoint(100);//just away from the player
+    }
+
+    private void CheckPlanets() // Maybe Change name later
+    {
+        float rayLength = 10000f;//distancia finita onde o z aponta
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        //CHECAR SE O RAY MIRA EM ALGO
+        Vector3 targetPoint;
+        if (Physics.Raycast(ray, out hit, rayLength, PlanetsLayerMask))
+        {
+            targetPoint = hit.point;
+            planeta = hit.collider.gameObject;
         }
         else
             targetPoint = ray.GetPoint(100);//just away from the player
