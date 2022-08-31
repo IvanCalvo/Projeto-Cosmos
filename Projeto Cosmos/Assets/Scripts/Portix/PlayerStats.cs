@@ -47,16 +47,14 @@ public class PlayerStats : MonoBehaviour
         }
         healthBarScript.SetHealth(health);
         shieldBarScript.SetShield(shield);
-        moneyObject.text = money.ToString();
+        moneyObject.text = money.ToString(); // Maybe change only when receive money?
     }
 
     //*
     private void OnCollisionEnter(Collision collision) // Should Work
     {
-            Debug.Log("Emnt1");
         if(!collision.collider.CompareTag("Bullet") && !collision.collider.CompareTag("Missile") && !collision.collider.CompareTag("Untagged") && !collision.collider.CompareTag("Drop"))
         {
-            Debug.Log("Emnt");
             isOnCombatTimer = 5;
             if (!isOnCombat)
                 StartCoroutine(StopCombat());

@@ -21,4 +21,4 @@ public class LookAtCamera : MonoBehaviour
         else
             image.enabled = false;
     }
-}
+} 
