@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class TargetController : MonoBehaviour
 {
     public Camera cam;
-    public EnemyInView target;
     public Image image;
     public GameObject player;
 
@@ -80,7 +79,7 @@ public class TargetController : MonoBehaviour
 
                 gameObject.transform.position = cam.WorldToScreenPoint(alvo.transform.position);
 
-                //float distancia = Vector3.Distance(player.transform.position, enemyScript.transform.position);
+                //float distance = Vector3.Distance(player.transform.position, enemyScript.transform.position);
                 //Debug.Log(distancia); // distancia até o inimigo
 
             }

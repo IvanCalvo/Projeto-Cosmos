@@ -6,6 +6,7 @@ public class CursorController : MonoBehaviour
 {
     //declaracao das texturas do cursor caso tenha mais de uma etc
     public Texture2D cursor;
+    public Texture2D cursorHUD;
     public Texture2D cursorAtirando;
 
     private void Awake()
@@ -13,7 +14,7 @@ public class CursorController : MonoBehaviour
         ChangeCursor(cursor);
         Cursor.lockState = CursorLockMode.Confined;
     }
-    private void ChangeCursor(Texture2D cursorType)
+    public void ChangeCursor(Texture2D cursorType)
     {
         Vector2 hotspot = new Vector2(cursorType.width/2 , cursorType.height/2);
         Cursor.SetCursor(cursorType, hotspot, CursorMode.Auto);

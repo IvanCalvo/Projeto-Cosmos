@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -121,10 +122,14 @@ public class DestroyObject : MonoBehaviour
                 if(hpEnemyScript.health <= 0)
                     DropItem(collision);
                 tookDamage = true;
-                if(collision.collider.CompareTag("Enemy"))
-                    shotGoalScript.Shots++;
-                else if(collision.collider.CompareTag("Asteroid"))
-                    meteorGoalScript.meteorsDestroyed++;
+                try
+                {
+                    if (collision.collider.CompareTag("Enemy"))
+                        shotGoalScript.Shots++;
+                    else if (collision.collider.CompareTag("Asteroid"))
+                        meteorGoalScript.meteorsDestroyed++;
+                }
+                catch(Exception e) { }
             }
         }
     }

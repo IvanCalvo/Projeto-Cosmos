@@ -6,9 +6,12 @@ public class DestroyMeteors : Goal {
  
     public int meteorsDestroyed = 0;
     public int MeteorsGoal = 10;
+    public bool displayOnce = true;
     
     public override void Complete() {
-        Debug.Log("Completo!");
+        if(displayOnce)
+            Debug.Log("Completo!");
+        displayOnce = false;
     }
 
     public override bool IsAchieved(){
