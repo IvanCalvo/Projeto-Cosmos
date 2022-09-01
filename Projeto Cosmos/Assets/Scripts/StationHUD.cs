@@ -7,6 +7,7 @@ public class StationHUD : MonoBehaviour
 {
     Button missionButton;
     int state;
+    public bool changing;
 
     //0 - nao selecionada
     //1 - fazendo
@@ -18,10 +19,17 @@ public class StationHUD : MonoBehaviour
         state = 0;
         ColorBlock cb = missionButton.colors;
         cb.normalColor = Color.white;
+        if(state == 2)
+        {
+            cb.normalColor = Color.green;
+            cb.selectedColor = cb.normalColor;
+            missionButton.colors = cb;
+        }
     }
 
-    void clickButton()
+    public void clickButton()
     {
+        changing = false;
         ColorBlock cb1 = missionButton.colors;
         switch(state)
         {
@@ -36,6 +44,8 @@ public class StationHUD : MonoBehaviour
             default:
                 break;
         }
-        Debug.Log(state);
+        cb1.selectedColor = cb1.normalColor;
+        missionButton.colors = cb1;
     }
+    
 }
