@@ -59,7 +59,7 @@ public class hpScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) // TRIGGER?????? 
+    private void OnTriggerEnter(Collider other)
     {
         // Checks if player hit certain objects
         if(gameObject.CompareTag("Player") && !other.CompareTag("Bullet") && !other.CompareTag("Missile") && !other.CompareTag("Untagged") && !other.CompareTag("Drop") && alive)

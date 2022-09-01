@@ -14,7 +14,6 @@ TagManager:
   - Asteroid
   - Drop
   - Missile
-  - MoneyManager
   layers:
   - Default
   - TransparentFX
