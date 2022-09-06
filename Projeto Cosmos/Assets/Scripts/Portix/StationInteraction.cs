@@ -7,9 +7,15 @@ public class StationInteraction : MonoBehaviour
 {
     public CursorController cursorScript;
     public ArmaRay gunScript;
+    public PlayerStats playerStatsScript;
 
     public GameObject stationHUD;
     public bool isOnHUD = false;
+
+    public Transform playerTransform;
+    public Vector3 playerPositionAtStation;
+    public Quaternion playerRotationAtStation;
+    private int playerMoney;
 
     private void Update() 
     {
@@ -19,8 +25,16 @@ public class StationInteraction : MonoBehaviour
 
     private void OnTriggerStay(Collider other) 
     {
-        if (other.CompareTag("Player") && Input.GetKey(KeyCode.F) && !isOnHUD) 
+        if (other.CompareTag("Player") && Input.GetKey(KeyCode.F) && !isOnHUD)
+        {
+            SaveCurrentStats();
             Pause();
+        }
+
+        if (other.CompareTag("Player") && Input.GetKey(KeyCode.L) && !isOnHUD)
+        {
+            LoadPlayerStatsAtStation();
+        }
     }
 
 
@@ -48,5 +62,18 @@ public class StationInteraction : MonoBehaviour
             gunScript.readyToShoot = false;
     }
 
+    void SaveCurrentStats()
+    {
+        playerMoney = playerStatsScript.money;
+        playerPositionAtStation = playerTransform.position;
+        playerRotationAtStation = playerTransform.rotation;
+    }
+
+    public void LoadPlayerStatsAtStation()
+    {
+        playerStatsScript.money = playerMoney;
+        playerTransform.position = playerPositionAtStation;
+        playerTransform.rotation = playerRotationAtStation;
+    }
 
 }

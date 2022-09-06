@@ -18,16 +18,14 @@ public class ScanObject : MonoBehaviour
     public TMP_Text text;
     public TMP_Text distance;
 
-    private Vector3 planetPosition;
+    float minStationClamp = 15f;
+    [SerializeField]float minPlanetClamp;
 
-    private float defaultSizeText;
     int distanceFromPlayer;
-    float objectScale = 0f;
 
     private void Start()
     {
-        defaultSizeText = text.fontSize;
-        objectScale = gameObject.transform.parent.localScale.x;
+        minPlanetClamp = gameObject.transform.parent.localScale.x/30f;
     }
 
 
@@ -40,26 +38,22 @@ public class ScanObject : MonoBehaviour
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             inViewScript = planeta.GetComponent<EnemyInView>();
             planetStatsScript = planeta.GetComponent<PlanetStats>();
+            if(planeta.tag == "Planet")
+                text.fontSize = Mathf.Clamp(distanceFromPlayer/20f, minPlanetClamp, 2000f);
+            else
+                text.fontSize = Mathf.Clamp(distanceFromPlayer/20f, minStationClamp, 2000f);
 
-            text.fontSize = Mathf.Clamp(distanceFromPlayer/objectScale, 1f, 1000f) * 40f;
-            distance.fontSize = text.fontSize - 8f;
-
-            text.text = planetStatsScript.planetName;
             if (inViewScript.onScreen && gameObject.tag == planeta.tag)
             {
                 distanceFromPlayer = (int)Vector3.Distance(player.transform.position, planeta.transform.position) -(int)planeta.transform.localScale.x/2;
                 if (distanceFromPlayer >= 0)
-                    distance.text = distanceFromPlayer.ToString() + "m";
+                    text.text = planetStatsScript.planetName + "\n" + distanceFromPlayer.ToString() + "m";
                 else
-                    distance.text = "0m";
-                distance.enabled = true;
+                    text.text = planetStatsScript.planetName + "\n" + "0m";
                 text.enabled = true;
             }
             else
-            {
-                distance.enabled = false;
                 text.enabled = false;
-            }
             //if (planeta.tag == "Planet")
                 //planetPosition = new Vector3(planeta.transform.position.x + (planeta.transform.localScale.x * 1.5f), planeta.transform.position.y, planeta.transform.position.z);
            //else
