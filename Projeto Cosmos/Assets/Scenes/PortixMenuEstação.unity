@@ -3518,6 +3518,7 @@ MonoBehaviour:
   meteorsDestroyed: 0
   MeteorsGoal: 10
   displayOnce: 1
+  state: 0
 --- !u!1 &624480984
 GameObject:
   m_ObjectHideFlags: 0
@@ -6662,7 +6663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fde384dd2e16641bb19722cd178813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changing: 0
+  dm: {fileID: 610593825}
 --- !u!114 &1506969627
 MonoBehaviour:
   m_ObjectHideFlags: 0
