@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StationHUD : MonoBehaviour
+public class ButtonDestroyMeteors : MonoBehaviour
 {
     Button missionButton;
     int state;
