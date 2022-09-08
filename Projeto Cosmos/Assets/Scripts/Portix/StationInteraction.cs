@@ -13,9 +13,6 @@ public class StationInteraction : MonoBehaviour
     public bool isOnHUD = false;
 
     public Transform playerTransform;
-    public Vector3 playerPositionAtStation;
-    public Quaternion playerRotationAtStation;
-    private int playerMoney;
 
     private void Update() 
     {
@@ -64,16 +61,28 @@ public class StationInteraction : MonoBehaviour
 
     void SaveCurrentStats()
     {
-        playerMoney = playerStatsScript.money;
-        playerPositionAtStation = playerTransform.position;
-        playerRotationAtStation = playerTransform.rotation;
+        PlayerPrefs.SetInt("playerMoney", playerStatsScript.money);
+        PlayerPrefs.SetFloat("posicaoX", playerTransform.position.x);
+        PlayerPrefs.SetFloat("posicaoY", playerTransform.position.y);
+        PlayerPrefs.SetFloat("posicaoZ", playerTransform.position.z);
+        PlayerPrefs.SetFloat("rotacaoW", playerTransform.rotation.w);
+        PlayerPrefs.SetFloat("rotacaoX", playerTransform.rotation.x);
+        PlayerPrefs.SetFloat("rotacaoY", playerTransform.rotation.y);
+        PlayerPrefs.SetFloat("rotacaoZ", playerTransform.rotation.z);
     }
 
     public void LoadPlayerStatsAtStation()
     {
-        playerStatsScript.money = playerMoney;
-        playerTransform.position = playerPositionAtStation;
-        playerTransform.rotation = playerRotationAtStation;
+        playerStatsScript.money = PlayerPrefs.GetInt("playerMoney");
+        float posicaoX = PlayerPrefs.GetFloat("posicaoX");
+        float posicaoY = PlayerPrefs.GetFloat("posicaoY");
+        float posicaoZ = PlayerPrefs.GetFloat("posicaoZ");
+        playerTransform.position = new Vector3(posicaoX, posicaoY, posicaoZ);
+        float rotacaoW = PlayerPrefs.GetFloat("rotacaoW");
+        float rotacaoX = PlayerPrefs.GetFloat("rotacaoX");
+        float rotacaoY = PlayerPrefs.GetFloat("rotacaoY");
+        float rotacaoZ = PlayerPrefs.GetFloat("rotacaoZ");
+        playerTransform.rotation = new Quaternion(rotacaoX, rotacaoY, rotacaoZ, rotacaoW);
     }
 
 }
