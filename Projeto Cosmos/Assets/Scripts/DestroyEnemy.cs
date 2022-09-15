@@ -7,22 +7,36 @@ public class DestroyEnemy : Goal {
  
     public int Shots = 0;
     public int ShotsGoal = 10;
-    
+    public bool displayOnce;
+    public bool state;
+
     public GameObject enemyGO;
 
     public override void Complete() {
-        Debug.Log("Completo!");
+        if(displayOnce)
+        {
+            Debug.Log("Completo!");
+        }
+        displayOnce = false;
     }
 
     public override bool IsAchieved(){
-        return (Shots >= ShotsGoal);
+        if(state) return (Shots >= ShotsGoal);
+
+        return false;
     }
  
     public override void DrawHUD() {
-        if(this.IsAchieved()) {
-            GUILayout.Label(string.Format("Acertou {0}/{1} tiros (Completo!)", Shots, ShotsGoal));
-        } else {
-            GUILayout.Label(string.Format("Acertou {0}/{1} tiros", Shots, ShotsGoal));
+        if(state)
+        {
+            if (this.IsAchieved())
+            {
+                GUILayout.Label(string.Format("Acertou {0}/{1} tiros (Completo!)", Shots, ShotsGoal));
+            }
+            else
+            {
+                GUILayout.Label(string.Format("Acertou {0}/{1} tiros", Shots, ShotsGoal));
+            }
         }
     }
 
