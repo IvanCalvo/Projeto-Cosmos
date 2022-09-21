@@ -31,9 +31,18 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-        shield = maxShield;
         healthBarScript.SetMaxHealth(maxHealth);
-        shieldBarScript.SetMaxShield(maxShield);
+
+        if(hasShield)
+        {
+            shield = maxShield;
+            shieldBarScript.SetMaxShield(maxShield);
+        } 
+        else
+        {
+            shield = 0;
+            shieldBarScript.SetShield(shield);
+        }
     }
 
     // Update is called once per frame
@@ -48,6 +57,13 @@ public class PlayerStats : MonoBehaviour
         healthBarScript.SetHealth(health);
         shieldBarScript.SetShield(shield);
         moneyObject.text = money.ToString(); // Maybe change only when receive money?
+    }
+
+    public void buyShield()
+    {
+        hasShield = true;
+        shield = maxShield;
+        shieldBarScript.SetShield(shield);
     }
 
     //*
