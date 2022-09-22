@@ -8,10 +8,12 @@ public class ButtonDestroyEnemy : MonoBehaviour
     Button missionButton;
     int state;
     public DestroyEnemy de;
+    public PlayerStats player;
 
     //0 - nao selecionada
     //1 - fazendo
     //2 - completa
+    //3 - recebeu recompensa
 
     private void Start()
     {
@@ -36,7 +38,7 @@ public class ButtonDestroyEnemy : MonoBehaviour
             state = 2;
         }
 
-        if (state == 2)
+        if (state == 2 || state == 3)
         {
             cb.normalColor = Color.green;
             cb.selectedColor = cb.normalColor;
@@ -59,9 +61,14 @@ public class ButtonDestroyEnemy : MonoBehaviour
                 state = 0;
                 de.state = false;
                 break;
+            case 2:
+                player.money += 50;
+                state = 3;
+                break;
             default:
                 break;
         }
+
         cb1.selectedColor = cb1.normalColor;
         missionButton.colors = cb1;
     }
