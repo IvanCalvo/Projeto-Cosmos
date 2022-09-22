@@ -22,7 +22,7 @@ public class StoreButtons : MonoBehaviour
         if(player.money >= 50)
         {
             player.money -= 50;
-            ship.max_boost_value += 100;
+            ship.max_boost_value *= 2;
         }
     }
 }

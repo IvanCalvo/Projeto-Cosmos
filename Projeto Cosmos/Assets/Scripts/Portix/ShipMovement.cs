@@ -22,8 +22,8 @@ public class ShipMovement : MonoBehaviour
 
     void Start()
     {
-        boost_value = 100;
-        max_boost_value = 100;
+        max_boost_value = 200;
+        boost_value = max_boost_value;
         boost_string = (boost_value / 10).ToString();
         boostText.text = boost_string;
         screenCenter.x = Screen.width * .5f;
@@ -44,11 +44,11 @@ public class ShipMovement : MonoBehaviour
         {
             boost_value = 0;
         }
-        if (Input.GetKey(KeyCode.LeftShift) && boost_value > 20)
+        if (Input.GetKey(KeyCode.LeftShift) && boost_value > 3)
         {
             Accelerate(36f, 80.0f, 1.0f);
 
-            boost_value -= 10;
+            boost_value -= 2;
         }
         else
         {
@@ -56,7 +56,7 @@ public class ShipMovement : MonoBehaviour
 
             if (boost_value < max_boost_value)
             {
-                boost_value += 2;
+                boost_value++;
             }
         }
         float x = Input.GetAxis("Horizontal");
