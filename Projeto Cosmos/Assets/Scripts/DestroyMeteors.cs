@@ -18,7 +18,13 @@ public class DestroyMeteors : Goal {
     public override bool IsAchieved(){
         if (state)
         {
+            PlayerPrefs.SetInt("DestroyMeteorState", 1);
             return (meteorsDestroyed >= MeteorsGoal);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("DestroyMeteorState", 0);
+            meteorsDestroyed = 0;
         }
 
         return false;

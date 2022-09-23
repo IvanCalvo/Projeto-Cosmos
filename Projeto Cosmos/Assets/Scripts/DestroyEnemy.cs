@@ -21,7 +21,16 @@ public class DestroyEnemy : Goal {
     }
 
     public override bool IsAchieved(){
-        if(state) return (Shots >= ShotsGoal);
+        if (state)
+        {
+            PlayerPrefs.SetInt("DestroyEnemyState", 1);
+            return (Shots >= ShotsGoal);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("DestroyEnemyState", 0);
+            Shots = 0;
+        }
 
         return false;
     }
