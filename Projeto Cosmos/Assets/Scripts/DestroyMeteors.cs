@@ -8,7 +8,8 @@ public class DestroyMeteors : Goal {
     public int MeteorsGoal = 10;
     public bool displayOnce = true;
     public bool state;
-    
+    GUIStyle headStyle = new GUIStyle();
+
     public override void Complete() {
         if(displayOnce)
             Debug.Log("Completo!");
@@ -31,13 +32,15 @@ public class DestroyMeteors : Goal {
     }
  
     public override void DrawHUD() {
+        headStyle.fontSize = 30;
+        headStyle.normal.textColor = Color.white;
 
         if (state)
         {
             if (this.IsAchieved())
-                GUILayout.Label(string.Format("Destruir 10 meteoros: {0}/{1} (Completo!))", meteorsDestroyed, MeteorsGoal));
+                GUILayout.Label(string.Format("Destruir 10 meteoros: {0}/{1} (Completo!))", meteorsDestroyed, MeteorsGoal), headStyle);
             else
-                GUILayout.Label(string.Format("Destruir 10 meteoros: {0}/{1}", meteorsDestroyed, MeteorsGoal));
+                GUILayout.Label(string.Format("Destruir 10 meteoros: {0}/{1}", meteorsDestroyed, MeteorsGoal), headStyle);
         }
     }
 

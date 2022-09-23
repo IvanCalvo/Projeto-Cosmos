@@ -9,8 +9,8 @@ public class DestroyEnemy : Goal {
     public int ShotsGoal = 10;
     public bool displayOnce;
     public bool state;
-
     public GameObject enemyGO;
+    GUIStyle headStyle = new GUIStyle();
 
     public override void Complete() {
         if(displayOnce)
@@ -36,7 +36,9 @@ public class DestroyEnemy : Goal {
     }
  
     public override void DrawHUD() {
-        if(state)
+        headStyle.fontSize = 30;
+        headStyle.normal.textColor = Color.white;
+        if (state)
         {
             if (this.IsAchieved())
             {
