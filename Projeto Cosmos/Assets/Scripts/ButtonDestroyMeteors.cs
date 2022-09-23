@@ -8,10 +8,12 @@ public class ButtonDestroyMeteors : MonoBehaviour
     Button missionButton;
     int state;
     public DestroyMeteors dm;
+    public PlayerStats player;
 
     //0 - nao selecionada
     //1 - fazendo
     //2 - completa
+    //3 - recebeu recompensa
 
     private void Start()
     {
@@ -42,6 +44,12 @@ public class ButtonDestroyMeteors : MonoBehaviour
             cb.selectedColor = cb.normalColor;
             missionButton.colors = cb;
         }
+        if (state == 3)
+        {
+            cb.normalColor = Color.yellow;
+            cb.selectedColor = cb.normalColor;
+            missionButton.colors = cb;
+        }
     }
 
     public void clickButton()
@@ -58,6 +66,10 @@ public class ButtonDestroyMeteors : MonoBehaviour
                 cb1.normalColor = Color.white;
                 state = 0;
                 dm.state = false;
+                break;
+            case 2:
+                player.money += 50;
+                state = 3;
                 break;
             default:
                 break;
