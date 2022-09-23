@@ -38,9 +38,15 @@ public class ButtonDestroyMeteors : MonoBehaviour
             state = 2;
         }
 
-        if (state == 2 || state == 3)
+        if (state == 2)
         {
             cb.normalColor = Color.green;
+            cb.selectedColor = cb.normalColor;
+            missionButton.colors = cb;
+        }
+        if (state == 3)
+        {
+            cb.normalColor = Color.yellow;
             cb.selectedColor = cb.normalColor;
             missionButton.colors = cb;
         }
