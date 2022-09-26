@@ -14,10 +14,21 @@ public class StationInteraction : MonoBehaviour
 
     public Transform playerTransform;
 
+    private void Awake()
+    {
+        if (PlayerPrefs.GetInt("hasPlayedBefore") == 1)
+        {
+            LoadPlayerStatsAtStation();
+        }
+        else
+            ResetStatsToDefault();
+    }
+
+
     private void Update() 
     {
         if(Input.GetKey(KeyCode.Escape) && isOnHUD)
-            Resume(); 
+            Resume();
     }
 
     private void OnTriggerStay(Collider other) 
@@ -47,7 +58,7 @@ public class StationInteraction : MonoBehaviour
             gunScript.readyToShoot = true;
     }
 
-    void Pause()    // Talvez trocar o cursor? 
+    public void Pause()    // Talvez trocar o cursor? 
     {
         stationHUD.SetActive(true);
         cursorScript.ChangeCursor(cursorScript.cursorHUD);
@@ -69,6 +80,8 @@ public class StationInteraction : MonoBehaviour
         PlayerPrefs.SetFloat("rotacaoX", playerTransform.rotation.x);
         PlayerPrefs.SetFloat("rotacaoY", playerTransform.rotation.y);
         PlayerPrefs.SetFloat("rotacaoZ", playerTransform.rotation.z);
+        PlayerPrefs.SetInt("hasPlayedBefore", 1);
+        //SaveCurrentMission();
     }
 
     public void LoadPlayerStatsAtStation()
@@ -83,6 +96,27 @@ public class StationInteraction : MonoBehaviour
         float rotacaoY = PlayerPrefs.GetFloat("rotacaoY");
         float rotacaoZ = PlayerPrefs.GetFloat("rotacaoZ");
         playerTransform.rotation = new Quaternion(rotacaoX, rotacaoY, rotacaoZ, rotacaoW);
+        playerStatsScript.health = playerStatsScript.maxHealth;
+        playerStatsScript.shield = playerStatsScript.maxShield;
+        playerStatsScript.alive = true;
+        LoadCurrentMission();
+    }
+    public void ResetStatsToDefault()
+    {
+        PlayerPrefs.SetInt("playerMoney", 0);
+        PlayerPrefs.SetFloat("posicaoX", 0);
+        PlayerPrefs.SetFloat("posicaoY", 0);
+        PlayerPrefs.SetFloat("posicaoZ", 0);
+        PlayerPrefs.SetFloat("rotacaoW", 0);
+        PlayerPrefs.SetFloat("rotacaoX", 0);
+        PlayerPrefs.SetFloat("rotacaoY", 0);
+        PlayerPrefs.SetFloat("rotacaoZ", 0);
+        PlayerPrefs.SetInt("hasPlayedBefore", 0);
+    }
+    
+    public void LoadCurrentMission()
+    {
+
     }
 
 }
