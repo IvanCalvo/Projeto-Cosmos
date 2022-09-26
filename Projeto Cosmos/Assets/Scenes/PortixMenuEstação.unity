@@ -4531,6 +4531,7 @@ MonoBehaviour:
   gunScript: {fileID: 2010424892}
   text: {fileID: 1449090946}
   distance: {fileID: 840080475}
+  minPlanetClamp: 0
 --- !u!114 &752420936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4887,6 +4888,7 @@ MonoBehaviour:
   gunScript: {fileID: 2010424892}
   text: {fileID: 863423881}
   distance: {fileID: 1912548091}
+  minPlanetClamp: 0
 --- !u!114 &863423881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5187,8 +5189,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorScript: {fileID: 364524758}
   gunScript: {fileID: 2010424892}
+  playerStatsScript: {fileID: 1383053165}
   stationHUD: {fileID: 1854677503}
   isOnHUD: 0
+  playerTransform: {fileID: 1383053160}
 --- !u!135 &975407728
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7296,7 +7300,7 @@ MonoBehaviour:
   gunScript: {fileID: 2010424892}
   text: {fileID: 241534844}
   distance: {fileID: 583366016}
---- !u!1 &1485990332
+--- !u!1 &1485990332 
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7430,6 +7434,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485990332}
   m_CullTransparentMesh: 1
+  minPlanetClamp: 0
 --- !u!1 &1573368510
 GameObject:
   m_ObjectHideFlags: 0
