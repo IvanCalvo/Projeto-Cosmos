@@ -7,6 +7,7 @@ public class ShipMovement : MonoBehaviour
     string boost_string;
     public TMPro.TextMeshProUGUI boostText;
     public int boost_value;
+    public int max_boost_value;
     public CharacterController controller;
     public Transform playerTransform;
     [SerializeField] public float speed = 12f;
@@ -21,7 +22,8 @@ public class ShipMovement : MonoBehaviour
 
     void Start()
     {
-        boost_value = 1000000;
+        max_boost_value = 200;
+        boost_value = max_boost_value;
         boost_string = (boost_value / 10).ToString();
         boostText.text = boost_string;
         screenCenter.x = Screen.width * .5f;
@@ -35,26 +37,25 @@ public class ShipMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        boost_string = (boost_value / 10).ToString();
+        boost_string = boost_value.ToString();
         boostText.text = boost_string;
         //Debug.Log(speed);
         if (boost_value < 0)
         {
             boost_value = 0;
         }
-        if (Input.GetKey(KeyCode.LeftShift) && boost_value > 20)
+        if (Input.GetKey(KeyCode.LeftShift) && boost_value > 3)
         {
             Accelerate(36f, 80.0f, 1.0f);
 
-            boost_value -= 10;
+            boost_value -= 2;
         }
         else
         {
             Accelerate(12f, 60.0f, 3.0f);
 
-            if (boost_value < 1000000)
+            if (boost_value < max_boost_value)
             {
-                boost_value++;
                 boost_value++;
             }
         }
