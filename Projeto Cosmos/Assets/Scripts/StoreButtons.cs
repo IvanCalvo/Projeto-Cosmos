@@ -6,7 +6,7 @@ using UnityEngine;
 public class StoreButtons : MonoBehaviour
 {
     public PlayerStats player;
-    public ShipMovement ship;
+    //public ShipMovement ship;
 
     public void buyShield()
     {
@@ -22,7 +22,7 @@ public class StoreButtons : MonoBehaviour
         if(player.money >= 50)
         {
             player.money -= 50;
-            ship.max_boost_value *= 2;
+            PlayerPrefs.SetInt("maxBoostValue", PlayerPrefs.GetInt("maxBoostValue")*2);
         }
     }
 }

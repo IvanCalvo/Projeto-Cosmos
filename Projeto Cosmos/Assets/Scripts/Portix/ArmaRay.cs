@@ -286,7 +286,7 @@ public class ArmaRay : MonoBehaviour
         RaycastHit hit;
         //CHECAR SE O RAY MIRA EM ALGO
         Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit, rayLength, PlayerLayerMask) && !targetControllerScript.targetTracked)
+        if (Physics.Raycast(ray, out hit, rayLength, PlayerLayerMask) && !targetControllerScript.targetTracked && PlayerPrefs.GetInt("isOnHUD") != 1)
         {
             targetPoint = hit.point;
             //Debug.Log(hit.collider.gameObject.name);
@@ -303,7 +303,7 @@ public class ArmaRay : MonoBehaviour
         RaycastHit hit;
         //CHECAR SE O RAY MIRA EM ALGO
         Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit, rayLength, PlanetsLayerMask))
+        if (Physics.Raycast(ray, out hit, rayLength, PlanetsLayerMask) && PlayerPrefs.GetInt("isOnHUD") != 1)
         {
             targetPoint = hit.point;
             planeta = hit.collider.gameObject;

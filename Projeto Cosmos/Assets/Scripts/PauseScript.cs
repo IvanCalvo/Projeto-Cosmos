@@ -46,6 +46,7 @@ public class PauseScript : MonoBehaviour
         Time.timeScale = 1f;
         GamePaused = false;
         Cursor.visible = true;
+        PlayerPrefs.SetInt("isOnHUD", 0);
         Cursor.lockState = CursorLockMode.Confined;
         if(!gunScript.reloading && !gunScript.isOverHeating)    // To prevent player shooting while onPauseMenu/reloading/overheating
             gunScript.readyToShoot = true;
@@ -57,7 +58,8 @@ public class PauseScript : MonoBehaviour
         PauseMenu.SetActive(true);
         OptionsMenu.SetActive(false);
         Time.timeScale = 0f;
-        GamePaused = true;
+        GamePaused = true; 
+        PlayerPrefs.SetInt("isOnHUD", 1);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         if(!gunScript.reloading && !gunScript.isOverHeating)

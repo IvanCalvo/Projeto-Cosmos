@@ -27,8 +27,11 @@ public class StationInteraction : MonoBehaviour
 
     private void Update() 
     {
-        if(Input.GetKey(KeyCode.Escape) && isOnHUD)
+        if (Input.GetKey(KeyCode.Escape) && isOnHUD)
+        {
+            SaveCurrentStats();
             Resume();
+        }
     }
 
     private void OnTriggerStay(Collider other) 
@@ -45,12 +48,12 @@ public class StationInteraction : MonoBehaviour
         }
     }
 
-
     public void Resume()
     {
         stationHUD.SetActive(false);
         cursorScript.ChangeCursor(cursorScript.cursor);
         Time.timeScale = 1f;
+        PlayerPrefs.SetInt("isOnHUD", 0);
         isOnHUD = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -64,6 +67,7 @@ public class StationInteraction : MonoBehaviour
         cursorScript.ChangeCursor(cursorScript.cursorHUD);
         Time.timeScale = 0f;
         isOnHUD = true;
+        PlayerPrefs.SetInt("isOnHUD", 1);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         if(!gunScript.reloading && !gunScript.isOverHeating)
