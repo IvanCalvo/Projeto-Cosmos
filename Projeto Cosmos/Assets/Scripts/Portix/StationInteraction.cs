@@ -27,7 +27,7 @@ public class StationInteraction : MonoBehaviour
 
     private void Update() 
     {
-        if (Input.GetKey(KeyCode.Escape) && isOnHUD)
+        if (Input.GetKey(KeyCode.Escape) && isOnHUD && playerStatsScript.alive)
         {
             SaveCurrentStats();
             Resume();
@@ -36,7 +36,7 @@ public class StationInteraction : MonoBehaviour
 
     private void OnTriggerStay(Collider other) 
     {
-        if (other.CompareTag("Player") && Input.GetKey(KeyCode.F) && !isOnHUD)
+        if (other.CompareTag("Player") && Input.GetKey(KeyCode.F) && !isOnHUD && playerStatsScript.alive) 
         {
             SaveCurrentStats();
             Pause();
@@ -44,7 +44,7 @@ public class StationInteraction : MonoBehaviour
 
         if (other.CompareTag("Player") && Input.GetKey(KeyCode.L) && !isOnHUD)
         {
-            LoadPlayerStatsAtStation();
+            ResetStatsToDefault();
         }
     }
 
@@ -63,7 +63,8 @@ public class StationInteraction : MonoBehaviour
 
     public void Pause()    // Talvez trocar o cursor? 
     {
-        stationHUD.SetActive(true);
+        if(playerStatsScript.alive)
+            stationHUD.SetActive(true);
         cursorScript.ChangeCursor(cursorScript.cursorHUD);
         Time.timeScale = 0f;
         isOnHUD = true;
@@ -77,6 +78,9 @@ public class StationInteraction : MonoBehaviour
     void SaveCurrentStats()
     {
         PlayerPrefs.SetInt("playerMoney", playerStatsScript.money);
+        PlayerPrefs.SetInt("bulletsLeft", gunScript.bulletsLeft);
+        PlayerPrefs.SetInt("extraAmmo", gunScript.extraAmmo);
+        PlayerPrefs.SetInt("hasPlayedBefore", 1);
         PlayerPrefs.SetFloat("posicaoX", playerTransform.position.x);
         PlayerPrefs.SetFloat("posicaoY", playerTransform.position.y);
         PlayerPrefs.SetFloat("posicaoZ", playerTransform.position.z);
@@ -84,7 +88,6 @@ public class StationInteraction : MonoBehaviour
         PlayerPrefs.SetFloat("rotacaoX", playerTransform.rotation.x);
         PlayerPrefs.SetFloat("rotacaoY", playerTransform.rotation.y);
         PlayerPrefs.SetFloat("rotacaoZ", playerTransform.rotation.z);
-        PlayerPrefs.SetInt("hasPlayedBefore", 1);
         //SaveCurrentMission();
     }
 
@@ -103,6 +106,8 @@ public class StationInteraction : MonoBehaviour
         playerStatsScript.health = playerStatsScript.maxHealth;
         playerStatsScript.shield = playerStatsScript.maxShield;
         playerStatsScript.alive = true;
+        gunScript.bulletsLeft = PlayerPrefs.GetInt("bulletsLeft");
+        gunScript.extraAmmo = PlayerPrefs.GetInt("extraAmmo");
         LoadCurrentMission();
     }
     public void ResetStatsToDefault()

@@ -52,8 +52,8 @@ public class PlayerStats : MonoBehaviour
     {
         if (health <= 0 && alive)
         {
-            Die();
             alive = false;
+            Die();
             health = 0;
         }
         healthBarScript.SetHealth(health);
@@ -110,7 +110,7 @@ public class PlayerStats : MonoBehaviour
 
     private void RecoverShield()
     {
-        if (shield <= maxShield && !isOnCombat)
+        if (shield <= maxShield && !isOnCombat && alive)
         {
             shield = Mathf.MoveTowards(shield, maxShield, 1000f * Time.deltaTime); // Testing
             //shield++;

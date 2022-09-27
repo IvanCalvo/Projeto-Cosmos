@@ -28,7 +28,7 @@ public class ArmaRay : MonoBehaviour
     public bool allowHold; //auto / semiauto
     public bool hasOverHeat = true;
     public bool hasAmmo = false;
-    int bulletsLeft, bulletsShot; //quantas balas tem
+    public int bulletsLeft, bulletsShot; //quantas balas tem
     public int extraAmmo;
     private float overHeatReload = 0.25f;
     public float overHeat= 0f;
