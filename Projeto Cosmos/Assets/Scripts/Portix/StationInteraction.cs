@@ -14,6 +14,7 @@ public class StationInteraction : MonoBehaviour
 
     public Transform playerTransform;
 
+
     private void Awake()
     {
         if (PlayerPrefs.GetInt("hasPlayedBefore") == 1)
@@ -38,6 +39,7 @@ public class StationInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player") && Input.GetKey(KeyCode.F) && !isOnHUD && playerStatsScript.alive) 
         {
+            PlayerPrefs.SetInt("DestroyFirstMission", 1);
             SaveCurrentStats();
             Pause();
         }
@@ -45,9 +47,19 @@ public class StationInteraction : MonoBehaviour
         if (other.CompareTag("Player") && Input.GetKey(KeyCode.L) && !isOnHUD)
         {
             ResetStatsToDefault();
+            LoadPlayerStatsAtStation();
+        }
+
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && PlayerPrefs.GetInt("FirstTimeOnStation") == 1)
+        {
+            PlayerPrefs.SetInt("FirstTimeOnStation", 0);
+            playerStatsScript.money += 100;
         }
     }
-
     public void Resume()
     {
         stationHUD.SetActive(false);
@@ -108,7 +120,10 @@ public class StationInteraction : MonoBehaviour
         playerStatsScript.alive = true;
         gunScript.bulletsLeft = PlayerPrefs.GetInt("bulletsLeft");
         gunScript.extraAmmo = PlayerPrefs.GetInt("extraAmmo");
-        LoadCurrentMission();
+        ShipMovement shipMov = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipMovement>();
+        shipMov.boost_value = PlayerPrefs.GetInt("maxBoostValue");
+        playerStatsScript.shield = 0;
+        playerStatsScript.shieldBarScript.SetMaxShield(0);
     }
     public void ResetStatsToDefault()
     {
@@ -121,11 +136,13 @@ public class StationInteraction : MonoBehaviour
         PlayerPrefs.SetFloat("rotacaoY", 0);
         PlayerPrefs.SetFloat("rotacaoZ", 0);
         PlayerPrefs.SetInt("hasPlayedBefore", 0);
+        PlayerPrefs.SetInt("DestroyMeteorState", 0);
+        PlayerPrefs.SetInt("DestroyEmemyState", 0);
+        PlayerPrefs.SetInt("FirstTimeOnStation", 1);
+        PlayerPrefs.SetInt("DestroyFirstMission", 0);
+        PlayerPrefs.SetInt("maxBoostValue", 200);
+        PlayerPrefs.SetInt("HasShield", 0);
     }
-    
-    public void LoadCurrentMission()
-    {
 
-    }
 
 }

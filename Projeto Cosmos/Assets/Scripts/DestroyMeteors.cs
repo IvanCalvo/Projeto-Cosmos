@@ -7,6 +7,7 @@ public class DestroyMeteors : Goal {
     public int meteorsDestroyed = 0;
     public int MeteorsGoal = 10;
     public bool displayOnce = true;
+    public bool complete;
     public bool state;
     GUIStyle headStyle = new GUIStyle();
 
@@ -17,14 +18,14 @@ public class DestroyMeteors : Goal {
     }
 
     public override bool IsAchieved(){
-        if (state)
+        if (state && !complete)
         {
-            PlayerPrefs.SetInt("DestroyMeteorState", 1);
+            //PlayerPrefs.SetInt("DestroyMeteorState", 1);
             return (meteorsDestroyed >= MeteorsGoal);
         }
-        else
+        else if(!complete)
         {
-            PlayerPrefs.SetInt("DestroyMeteorState", 0);
+            //PlayerPrefs.SetInt("DestroyMeteorState", 0);
             meteorsDestroyed = 0;
         }
 

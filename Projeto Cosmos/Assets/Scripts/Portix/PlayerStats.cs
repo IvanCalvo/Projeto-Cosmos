@@ -25,17 +25,16 @@ public class PlayerStats : MonoBehaviour
     public int isOnCombatTimer = 5;
     public int money = 0;
 
-    public bool hasShield = false;
     public bool alive = true;
     public bool isOnCombat = false;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         health = maxHealth;
         healthBarScript.SetMaxHealth(maxHealth);
 
-        if(hasShield)
+        if (PlayerPrefs.GetInt("HasShield") == 1)
         {
             shield = maxShield;
             shieldBarScript.SetMaxShield(maxShield);
@@ -59,13 +58,17 @@ public class PlayerStats : MonoBehaviour
         healthBarScript.SetHealth(health);
         shieldBarScript.SetShield(shield);
         moneyObject.text = money.ToString(); // Maybe change only when receive money?
+
+        if (Input.GetKey(KeyCode.M))
+            money += 100;
     }
 
     public void buyShield()
     {
-        hasShield = true;
+        PlayerPrefs.SetInt("HasShield", 1);
         shield = maxShield;
-        shieldBarScript.SetShield(shield);
+        shieldBarScript.SetMaxShield(maxShield);
+        //shieldBarScript.SetShield(shield);
     }
 
     //*
@@ -143,6 +146,8 @@ public class PlayerStats : MonoBehaviour
     {
         DeathCanvas.SetActive(true);
         StationInteraction stationInterac = GameObject.FindGameObjectWithTag("StationInteraction").GetComponent<StationInteraction>();
+        ShipMovement shipMov = gameObject.GetComponent<ShipMovement>();
+        shipMov.boost_value = PlayerPrefs.GetInt("maxBoostValue");
         stationInterac.Pause();
     }
 

@@ -22,7 +22,7 @@ public class ShipMovement : MonoBehaviour
     void Start()
     {
         if(PlayerPrefs.GetInt("hasPlayedBefore") == 0)
-            PlayerPrefs.SetInt("maxBoostValue", 200);
+            PlayerPrefs.SetInt("maxBoostValue", 10000);
         boost_value = PlayerPrefs.GetInt("maxBoostValue");
         boost_string = (boost_value / 10).ToString();
         boostText.text = boost_string;

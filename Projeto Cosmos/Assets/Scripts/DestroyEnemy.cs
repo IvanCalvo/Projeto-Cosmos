@@ -9,6 +9,7 @@ public class DestroyEnemy : Goal {
     public int ShotsGoal = 10;
     public bool displayOnce;
     public bool state;
+    public bool complete;
     public GameObject enemyGO;
     GUIStyle headStyle = new GUIStyle();
 
@@ -21,14 +22,12 @@ public class DestroyEnemy : Goal {
     }
 
     public override bool IsAchieved(){
-        if (state)
+        if (state && !complete)
         {
-            PlayerPrefs.SetInt("DestroyEnemyState", 1);
             return (Shots >= ShotsGoal);
         }
-        else
+        else if(!complete)
         {
-            PlayerPrefs.SetInt("DestroyEnemyState", 0);
             Shots = 0;
         }
 

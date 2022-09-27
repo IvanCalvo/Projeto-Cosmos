@@ -10,7 +10,7 @@ public class StoreButtons : MonoBehaviour
 
     public void buyShield()
     {
-        if(player.money >= 50 && !player.hasShield)
+        if(player.money >= 50 && PlayerPrefs.GetInt("HasShield") == 0)
         {
             player.buyShield();
             player.money -= 50;
