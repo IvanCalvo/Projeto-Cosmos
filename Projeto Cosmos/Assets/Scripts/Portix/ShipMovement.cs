@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
-    string boost_string;
-    public TMPro.TextMeshProUGUI boostText;
-    public int boost_value;
-    public int max_boost_value;
+    public BoostBar boostBarScript;
     public CharacterController controller;
     public Transform playerTransform;
-    [SerializeField] public float speed = 12f;
+    public TMPro.TextMeshProUGUI boostText;
     public GameObject virtual_camera;
-    Cinemachine.CinemachineVirtualCamera fov;
 
+    string boost_string;
+    public float boost_value;
+    public float max_boost_value;
+    [SerializeField] public float speed = 12f;
     private float rollInput;
     public float lookSpeed = 60f;
     public float rollSpeed = 130f;
-
     public Vector2 lookInput, screenCenter, mouseDistance;
+
+    Cinemachine.CinemachineVirtualCamera fov;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class ShipMovement : MonoBehaviour
         boost_value = max_boost_value;
         boost_string = (boost_value / 10).ToString();
         boostText.text = boost_string;
+        boostBarScript.SetMaxBoost(max_boost_value);
         screenCenter.x = Screen.width * .5f;
         screenCenter.y = Screen.height * .5f;
         Cursor.lockState = CursorLockMode.Confined;
@@ -34,12 +36,15 @@ public class ShipMovement : MonoBehaviour
         fov = virtual_camera.GetComponent<Cinemachine.CinemachineVirtualCamera>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        //atualiza o valor do boost mostrado na tela
         boost_string = boost_value.ToString();
         boostText.text = boost_string;
-        //Debug.Log(speed);
+
+        //atualiza a barra de boost
+        boostBarScript.SetBoost(boost_value);
+
         if (boost_value < 0)
         {
             boost_value = 0;
@@ -77,8 +82,7 @@ public class ShipMovement : MonoBehaviour
 
         // Movimento
         Vector3 move = transform.right * x + transform.forward * z;
-        controller.Move(move * speed * Time.deltaTime);
-
+        controller.Move(move * speed * Time.deltaTime);   
     }
 
     void Accelerate(float desired_speed, float desired_fov, float lerp_strength) 
