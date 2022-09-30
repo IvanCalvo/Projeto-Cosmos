@@ -27,7 +27,6 @@ public class PauseScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !stationScript.isOnHUD)
         {
-            Debug.Log("teste");
             if (GamePaused)
             {
                 Resume();
@@ -54,7 +53,6 @@ public class PauseScript : MonoBehaviour
 
     void Pause()
     {
-        Debug.Log("teste Pause");
         PauseMenu.SetActive(true);
         OptionsMenu.SetActive(false);
         Time.timeScale = 0f;

@@ -39,7 +39,7 @@ public class ArmaRay : MonoBehaviour
     public bool readyToShoot;
     public bool reloading;
     public bool isOverHeating;
-    public bool readyToLock; 
+    public bool readyToLock;
 
     //REFERENCES
     [Header("Refer�ncias")]
@@ -144,7 +144,7 @@ public class ArmaRay : MonoBehaviour
             CanvasMunicaoMissil.SetActive(false);
             
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && PlayerPrefs.GetInt("HasMissileGun") == 1)
         {
             ShootMissile();
             hasOverHeat = false;

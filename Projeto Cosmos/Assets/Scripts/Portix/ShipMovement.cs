@@ -6,6 +6,10 @@ public class ShipMovement : MonoBehaviour
 {
     string boost_string;
     public TMPro.TextMeshProUGUI boostText;
+    public TMPro.TextMeshProUGUI velocityText;
+    public BoostBar boostBarScript;
+    public GameObject boostBarLights;
+    private int currentBoostRefuel;
     public int boost_value;
     public CharacterController controller;
     public Transform playerTransform;
@@ -21,8 +25,13 @@ public class ShipMovement : MonoBehaviour
 
     void Start()
     {
-        if(PlayerPrefs.GetInt("hasPlayedBefore") == 0)
-            PlayerPrefs.SetInt("maxBoostValue", 10000);
+        if (PlayerPrefs.GetInt("hasPlayedBefore") == 0)
+        {
+            PlayerPrefs.SetInt("maxBoostValue", 200);
+            PlayerPrefs.SetInt("BoostRefuelVelocity", 1);
+            PlayerPrefs.SetInt("DropMultiplier", 1);
+            currentBoostRefuel = PlayerPrefs.GetInt("BoostRefuelVelocity");
+        }
         boost_value = PlayerPrefs.GetInt("maxBoostValue");
         boost_string = (boost_value / 10).ToString();
         boostText.text = boost_string;
@@ -30,6 +39,7 @@ public class ShipMovement : MonoBehaviour
         screenCenter.y = Screen.height * .5f;
         Cursor.lockState = CursorLockMode.Confined;
         controller.detectCollisions = false;
+        boostBarScript.SetMaxBoost(PlayerPrefs.GetInt("maxBoostValue"));
 
         fov = virtual_camera.GetComponent<Cinemachine.CinemachineVirtualCamera>();
     }
@@ -37,8 +47,8 @@ public class ShipMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        boost_string = boost_value.ToString();
-        boostText.text = boost_string;
+        //boost_string = boost_value.ToString();
+        //boostText.text = boost_string;
         //Debug.Log(speed);
         if (boost_value < 0)
         {
@@ -47,8 +57,8 @@ public class ShipMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && boost_value > 3)
         {
             Accelerate(36f, 80.0f, 1.0f);
-
             boost_value -= 2;
+            boostBarLights.SetActive(true);
         }
         else
         {
@@ -56,9 +66,12 @@ public class ShipMovement : MonoBehaviour
 
             if (boost_value < PlayerPrefs.GetInt("maxBoostValue"))
             {
-                boost_value++;
+                boost_value += PlayerPrefs.GetInt("BoostRefuelVelocity");
             }
+            boostBarLights.SetActive(false);
+
         }
+        boostBarScript.SetBoost(boost_value);
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -78,6 +91,12 @@ public class ShipMovement : MonoBehaviour
         // Movimento
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * speed * Time.deltaTime);
+        velocityText.SetText((int)(controller.velocity.magnitude) + " cms/s");
+        if(currentBoostRefuel != PlayerPrefs.GetInt("BoostRefuelVelocity"))
+        {
+            currentBoostRefuel = PlayerPrefs.GetInt("BoostRefuelVelocity");
+            boostBarScript.SetMaxBoost(PlayerPrefs.GetInt("maxBoostValue"));
+        }
 
     }
 

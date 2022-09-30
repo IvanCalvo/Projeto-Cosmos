@@ -35,10 +35,10 @@ public class PickUpScript : MonoBehaviour
             }
             else
                 armaRayScript.extraAmmo += 2;
-            playerStatScript.money += 10;
+            playerStatScript.money += 10 * PlayerPrefs.GetInt("DropMultiplier");
 
-            if (shipMov.boost_value <= (PlayerPrefs.GetInt("maxBoostValue") - 150))
-                shipMov.boost_value += 150;
+            if (shipMov.boost_value <= (PlayerPrefs.GetInt("maxBoostValue") - (150 * PlayerPrefs.GetInt("DropMultiplier"))))
+                shipMov.boost_value += 150 * PlayerPrefs.GetInt("DropMultiplier");
             else
                 shipMov.boost_value = PlayerPrefs.GetInt("maxBoostValue");
             Destroy(gameObject);

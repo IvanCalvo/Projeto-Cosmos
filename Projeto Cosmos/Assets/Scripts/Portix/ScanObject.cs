@@ -45,7 +45,7 @@ public class ScanObject : MonoBehaviour
 
             if (inViewScript.onScreen && gameObject.tag == planeta.tag)
             {
-                distanceFromPlayer = (int)Vector3.Distance(player.transform.position, planeta.transform.position) -(int)planeta.transform.localScale.x/2;
+                distanceFromPlayer = (int)Vector3.Distance(player.transform.position, planeta.transform.position) - (int)planeta.transform.localScale.x / 2;
                 if (distanceFromPlayer >= 0)
                     text.text = planetStatsScript.planetName + "\n" + distanceFromPlayer.ToString() + "m";
                 else
@@ -53,11 +53,13 @@ public class ScanObject : MonoBehaviour
                 text.enabled = true;
             }
             else
+            {
                 text.enabled = false;
+            }
             //if (planeta.tag == "Planet")
-                //planetPosition = new Vector3(planeta.transform.position.x + (planeta.transform.localScale.x * 1.5f), planeta.transform.position.y, planeta.transform.position.z);
-           //else
-                //planetPosition = new Vector3(planeta.transform.position.x + (planeta.transform.localScale.x), planeta.transform.position.y, planeta.transform.position.z) ;
+            //planetPosition = new Vector3(planeta.transform.position.x + (planeta.transform.localScale.x * 1.5f), planeta.transform.position.y, planeta.transform.position.z);
+            //else
+            //planetPosition = new Vector3(planeta.transform.position.x + (planeta.transform.localScale.x), planeta.transform.position.y, planeta.transform.position.z) ;
 
             //gameObject.transform.position = cam.WorldToScreenPoint(planetPosition);
             //gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0);

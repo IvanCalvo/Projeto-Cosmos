@@ -149,6 +149,9 @@ public class StationInteraction : MonoBehaviour
         PlayerPrefs.SetInt("DestroyFirstMission", 0);
         PlayerPrefs.SetInt("maxBoostValue", 200);
         PlayerPrefs.SetInt("HasShield", 0);
+        PlayerPrefs.SetInt("BoostRefuelVelocity", 1);
+        PlayerPrefs.SetInt("DropMultiplier", 1);
+        PlayerPrefs.SetInt("HasMissileGun", 0);
         ShipMovement shipMov = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipMovement>();
         shipMov.boost_value = PlayerPrefs.GetInt("maxBoostValue");
         playerStatsScript.shield = 0;
