@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class DestroyEnemy : Goal {
  
-    public int Shots = 0;
-    public int ShotsGoal = 10;
+    public int enemyKilled = 0;
+    public int enemyKilledGoal = 1;
     public bool displayOnce;
     public bool state;
     public bool complete;
-    public GameObject enemyGO;
     GUIStyle headStyle = new GUIStyle();
 
     public override void Complete() {
@@ -24,11 +23,11 @@ public class DestroyEnemy : Goal {
     public override bool IsAchieved(){
         if (state && !complete)
         {
-            return (Shots >= ShotsGoal);
+            return (enemyKilled >= enemyKilledGoal);
         }
         else if(!complete)
         {
-            Shots = 0;
+            enemyKilled = 0;
         }
 
         return false;
@@ -37,15 +36,16 @@ public class DestroyEnemy : Goal {
     public override void DrawHUD() {
         headStyle.fontSize = 30;
         headStyle.normal.textColor = Color.white;
+
         if (state)
         {
             if (this.IsAchieved())
             {
-                GUILayout.Label(string.Format("Acertou {0}/{1} tiros (Completo!)", Shots, ShotsGoal));
+                GUILayout.Label(string.Format("Matou {0}/{1} inimigos (Completo!)", enemyKilled, enemyKilledGoal), headStyle);
             }
             else
             {
-                GUILayout.Label(string.Format("Acertou {0}/{1} tiros", Shots, ShotsGoal));
+                GUILayout.Label(string.Format("Matou {0}/{1} inimigos", enemyKilled, enemyKilledGoal), headStyle);
             }
         }
     }

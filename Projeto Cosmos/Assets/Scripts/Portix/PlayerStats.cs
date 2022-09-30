@@ -76,30 +76,34 @@ public class PlayerStats : MonoBehaviour
     {
         if(!collision.collider.CompareTag("Bullet") && !collision.collider.CompareTag("Missile") && !collision.collider.CompareTag("Untagged") && !collision.collider.CompareTag("Drop"))
         {
-            isOnCombatTimer = 5;
-            if (!isOnCombat)
-                StartCoroutine(StopCombat());
             CharacterController cControl = GetComponent<CharacterController>();
             float velocity = cControl.velocity.magnitude; // Gets current velocity to lose HP proportionally to its speed
             if (velocity > 20)
             {
-                if (shield >= velocity)
-                    shield -= velocity;
-                else if (shield <= velocity && shield > 0)
-                {
-                    float aux = velocity - shield;
-                    shield = 0;
-                    health -= aux;
-                }
-                else if (health >= velocity)
-                    health -= velocity;
-                else
-                    health = 0;
+                TakeDamage(velocity);
             }
         }
     }
     //*/
 
+    public void TakeDamage(float damage)
+    {
+        isOnCombatTimer = 5;
+        if (!isOnCombat)
+            StartCoroutine(StopCombat());
+        if (shield >= damage)
+            shield -= damage;
+        else if (shield <= damage && shield > 0)
+        {
+            float aux = damage - shield;
+            shield = 0;
+            health -= aux;
+        }
+        else if (health >= damage)
+            health -= damage;
+        else
+            health = 0;
+    }
     private void RecoverHp()
     {
         if (health <= maxHealth && alive && !isOnCombat)

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyObject : MonoBehaviour
+public class EnemyBulletScript : MonoBehaviour
 {
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
     //ASSIGNABLES
@@ -11,10 +11,7 @@ public class DestroyObject : MonoBehaviour
     public GameObject explosion;
     public GameObject dropObject;
     public hpScript hpEnemyScript;
-    public DestroyEnemy shotGoalScript;
-    public DestroyMeteors meteorGoalScript;
     public LayerMask whatIsEnemies;
-    private ArmaRay armaRayScript;
     private TargetController targetControllerScript;
 
     //STATS
@@ -23,6 +20,7 @@ public class DestroyObject : MonoBehaviour
     //public bool useGravity; // vai que corpos atraem a bala??
 
     //DANO
+    public int bulletDamage;
     public int explosionDamage;
     public float explosionRange;
 
@@ -39,16 +37,9 @@ public class DestroyObject : MonoBehaviour
     int collisions;
     PhysicMaterial physics_mat;
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
-   
+
     private void Start()
     {
-        GameObject gun = GameObject.FindWithTag("Gun");
-        armaRayScript = gun.GetComponent<ArmaRay>();
-        GameObject targetController = GameObject.FindGameObjectWithTag("LockOnImage");
-        targetControllerScript = targetController.GetComponent<TargetController>();
-        GameObject goalManager = GameObject.FindGameObjectWithTag("GoalManager");
-        shotGoalScript = goalManager.GetComponent<DestroyEnemy>();
-        meteorGoalScript = goalManager.GetComponent<DestroyMeteors>();
         Setup();
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -88,7 +79,7 @@ public class DestroyObject : MonoBehaviour
     private void Delay()
     {
         Destroy(gameObject);
-        
+
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
 
@@ -98,38 +89,12 @@ public class DestroyObject : MonoBehaviour
         collisions++;
 
         //EXPLODE IF HIT ENEMY
-        if ((collision.collider.CompareTag("Enemy") && explodeOnToutch) || (collision.collider.CompareTag("Asteroid") && explodeOnToutch))
+        if ((collision.collider.CompareTag("Player") && explodeOnToutch))
         {
             Explode();
-            hpEnemyScript = collision.collider.GetComponent<hpScript>();
 
-            if (!tookDamage)
-            {
-                if (hitImpactVFX != null)
-                {
-                    Instantiate(hitImpactVFX, transform);
-                }
-                if (collision.collider.gameObject == armaRayScript.inimigo)
-                {
-                    targetControllerScript.firstLock = true;
-                    targetControllerScript.image.enabled = false;
-                    targetControllerScript.lockedOn = false;
-                }
-                hpEnemyScript.health -= explosionDamage;
-                if (hpEnemyScript.health <= 0)
-                {
-                    DropItem(collision);
-                    try
-                    {
-                        if (collision.collider.CompareTag("Enemy"))
-                            shotGoalScript.enemyKilled++;
-                        else if (collision.collider.CompareTag("Asteroid"))
-                            meteorGoalScript.meteorsDestroyed++;
-                    }
-                    catch (Exception e) { }
-                }
-                tookDamage = true;
-            }
+            PlayerStats playerStats = collision.collider.GetComponent<PlayerStats>();
+            playerStats.TakeDamage(bulletDamage);
         }
     }
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-//
@@ -160,6 +125,5 @@ public class DestroyObject : MonoBehaviour
     {
         Instantiate(dropObject, objectTransform.collider.transform.position, Quaternion.identity);
     }
-
 
 }
