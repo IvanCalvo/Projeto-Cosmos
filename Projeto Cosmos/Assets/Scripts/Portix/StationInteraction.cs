@@ -10,9 +10,11 @@ public class StationInteraction : MonoBehaviour
     public PlayerStats playerStatsScript;
 
     public GameObject stationHUD;
+    public GameObject stationInteractionHint;
     public bool isOnHUD = false;
 
     public Transform playerTransform;
+
 
     private void Awake()
     {
@@ -27,30 +29,53 @@ public class StationInteraction : MonoBehaviour
 
     private void Update() 
     {
-        if(Input.GetKey(KeyCode.Escape) && isOnHUD)
+        if (Input.GetKey(KeyCode.Escape) && isOnHUD && playerStatsScript.alive)
+        {
+            SaveCurrentStats();
             Resume();
+        }
     }
 
     private void OnTriggerStay(Collider other) 
     {
-        if (other.CompareTag("Player") && Input.GetKey(KeyCode.F) && !isOnHUD)
+        if(other.CompareTag("Player") && !isOnHUD)
+            stationInteractionHint.SetActive(true);
+        if (other.CompareTag("Player") && Input.GetKey(KeyCode.F) && !isOnHUD && playerStatsScript.alive) 
         {
+            PlayerPrefs.SetInt("DestroyFirstMission", 1);
             SaveCurrentStats();
             Pause();
         }
 
         if (other.CompareTag("Player") && Input.GetKey(KeyCode.L) && !isOnHUD)
         {
+            ResetStatsToDefault();
             LoadPlayerStatsAtStation();
         }
+
+        
     }
 
-
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            stationInteractionHint.SetActive(false);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && PlayerPrefs.GetInt("FirstTimeOnStation") == 1)
+        {
+            PlayerPrefs.SetInt("FirstTimeOnStation", 0);
+            playerStatsScript.money += 100;
+        }
+    }
     public void Resume()
     {
         stationHUD.SetActive(false);
         cursorScript.ChangeCursor(cursorScript.cursor);
+        stationInteractionHint.SetActive(true);
         Time.timeScale = 1f;
+        PlayerPrefs.SetInt("isOnHUD", 0);
         isOnHUD = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -60,19 +85,25 @@ public class StationInteraction : MonoBehaviour
 
     public void Pause()    // Talvez trocar o cursor? 
     {
-        stationHUD.SetActive(true);
+        stationInteractionHint.SetActive(false);
+        if(playerStatsScript.alive)
+            stationHUD.SetActive(true);
         cursorScript.ChangeCursor(cursorScript.cursorHUD);
         Time.timeScale = 0f;
         isOnHUD = true;
+        PlayerPrefs.SetInt("isOnHUD", 1);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        if(!gunScript.reloading && !gunScript.isOverHeating)
+        if (!gunScript.reloading && !gunScript.isOverHeating)
             gunScript.readyToShoot = false;
     }
 
     void SaveCurrentStats()
     {
         PlayerPrefs.SetInt("playerMoney", playerStatsScript.money);
+        PlayerPrefs.SetInt("bulletsLeft", gunScript.bulletsLeft);
+        PlayerPrefs.SetInt("extraAmmo", gunScript.extraAmmo);
+        PlayerPrefs.SetInt("hasPlayedBefore", 1);
         PlayerPrefs.SetFloat("posicaoX", playerTransform.position.x);
         PlayerPrefs.SetFloat("posicaoY", playerTransform.position.y);
         PlayerPrefs.SetFloat("posicaoZ", playerTransform.position.z);
@@ -80,7 +111,6 @@ public class StationInteraction : MonoBehaviour
         PlayerPrefs.SetFloat("rotacaoX", playerTransform.rotation.x);
         PlayerPrefs.SetFloat("rotacaoY", playerTransform.rotation.y);
         PlayerPrefs.SetFloat("rotacaoZ", playerTransform.rotation.z);
-        PlayerPrefs.SetInt("hasPlayedBefore", 1);
         //SaveCurrentMission();
     }
 
@@ -99,7 +129,8 @@ public class StationInteraction : MonoBehaviour
         playerStatsScript.health = playerStatsScript.maxHealth;
         playerStatsScript.shield = playerStatsScript.maxShield;
         playerStatsScript.alive = true;
-        LoadCurrentMission();
+        gunScript.bulletsLeft = PlayerPrefs.GetInt("bulletsLeft");
+        gunScript.extraAmmo = PlayerPrefs.GetInt("extraAmmo");
     }
     public void ResetStatsToDefault()
     {
@@ -112,11 +143,20 @@ public class StationInteraction : MonoBehaviour
         PlayerPrefs.SetFloat("rotacaoY", 0);
         PlayerPrefs.SetFloat("rotacaoZ", 0);
         PlayerPrefs.SetInt("hasPlayedBefore", 0);
+        PlayerPrefs.SetInt("DestroyMeteorState", 0);
+        PlayerPrefs.SetInt("DestroyEmemyState", 0);
+        PlayerPrefs.SetInt("FirstTimeOnStation", 1);
+        PlayerPrefs.SetInt("DestroyFirstMission", 0);
+        PlayerPrefs.SetInt("maxBoostValue", 200);
+        PlayerPrefs.SetInt("HasShield", 0);
+        PlayerPrefs.SetInt("BoostRefuelVelocity", 1);
+        PlayerPrefs.SetInt("DropMultiplier", 1);
+        PlayerPrefs.SetInt("HasMissileGun", 0);
+        ShipMovement shipMov = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipMovement>();
+        shipMov.boost_value = PlayerPrefs.GetInt("maxBoostValue");
+        playerStatsScript.shield = 0;
+        playerStatsScript.shieldBarScript.SetMaxShield(0);
     }
-    
-    public void LoadCurrentMission()
-    {
 
-    }
 
 }
