@@ -28,7 +28,7 @@ public class ArmaRay : MonoBehaviour
     public bool allowHold; //auto / semiauto
     public bool hasOverHeat = true;
     public bool hasAmmo = false;
-    int bulletsLeft, bulletsShot; //quantas balas tem
+    public int bulletsLeft, bulletsShot; //quantas balas tem
     public int extraAmmo;
     private float overHeatReload = 0.25f;
     public float overHeat= 0f;
@@ -39,7 +39,7 @@ public class ArmaRay : MonoBehaviour
     public bool readyToShoot;
     public bool reloading;
     public bool isOverHeating;
-    public bool readyToLock; 
+    public bool readyToLock;
 
     //REFERENCES
     [Header("Refer�ncias")]
@@ -144,7 +144,7 @@ public class ArmaRay : MonoBehaviour
             CanvasMunicaoMissil.SetActive(false);
             
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && PlayerPrefs.GetInt("HasMissileGun") == 1)
         {
             ShootMissile();
             hasOverHeat = false;
@@ -286,7 +286,7 @@ public class ArmaRay : MonoBehaviour
         RaycastHit hit;
         //CHECAR SE O RAY MIRA EM ALGO
         Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit, rayLength, PlayerLayerMask) && !targetControllerScript.targetTracked)
+        if (Physics.Raycast(ray, out hit, rayLength, PlayerLayerMask) && !targetControllerScript.targetTracked && PlayerPrefs.GetInt("isOnHUD") != 1)
         {
             targetPoint = hit.point;
             //Debug.Log(hit.collider.gameObject.name);
@@ -303,7 +303,7 @@ public class ArmaRay : MonoBehaviour
         RaycastHit hit;
         //CHECAR SE O RAY MIRA EM ALGO
         Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit, rayLength, PlanetsLayerMask))
+        if (Physics.Raycast(ray, out hit, rayLength, PlanetsLayerMask) && PlayerPrefs.GetInt("isOnHUD") != 1)
         {
             targetPoint = hit.point;
             planeta = hit.collider.gameObject;

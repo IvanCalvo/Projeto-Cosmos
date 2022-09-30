@@ -5,8 +5,8 @@ using UnityEngine;
 public class PickUpScript : MonoBehaviour
 {
     private ArmaRay armaRayScript;
-    private MoneyScript moneyScript;
     private PlayerStats playerStatScript;
+    private ShipMovement shipMov;
 
     [SerializeField] private GameObject pickUpVFX;
     private float destructionTimer = 10f;
@@ -17,6 +17,7 @@ public class PickUpScript : MonoBehaviour
         GameObject gun = GameObject.FindWithTag("Gun");
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerStatScript = player.GetComponent<PlayerStats>();
+        shipMov = player.GetComponent<ShipMovement>();
         armaRayScript = gun.GetComponent<ArmaRay>();
     }
     private void OnTriggerEnter(Collider other)
@@ -34,7 +35,12 @@ public class PickUpScript : MonoBehaviour
             }
             else
                 armaRayScript.extraAmmo += 2;
-            playerStatScript.money += 10;
+            playerStatScript.money += 10 * PlayerPrefs.GetInt("DropMultiplier");
+
+            if (shipMov.boost_value <= (PlayerPrefs.GetInt("maxBoostValue") - (150 * PlayerPrefs.GetInt("DropMultiplier"))))
+                shipMov.boost_value += 150 * PlayerPrefs.GetInt("DropMultiplier");
+            else
+                shipMov.boost_value = PlayerPrefs.GetInt("maxBoostValue");
             Destroy(gameObject);
         }
     }

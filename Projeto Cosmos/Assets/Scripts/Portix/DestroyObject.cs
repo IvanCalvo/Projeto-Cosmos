@@ -96,10 +96,7 @@ public class DestroyObject : MonoBehaviour
     {
         //CONTAR COLISAO
         collisions++;
-        if(collision.collider.tag == "Player")
-        {
-            Physics.IgnoreCollision(collision.collider, gameObject.GetComponent<Collider>());
-        }
+
         //EXPLODE IF HIT ENEMY
         if ((collision.collider.CompareTag("Enemy") && explodeOnToutch) || (collision.collider.CompareTag("Asteroid") && explodeOnToutch))
         {
@@ -119,17 +116,19 @@ public class DestroyObject : MonoBehaviour
                     targetControllerScript.lockedOn = false;
                 }
                 hpEnemyScript.health -= explosionDamage;
-                if(hpEnemyScript.health <= 0)
-                    DropItem(collision);
-                tookDamage = true;
-                try
+                if (hpEnemyScript.health <= 0)
                 {
-                    if (collision.collider.CompareTag("Enemy"))
-                        shotGoalScript.Shots++;
-                    else if (collision.collider.CompareTag("Asteroid"))
-                        meteorGoalScript.meteorsDestroyed++;
+                    DropItem(collision);
+                    try
+                    {
+                        if (collision.collider.CompareTag("Enemy"))
+                            shotGoalScript.enemyKilled++;
+                        else if (collision.collider.CompareTag("Asteroid"))
+                            meteorGoalScript.meteorsDestroyed++;
+                    }
+                    catch (Exception e) { }
                 }
-                catch(Exception e) { }
+                tookDamage = true;
             }
         }
     }

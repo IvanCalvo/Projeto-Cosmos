@@ -15,6 +15,11 @@ public class ButtonDestroyEnemy : MonoBehaviour
     //2 - completa
     //3 - recebeu recompensa
 
+    private void Awake()
+    {
+        state = PlayerPrefs.GetInt("DestroyEnemyState");
+    }
+
     private void Start()
     {
         missionButton = GetComponent<Button>();
@@ -35,6 +40,8 @@ public class ButtonDestroyEnemy : MonoBehaviour
         ColorBlock cb = missionButton.colors;
         if(de.IsAchieved())
         {
+            PlayerPrefs.SetInt("DestroyEmemyState", 2);
+            de.complete = true;
             state = 2;
         }
 
@@ -61,15 +68,18 @@ public class ButtonDestroyEnemy : MonoBehaviour
                 cb1.normalColor = Color.blue;
                 state = 1;
                 de.state = true;
+                PlayerPrefs.SetInt("DestroyEmemyState", 1);
                 break;
             case 1:
                 cb1.normalColor = Color.white;
                 state = 0;
                 de.state = false;
+                PlayerPrefs.SetInt("DestroyEmemyState", 0);
                 break;
             case 2:
                 player.money += 50;
                 state = 3;
+                PlayerPrefs.SetInt("DestroyEmemyState", 3);
                 break;
             default:
                 break;
