@@ -17,16 +17,24 @@ public class ButtonDestroyEnemy : MonoBehaviour
 
     private void Awake()
     {
-        state = PlayerPrefs.GetInt("DestroyEnemyState");
+        if (PlayerPrefs.GetInt("hasPlayedBefore") == 1)
+        {
+            state = PlayerPrefs.GetInt("DestroyEnemyState");
+            Debug.Log(state + "state");
+        }
     }
+
 
     private void Start()
     {
         missionButton = GetComponent<Button>();
-        state = 0;
-        de.state = false;
         ColorBlock cb = missionButton.colors;
-        cb.normalColor = Color.white;
+        if (PlayerPrefs.GetInt("hasPlayedBefore") == 0)
+        {
+            state = 0;
+            de.state = false;
+            cb.normalColor = Color.white;
+        }
         if(state == 2)
         {
             cb.normalColor = Color.green;
