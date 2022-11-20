@@ -16,19 +16,13 @@ public class DestroyEnemy : Goal {
     {
         if (PlayerPrefs.GetInt("hasPlayedBefore") == 1)
         {
-            Debug.Log(PlayerPrefs.GetInt("DestroyEmemyState") + "EnemyState");
             if (PlayerPrefs.GetInt("DestroyEmemyState") == 1)
             {
-                Debug.Log("1");
                 state = true;
             }
         }
     }
     public override void Complete() {
-        if(displayOnce)
-        {
-            Debug.Log("Completo!");
-        }
         displayOnce = false;
     }
 

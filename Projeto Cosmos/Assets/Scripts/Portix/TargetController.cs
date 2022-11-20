@@ -52,13 +52,13 @@ public class TargetController : MonoBehaviour
                 weaponScript.inimigo = null; // Retira referência do inimigo
             }
             
-            else if (enemyScript.onScreen)
+            else if (enemyScript.onScreen && PlayerPrefs.GetInt("HasMissileGun") == 1)
             {
                 image.enabled = true;
             }
             //*/
 
-            if(Input.GetKeyDown(KeyCode.Mouse1)) // Sistema de Lock on
+            if(Input.GetKeyDown(KeyCode.Mouse1) && PlayerPrefs.GetInt("HasMissileGun") == 1) // Sistema de Lock on
             {
                 lockedOn = !lockedOn;
                 if (lockedOn) // Muda a cor da mira
@@ -68,7 +68,7 @@ public class TargetController : MonoBehaviour
             }
 
 
-            if (weaponScript.readyToLock)
+            if (weaponScript.readyToLock && PlayerPrefs.GetInt("HasMissileGun") == 1)
             {
                 if (firstLock && enemyScript.onScreen)
                 {

@@ -20,7 +20,6 @@ public class ButtonDestroyEnemy : MonoBehaviour
         if (PlayerPrefs.GetInt("hasPlayedBefore") == 1)
         {
             state = PlayerPrefs.GetInt("DestroyEnemyState");
-            Debug.Log(state + "state");
         }
     }
 
@@ -35,7 +34,7 @@ public class ButtonDestroyEnemy : MonoBehaviour
             de.state = false;
             cb.normalColor = Color.white;
         }
-        if(state == 2)
+        if (state == 2)
         {
             cb.normalColor = Color.green;
             cb.selectedColor = cb.normalColor;
@@ -48,18 +47,24 @@ public class ButtonDestroyEnemy : MonoBehaviour
         ColorBlock cb = missionButton.colors;
         if(de.IsAchieved())
         {
-            PlayerPrefs.SetInt("DestroyEmemyState", 2);
+            PlayerPrefs.SetInt("DestroyEnemyState", 2);
             de.complete = true;
             state = 2;
         }
 
-        if (state == 2)
+        if (state == 1)
+        {
+            cb.normalColor = Color.blue;
+            cb.selectedColor = cb.normalColor;
+            missionButton.colors = cb;
+        }
+        else if (state == 2)
         {
             cb.normalColor = Color.green;
             cb.selectedColor = cb.normalColor;
             missionButton.colors = cb;
         }
-        if (state == 3)
+        else if (state == 3)
         {
             cb.normalColor = Color.yellow;
             cb.selectedColor = cb.normalColor;
@@ -76,18 +81,18 @@ public class ButtonDestroyEnemy : MonoBehaviour
                 cb1.normalColor = Color.blue;
                 state = 1;
                 de.state = true;
-                PlayerPrefs.SetInt("DestroyEmemyState", 1);
+                PlayerPrefs.SetInt("DestroyEnemyState", 1);
                 break;
             case 1:
                 cb1.normalColor = Color.white;
                 state = 0;
                 de.state = false;
-                PlayerPrefs.SetInt("DestroyEmemyState", 0);
+                PlayerPrefs.SetInt("DestroyEnemyState", 0);
                 break;
             case 2:
                 player.money += 50;
                 state = 3;
-                PlayerPrefs.SetInt("DestroyEmemyState", 3);
+                PlayerPrefs.SetInt("DestroyEnemyState", 3);
                 break;
             default:
                 break;

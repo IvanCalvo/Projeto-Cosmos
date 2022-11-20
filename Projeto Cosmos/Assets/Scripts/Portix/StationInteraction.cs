@@ -15,6 +15,7 @@ public class StationInteraction : MonoBehaviour
 
     public Transform playerTransform;
 
+    bool playerIsOnTrigger;
 
     private void Awake()
     {
@@ -29,10 +30,16 @@ public class StationInteraction : MonoBehaviour
 
     private void Update() 
     {
-        if (Input.GetKey(KeyCode.Escape) && isOnHUD && playerStatsScript.alive)
+        if ((Input.GetKey(KeyCode.Escape) || Input.GetKeyDown(KeyCode.F)) && isOnHUD && playerStatsScript.alive)
         {
             SaveCurrentStats();
             Resume();
+        }
+        else if(Input.GetKeyDown(KeyCode.F) && !isOnHUD && playerStatsScript.alive && playerIsOnTrigger)
+        {
+            PlayerPrefs.SetInt("DestroyFirstMission", 1);
+            SaveCurrentStats();
+            Pause();
         }
     }
 
@@ -40,11 +47,9 @@ public class StationInteraction : MonoBehaviour
     {
         if(other.CompareTag("Player") && !isOnHUD)
             stationInteractionHint.SetActive(true);
-        if (other.CompareTag("Player") && Input.GetKey(KeyCode.F) && !isOnHUD && playerStatsScript.alive) 
+        if (other.CompareTag("Player") && playerStatsScript.alive) 
         {
-            PlayerPrefs.SetInt("DestroyFirstMission", 1);
-            SaveCurrentStats();
-            Pause();
+            playerIsOnTrigger = true;
         }
 
         if (other.CompareTag("Player") && Input.GetKey(KeyCode.L) && !isOnHUD)
@@ -144,7 +149,7 @@ public class StationInteraction : MonoBehaviour
         PlayerPrefs.SetFloat("rotacaoZ", 0);
         PlayerPrefs.SetInt("hasPlayedBefore", 0);
         PlayerPrefs.SetInt("DestroyMeteorState", 0);
-        PlayerPrefs.SetInt("DestroyEmemyState", 0);
+        PlayerPrefs.SetInt("DestroyEnemyState", 0);
         PlayerPrefs.SetInt("FirstTimeOnStation", 1);
         PlayerPrefs.SetInt("DestroyFirstMission", 0);
         PlayerPrefs.SetInt("maxBoostValue", 200);
