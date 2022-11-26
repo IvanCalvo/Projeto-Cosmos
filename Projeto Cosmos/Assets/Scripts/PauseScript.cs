@@ -21,11 +21,11 @@ public class PauseScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         PauseMenu.SetActive(false);
         OptionsMenu.SetActive(false);
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !stationScript.isOnHUD)
+        if (Input.GetKeyDown(KeyCode.Escape) && PlayerPrefs.GetInt("isOnHUD") != 1)
         {
             if (GamePaused)
             {
