@@ -17,6 +17,10 @@ TagManager:
   - MoneyManager
   - DeathCanvas
   - StationInteraction
+  - Second Planet
+  - Cursor
+  - Third Planet
+  - AudioSource
   layers:
   - Default
   - TransparentFX

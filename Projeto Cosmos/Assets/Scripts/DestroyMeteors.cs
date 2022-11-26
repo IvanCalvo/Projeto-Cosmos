@@ -10,10 +10,18 @@ public class DestroyMeteors : Goal {
     public bool complete;
     public bool state;
     GUIStyle headStyle = new GUIStyle();
+    private void Start()
+    {
+        if (PlayerPrefs.GetInt("hasPlayedBefore") == 1)
+        {
+            if (PlayerPrefs.GetInt("DestroyMeteorState") == 1)
+            {
+                state = true;
+            }
+        }
+    }
 
     public override void Complete() {
-        if(displayOnce)
-            Debug.Log("Completo!");
         displayOnce = false;
     }
 

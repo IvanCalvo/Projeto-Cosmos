@@ -27,7 +27,7 @@ MonoBehaviour:
   maxlifeTime: 4
   explodeOnToutch: 1
   tookDamage: 0
-  hitImpactVFX: {fileID: 4085096625336766974, guid: 4b93d97ae99cd4486886654a13e75955, type: 3}
+  hitImpactVFX: {fileID: 7495854542567655959, guid: 77c2108e75a6da04b8a9c2d5f73fc910, type: 3}
 --- !u!1001 &7273917143798747304
 PrefabInstance:
   m_ObjectHideFlags: 0

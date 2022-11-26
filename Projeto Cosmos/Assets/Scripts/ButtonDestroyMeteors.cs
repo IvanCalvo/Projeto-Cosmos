@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class ButtonDestroyMeteors : MonoBehaviour
 {
+    public AudioController audioController;
     Button missionButton;
-    [SerializeField]int state;
+    int state;
     public DestroyMeteors dm;
     public PlayerStats player;
 
@@ -17,16 +18,20 @@ public class ButtonDestroyMeteors : MonoBehaviour
 
     private void Awake()
     {
-        state = PlayerPrefs.GetInt("DestroyMeteorState");
+        if(PlayerPrefs.GetInt("hasPlayedBefore") == 1)
+            state = PlayerPrefs.GetInt("DestroyMeteorState");
     }
     private void Start()
     {
         missionButton = GetComponent<Button>();
-        dm.state = false;
-        state = PlayerPrefs.GetInt("DestroyMeteorState");
         ColorBlock cb = missionButton.colors;
-        cb.normalColor = Color.white;
-        if(state == 2)
+        if (PlayerPrefs.GetInt("hasPlayedBefore") == 0)
+        {
+            state = 0;
+            dm.state = false;
+            cb.normalColor = Color.white;
+        }
+        if (state == 2)
         {
             cb.normalColor = Color.green;
             cb.selectedColor = cb.normalColor;
@@ -43,19 +48,26 @@ public class ButtonDestroyMeteors : MonoBehaviour
             PlayerPrefs.SetInt("DestroyMeteorState", 2);
             state = 2;
         }
-
-        if (state == 2)
+        
+        if (state == 1)
+        {
+            cb.normalColor = Color.blue;
+            cb.selectedColor = cb.normalColor;
+            missionButton.colors = cb;
+        }
+        else if (state == 2)
         {
             cb.normalColor = Color.green;
             cb.selectedColor = cb.normalColor;
             missionButton.colors = cb;
         }
-        if (state == 3)
+        else if (state == 3)
         {
             cb.normalColor = Color.yellow;
             cb.selectedColor = cb.normalColor;
             missionButton.colors = cb;
         }
+        
     }
 
     public void clickButton()
@@ -65,18 +77,21 @@ public class ButtonDestroyMeteors : MonoBehaviour
         {
             case 0:
                 cb1.normalColor = Color.blue;
+                audioController.ClickSound();
                 state = 1;
                 dm.state = true;
                 PlayerPrefs.SetInt("DestroyMeteorState", 1);
                 break;
             case 1:
                 cb1.normalColor = Color.white;
-                PlayerPrefs.SetInt("DestroyMeteorState", 0);
+                audioController.BackSound();
                 state = 0;
                 dm.state = false;
+                PlayerPrefs.SetInt("DestroyMeteorState", 0);
                 break;
             case 2:
-                player.money += 50;
+                player.money += 150;
+                audioController.CompleteMissionSound();
                 state = 3;
                 PlayerPrefs.SetInt("DestroyMeteorState", 3);
                 break;

@@ -12,11 +12,17 @@ public class DestroyEnemy : Goal {
     public bool complete;
     GUIStyle headStyle = new GUIStyle();
 
-    public override void Complete() {
-        if(displayOnce)
+    private void Start()
+    {
+        if (PlayerPrefs.GetInt("hasPlayedBefore") == 1)
         {
-            Debug.Log("Completo!");
+            if (PlayerPrefs.GetInt("DestroyEmemyState") == 1)
+            {
+                state = true;
+            }
         }
+    }
+    public override void Complete() {
         displayOnce = false;
     }
 

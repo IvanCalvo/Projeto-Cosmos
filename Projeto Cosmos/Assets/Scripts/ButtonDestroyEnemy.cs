@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ButtonDestroyEnemy : MonoBehaviour
 {
     Button missionButton;
+    public AudioController audioController;
     int state;
     public DestroyEnemy de;
     public PlayerStats player;
@@ -17,17 +18,24 @@ public class ButtonDestroyEnemy : MonoBehaviour
 
     private void Awake()
     {
-        state = PlayerPrefs.GetInt("DestroyEnemyState");
+        if (PlayerPrefs.GetInt("hasPlayedBefore") == 1)
+        {
+            state = PlayerPrefs.GetInt("DestroyEnemyState");
+        }
     }
+
 
     private void Start()
     {
         missionButton = GetComponent<Button>();
-        state = 0;
-        de.state = false;
         ColorBlock cb = missionButton.colors;
-        cb.normalColor = Color.white;
-        if(state == 2)
+        if (PlayerPrefs.GetInt("hasPlayedBefore") == 0)
+        {
+            state = 0;
+            de.state = false;
+            cb.normalColor = Color.white;
+        }
+        if (state == 2)
         {
             cb.normalColor = Color.green;
             cb.selectedColor = cb.normalColor;
@@ -40,18 +48,24 @@ public class ButtonDestroyEnemy : MonoBehaviour
         ColorBlock cb = missionButton.colors;
         if(de.IsAchieved())
         {
-            PlayerPrefs.SetInt("DestroyEmemyState", 2);
+            PlayerPrefs.SetInt("DestroyEnemyState", 2);
             de.complete = true;
             state = 2;
         }
 
-        if (state == 2)
+        if (state == 1)
+        {
+            cb.normalColor = Color.blue;
+            cb.selectedColor = cb.normalColor;
+            missionButton.colors = cb;
+        }
+        else if (state == 2)
         {
             cb.normalColor = Color.green;
             cb.selectedColor = cb.normalColor;
             missionButton.colors = cb;
         }
-        if (state == 3)
+        else if (state == 3)
         {
             cb.normalColor = Color.yellow;
             cb.selectedColor = cb.normalColor;
@@ -66,20 +80,23 @@ public class ButtonDestroyEnemy : MonoBehaviour
         {
             case 0:
                 cb1.normalColor = Color.blue;
+                audioController.ClickSound();
                 state = 1;
                 de.state = true;
-                PlayerPrefs.SetInt("DestroyEmemyState", 1);
+                PlayerPrefs.SetInt("DestroyEnemyState", 1);
                 break;
             case 1:
                 cb1.normalColor = Color.white;
+                audioController.BackSound();
                 state = 0;
                 de.state = false;
-                PlayerPrefs.SetInt("DestroyEmemyState", 0);
+                PlayerPrefs.SetInt("DestroyEnemyState", 0);
                 break;
             case 2:
-                player.money += 50;
+                player.money += 250;
+                audioController.CompleteMissionSound();
                 state = 3;
-                PlayerPrefs.SetInt("DestroyEmemyState", 3);
+                PlayerPrefs.SetInt("DestroyEnemyState", 3);
                 break;
             default:
                 break;

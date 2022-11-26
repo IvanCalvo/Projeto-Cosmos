@@ -22,7 +22,7 @@ public class StoreButtons : MonoBehaviour
         if(player.money >= 50)
         {
             player.money -= 50;
-            PlayerPrefs.SetInt("maxBoostValue", PlayerPrefs.GetInt("maxBoostValue") * 2);
+            PlayerPrefs.SetInt("maxBoostValue", PlayerPrefs.GetInt("maxBoostValue") + 500);
             PlayerPrefs.SetInt("BoostRefuelVelocity", PlayerPrefs.GetInt("BoostRefuelVelocity") + 1);
         }
     }

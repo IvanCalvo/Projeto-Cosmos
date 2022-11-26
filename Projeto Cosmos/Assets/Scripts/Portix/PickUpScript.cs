@@ -41,6 +41,8 @@ public class PickUpScript : MonoBehaviour
                 shipMov.boost_value += 150 * PlayerPrefs.GetInt("DropMultiplier");
             else
                 shipMov.boost_value = PlayerPrefs.GetInt("maxBoostValue");
+            AudioController audioScript = GameObject.FindGameObjectWithTag("AudioSource").GetComponent<AudioController>();
+            audioScript.PlayPickUpSound();
             Destroy(gameObject);
         }
     }

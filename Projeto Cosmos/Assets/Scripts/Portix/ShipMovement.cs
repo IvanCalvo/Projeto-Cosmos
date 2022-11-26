@@ -27,7 +27,7 @@ public class ShipMovement : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("hasPlayedBefore") == 0)
         {
-            PlayerPrefs.SetInt("maxBoostValue", 200);
+            PlayerPrefs.SetInt("maxBoostValue", 500);
             PlayerPrefs.SetInt("BoostRefuelVelocity", 1);
             PlayerPrefs.SetInt("DropMultiplier", 1);
             currentBoostRefuel = PlayerPrefs.GetInt("BoostRefuelVelocity");

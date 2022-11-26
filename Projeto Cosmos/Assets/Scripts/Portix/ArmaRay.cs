@@ -12,7 +12,9 @@ public class ArmaRay : MonoBehaviour
     [SerializeField] public GameObject Projectile;
     [SerializeField] private GameObject CurrentProjectile;
     [SerializeField] public GameObject CanvasOverHeat;
-    [SerializeField] public GameObject CanvasMunicaoMissil;    
+    [SerializeField] public GameObject CanvasMunicaoMissil;
+    public GameObject[] municaoMissil;
+    public AudioController audioScript;
 
     //FORCA DA BALA, BULLET FORCE
     [Header("Configura��es Arma")]
@@ -90,7 +92,7 @@ public class ArmaRay : MonoBehaviour
         }
         //set ammo display
         if (ammoDisplay != null)
-            ammoDisplay.SetText(bulletsLeft + "/" + extraAmmo);
+            ammoDisplay.SetText("/" + extraAmmo);
 
         if (!targetControllerScript.lockedOn)
             CheckHit();
@@ -108,7 +110,7 @@ public class ArmaRay : MonoBehaviour
             shooting = Input.GetKeyDown(KeyCode.Mouse0);
         //*
         //RECARREGAR MANUAL
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading && !hasOverHeat)
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading && !hasOverHeat && extraAmmo != 0)
             Reload();
         //RECARGA AUTOMATICA
         if (readyToShoot && !reloading && bulletsLeft <= 0 && !hasOverHeat)
@@ -200,12 +202,17 @@ public class ArmaRay : MonoBehaviour
         //DESCONTAR DAS BALAS E MARCAR Q ATIROU
         bulletsShot++;
         if (hasOverHeat)
+        {
             overHeat++;
+            audioScript.ShootSound();
+        }
         //*
         else if (hasAmmo)
         {
             bulletsLeft--;
+            municaoMissil[bulletsLeft].SetActive(false);
             bulletsShot++;
+            audioScript.ShootMissileSound();
         }
         //*/
 
@@ -243,25 +250,46 @@ public class ArmaRay : MonoBehaviour
     //*
     private void ReloadFinished()
     {
-        if ((magazineSize - bulletsLeft) > extraAmmo) // Arrumar, ainda est� dando n�mero negativo ??
+        if ((magazineSize - bulletsLeft) > extraAmmo) 
         {
+            Debug.Log("Munição acabou mas não tem de sobra");
             bulletsLeft += extraAmmo;
+            MissilesReloaded(extraAmmo);
             extraAmmo = 0;
         }
         else if (bulletsLeft != 0)
              {
+                Debug.Log("Munição não acabou e recarreguei");
                  extraAmmo -= (magazineSize - bulletsLeft);
+                 MissilesReloaded(magazineSize - bulletsLeft);
                  bulletsLeft += (magazineSize - bulletsLeft);
-             }
+        }
              else
              {
-                 extraAmmo -= magazineSize;
+                 Debug.Log("Munição acabou mas tem de sobra");
+                 extraAmmo -= magazineSize; ;
                  bulletsLeft += magazineSize;
+                 MissilesReloaded(magazineSize);
              }  
 
         reloading = false;
     }
     //*/
+
+    private void MissilesReloaded(int amount)
+    {
+        int i = 0;
+        int n = 0;
+        while(i < amount && n < municaoMissil.Length)
+        {
+            if(!municaoMissil[n].activeSelf)
+            {
+                municaoMissil[n].SetActive(true);
+                i++;
+            }
+            n++;
+        }
+    }
 
     private void ShootPrimaryWeapon()
     {
@@ -298,7 +326,7 @@ public class ArmaRay : MonoBehaviour
 
     private void CheckPlanets() // Maybe Change name later
     {
-        float rayLength = 10000f;//distancia finita onde o z aponta
+        float rayLength = 50000f;//distancia finita onde o z aponta
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         //CHECAR SE O RAY MIRA EM ALGO

@@ -11,7 +11,7 @@ public class enemyScript : MonoBehaviour
 
     public Transform player;
 
-    GameObject enemyGun;
+    public GameObject enemyGun;
 
     [SerializeField] GameObject CurrentProjectile;
 
@@ -49,7 +49,7 @@ public class enemyScript : MonoBehaviour
     {
         angleAmount = 2 * Mathf.PI / amountOfRays;
         player = GameObject.Find("InicialShip").transform;
-        enemyGun = GameObject.Find("enemyGun");
+        //enemyGun = GameObject.Find("enemyGun"); // Problema se tiver mais de um inimigo
         enemyRB = GetComponent<Rigidbody>();
     }
 

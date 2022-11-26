@@ -80,7 +80,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 6499557170259437615}
   explosion: {fileID: 4085096625336766974, guid: 4b93d97ae99cd4486886654a13e75955, type: 3}
-  dropObject: {fileID: 130102, guid: 04d0bf4be9447154188d86f6e3b8dce9, type: 3}
+  dropObject:
+  - {fileID: 8415248498332601849, guid: 836d7ac5b25afc746ac6cd6b74c295d0, type: 3}
+  - {fileID: 1609426563364382538, guid: 482a23eb854875b4ea0a9d1394443a6b, type: 3}
+  - {fileID: 8059062218478941161, guid: e0bfc7479007bc1479a9f7d769c5056e, type: 3}
   hpEnemyScript: {fileID: 0}
   shotGoalScript: {fileID: 0}
   meteorGoalScript: {fileID: 0}
