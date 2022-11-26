@@ -30,6 +30,7 @@ public class SettingsScript : MonoBehaviour
                 (resolutions[i].height == Screen.currentResolution.height))
             {
                 CurrentRes = i;
+
             }
         }
 
@@ -41,7 +42,6 @@ public class SettingsScript : MonoBehaviour
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
-        Debug.Log("fullscreen: " + isFullscreen);
     }
 
     public void SetResolution(int resIndex)
