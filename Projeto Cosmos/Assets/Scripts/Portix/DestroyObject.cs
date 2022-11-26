@@ -9,7 +9,7 @@ public class DestroyObject : MonoBehaviour
     //ASSIGNABLES
     public Rigidbody rb;
     public GameObject explosion;
-    public GameObject dropObject;
+    public GameObject[] dropObject;
     public hpScript hpEnemyScript;
     public DestroyEnemy shotGoalScript;
     public DestroyMeteors meteorGoalScript;
@@ -114,6 +114,8 @@ public class DestroyObject : MonoBehaviour
                     targetControllerScript.firstLock = true;
                     targetControllerScript.image.enabled = false;
                     targetControllerScript.lockedOn = false;
+                    CursorController cursorScript = GameObject.FindGameObjectWithTag("Cursor").GetComponent<CursorController>();
+                    cursorScript.HitMarker();
                 }
                 hpEnemyScript.health -= explosionDamage;
                 if (hpEnemyScript.health <= 0)
@@ -158,7 +160,13 @@ public class DestroyObject : MonoBehaviour
 
     private void DropItem(Collision objectTransform)
     {
-        Instantiate(dropObject, objectTransform.collider.transform.position, Quaternion.identity);
+        try
+        {
+            int randomDrop = UnityEngine.Random.Range(0, dropObject.Length);
+            Instantiate(dropObject[randomDrop], objectTransform.collider.transform.position, Quaternion.identity);
+        }
+        catch(Exception e)
+        { }
     }
 
 

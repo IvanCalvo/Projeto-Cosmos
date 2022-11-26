@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonDestroyMeteors : MonoBehaviour
 {
+    public AudioController audioController;
     Button missionButton;
     int state;
     public DestroyMeteors dm;
@@ -76,18 +77,21 @@ public class ButtonDestroyMeteors : MonoBehaviour
         {
             case 0:
                 cb1.normalColor = Color.blue;
+                audioController.ClickSound();
                 state = 1;
                 dm.state = true;
                 PlayerPrefs.SetInt("DestroyMeteorState", 1);
                 break;
             case 1:
                 cb1.normalColor = Color.white;
+                audioController.BackSound();
                 state = 0;
                 dm.state = false;
                 PlayerPrefs.SetInt("DestroyMeteorState", 0);
                 break;
             case 2:
-                player.money += 50;
+                player.money += 150;
+                audioController.CompleteMissionSound();
                 state = 3;
                 PlayerPrefs.SetInt("DestroyMeteorState", 3);
                 break;

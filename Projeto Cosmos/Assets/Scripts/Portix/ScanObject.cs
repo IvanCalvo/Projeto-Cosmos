@@ -16,7 +16,7 @@ public class ScanObject : MonoBehaviour
     private PlanetStats planetStatsScript;
 
     public TMP_Text text;
-    public TMP_Text distance;
+    //public TMP_Text distance;
 
     float minStationClamp = 15f;
     [SerializeField]float minPlanetClamp;
@@ -39,9 +39,10 @@ public class ScanObject : MonoBehaviour
             inViewScript = planeta.GetComponent<EnemyInView>();
             planetStatsScript = planeta.GetComponent<PlanetStats>();
             if(planeta.tag == "Planet")
-                text.fontSize = Mathf.Clamp(distanceFromPlayer/20f, minPlanetClamp, 2000f);
+                text.fontSize = Mathf.Clamp(distanceFromPlayer/20f, minPlanetClamp, 14800f);
             else
                 text.fontSize = Mathf.Clamp(distanceFromPlayer/20f, minStationClamp, 2000f);
+
 
             if (inViewScript.onScreen && gameObject.tag == planeta.tag)
             {

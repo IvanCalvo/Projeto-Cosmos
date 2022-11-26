@@ -22,9 +22,14 @@ public class StationInteraction : MonoBehaviour
         if (PlayerPrefs.GetInt("hasPlayedBefore") == 1)
         {
             LoadPlayerStatsAtStation();
+            if (PlayerPrefs.GetInt("isOnHUD") == 1 )
+            {
+                PlayerPrefs.SetInt("isOnHUD", 0);
+            }
         }
         else
             ResetStatsToDefault();
+
     }
 
 

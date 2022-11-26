@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ButtonDestroyEnemy : MonoBehaviour
 {
     Button missionButton;
+    public AudioController audioController;
     int state;
     public DestroyEnemy de;
     public PlayerStats player;
@@ -79,18 +80,21 @@ public class ButtonDestroyEnemy : MonoBehaviour
         {
             case 0:
                 cb1.normalColor = Color.blue;
+                audioController.ClickSound();
                 state = 1;
                 de.state = true;
                 PlayerPrefs.SetInt("DestroyEnemyState", 1);
                 break;
             case 1:
                 cb1.normalColor = Color.white;
+                audioController.BackSound();
                 state = 0;
                 de.state = false;
                 PlayerPrefs.SetInt("DestroyEnemyState", 0);
                 break;
             case 2:
-                player.money += 50;
+                player.money += 250;
+                audioController.CompleteMissionSound();
                 state = 3;
                 PlayerPrefs.SetInt("DestroyEnemyState", 3);
                 break;
