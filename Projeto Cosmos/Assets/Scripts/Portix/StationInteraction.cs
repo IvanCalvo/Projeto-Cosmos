@@ -40,7 +40,7 @@ public class StationInteraction : MonoBehaviour
             SaveCurrentStats();
             Resume();
         }
-        else if(Input.GetKeyDown(KeyCode.F) && !isOnHUD && playerStatsScript.alive && playerIsOnTrigger)
+        else if(Input.GetKeyDown(KeyCode.F) && PlayerPrefs.GetInt("isOnHUD") != 1 && playerStatsScript.alive && playerIsOnTrigger)
         {
             PlayerPrefs.SetInt("DestroyFirstMission", 1);
             SaveCurrentStats();
